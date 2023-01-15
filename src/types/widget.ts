@@ -269,3 +269,11 @@ export type Widget =
 // #endregion
 
 export type WidgetName = keyof OptsMap
+
+export type LayoutWidget =
+  | ConfigGrid
+  | ConfigTab
+  | ConfigGridCol
+  | ConfigTabPane
+
+export type FormWidget = Exclude<Widget, LayoutWidget>
