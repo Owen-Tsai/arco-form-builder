@@ -5,7 +5,13 @@
     :field="widget.uid"
     :rules="computedRules(widget.config.rules)"
     :validate-trigger="widget.config.trigger"
+    class="form-item"
   >
+    <Input
+      v-if="widget.type === 'input'"
+      :uid="widget.uid"
+      :config="widget.config"
+    />
     <!-- insert dedicated renderer -->
   </a-form-item>
 </template>
@@ -13,6 +19,7 @@
 <script lang="ts" setup>
 import { PropType } from 'vue'
 import type { FormWidget } from '@/types/widget'
+import Input from './widgets/Input.vue'
 
 const props = defineProps({
   widget: {
@@ -35,3 +42,11 @@ const computedRules = (rules?: string) => {
   return result
 }
 </script>
+
+<style lang="scss" scoped>
+@use '@/styles/var.scss' as *;
+
+.form-item {
+  position: relative;
+}
+</style>

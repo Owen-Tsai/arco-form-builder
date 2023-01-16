@@ -1,3 +1,5 @@
+import { DataSourceOpts } from './data-source'
+
 // #region options
 type InteractiveStateOpts = {
   required?: boolean
@@ -9,13 +11,6 @@ type CommonOpts = {
   label?: string
   width?: string
   fieldName?: string
-}
-
-type DataSourceType = 'static' | 'remote'
-
-type DataSourceOpts<T> = {
-  dataSourceType: DataSourceType
-  dataSource: T | string
 }
 
 type CascaderOption = {
@@ -47,7 +42,7 @@ export type OptInputNumber = {
   min?: number
   max?: number
   placeholder?: string
-  precision?: string
+  precision?: number
   step?: number
   prefix?: string
   affix?: string
