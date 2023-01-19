@@ -1,14 +1,30 @@
 <template>
   <div class="page">
     <aside>
-      <Stencil :components="['input']" />
+      <Stencil />
     </aside>
-    <main />
+    <main>
+      <Canvas :scheme="scheme" />
+    </main>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue'
+import { Scheme } from '@/types/builder'
 import Stencil from './components/stencil/Stencil.vue'
+import Canvas from './components/private/Canvas.vue'
+import Item from './_demo/DraggableItemDemo.vue'
+
+const scheme = ref<Scheme>({
+  dataSourcesConfig: {
+    remote: [],
+    variable: {},
+  },
+  formConfig: {},
+  formData: {},
+  widgetsConfig: [],
+})
 </script>
 
 <style lang="scss" scoped>

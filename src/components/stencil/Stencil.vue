@@ -12,9 +12,7 @@
           class="draggable-items-container"
         >
           <template #item="{ element }: { element: Widget }">
-            <slot name="item" :widget="element">
-              <DraggableItem :widget="element" />
-            </slot>
+            <component :is="itemSlot" :widget="element" />
           </template>
         </Draggable>
       </div>
@@ -23,7 +21,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, PropType } from 'vue'
+import { computed, PropType, type Component } from 'vue'
 import Draggable from 'vuedraggable'
 import { cloneDeep } from 'lodash'
 import { widgets } from '@/hooks/use-widgets'
@@ -50,6 +48,10 @@ const props = defineProps({
       'grid',
       'tab',
     ],
+  },
+  itemSlot: {
+    type: Object as PropType<Component>,
+    default: DraggableItem,
   },
 })
 

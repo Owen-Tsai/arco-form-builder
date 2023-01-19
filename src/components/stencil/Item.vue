@@ -1,5 +1,5 @@
 <template>
-  <div class="draggable-item">
+  <div class="draggable-item" :data-key="widget.type">
     {{ widget.name }}
   </div>
 </template>
