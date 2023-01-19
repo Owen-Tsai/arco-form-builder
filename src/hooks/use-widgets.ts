@@ -55,6 +55,7 @@ export const widgetsInitConfig: Record<string, Widget> = {
         { label: '选项1', value: 'option 1' },
         { label: '选项2', value: 'option 2' },
       ],
+      remoteSearchMethod: 'get',
     },
   },
   radio: {

@@ -78,6 +78,11 @@ export type OptSelect = {
   allowCreate?: boolean
   limit?: number
   placeholder?: string
+
+  // if configured, will enable remote search and automatically fetch
+  // data from this url, using remoteSearchMethod.
+  remoteSearchUrl?: string
+  remoteSearchMethod: 'get' | 'post'
 } & CommonOpts &
   InteractiveStateOpts &
   ValidationOpts &

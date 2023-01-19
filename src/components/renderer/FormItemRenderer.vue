@@ -12,6 +12,26 @@
       :uid="widget.uid"
       :config="widget.config"
     />
+    <InputNumber
+      v-if="widget.type === 'inputNumber'"
+      :uid="widget.uid"
+      :config="widget.config"
+    />
+    <InputTag
+      v-if="widget.type === 'inputTag'"
+      :uid="widget.uid"
+      :config="widget.config"
+    />
+    <Textarea
+      v-if="widget.type === 'textarea'"
+      :uid="widget.uid"
+      :config="widget.config"
+    />
+    <Select
+      v-if="widget.type === 'select'"
+      :uid="widget.uid"
+      :config="widget.config"
+    />
     <!-- insert dedicated renderer -->
   </a-form-item>
 </template>
@@ -20,6 +40,10 @@
 import { PropType } from 'vue'
 import type { FormWidget } from '@/types/widget'
 import Input from './widgets/Input.vue'
+import InputNumber from './widgets/InputNumber.vue'
+import InputTag from './widgets/InputTag.vue'
+import Textarea from './widgets/Textarea.vue'
+import Select from './widgets/Select.vue'
 
 const props = defineProps({
   widget: {

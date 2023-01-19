@@ -16,5 +16,5 @@ export type VariableDataSource = Record<string, DataSourceVariableEntry>
 
 export type DataSourceOpts<T> = {
   dataSourceType: DataSourceType
-  dataSource: RemoteDataSource | VariableDataSource | T
+  dataSource: string | DataSourceRemoteEntry | T
 }
