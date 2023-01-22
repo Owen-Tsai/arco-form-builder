@@ -12,7 +12,7 @@
           :list="widgetsList"
           v-bind="{
             group: 'widgets',
-            ghostClass: 'ghost',
+            ghostClass: 'dragging-ghost',
             animation: 200,
           }"
           class="draggable-container"
@@ -20,9 +20,10 @@
           item-key="uid"
         >
           <template #item="{ element }: { element: Widget }">
-            <div>{{ element }}</div>
+            <FormItemRenderer :widget="(element as FormWidget)" />
           </template>
         </Draggable>
+        <pre>{{ scheme }}</pre>
       </a-form>
     </div>
   </div>
@@ -31,8 +32,9 @@
 <script lang="ts" setup>
 import { provide, ref, toRefs, PropType } from 'vue'
 import Draggable from 'vuedraggable'
+import FormItemRenderer from '@/components/renderer/FormItemRenderer.vue'
 import { FormData, formDataCtxKey, Scheme } from '@/types/builder'
-import { Widget } from '@/types/widget'
+import { Widget, FormWidget } from '@/types/widget'
 
 const props = defineProps({
   scheme: {
@@ -50,10 +52,10 @@ const widgetsList = ref<Widget[]>(props.scheme.widgetsConfig)
 .canvas,
 .form,
 .draggable-container {
-  height: 100%;
+  min-height: calc(100vh);
 }
 .form-container {
-  height: 100%;
+  min-height: 100%;
   padding: 16px 24px;
 }
 </style>

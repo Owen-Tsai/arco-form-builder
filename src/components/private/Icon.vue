@@ -22,9 +22,10 @@ const styles = computed<CSSProperties>(() => ({
 </script>
 
 <style lang="scss" scoped>
-@use '@/styles/mixins.scss';
+@use '@/styles/mixins.scss' as *;
 .icon {
   vertical-align: middle;
+  @include flex-center;
   svg {
     height: 1em;
     width: 1em;

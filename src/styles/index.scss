@@ -1,0 +1,43 @@
+@use './var.scss' as *;
+
+$green: #22c55e;
+
+.dragging-ghost {
+  height: 0;
+  position: relative;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+
+  &::before {
+    content: "";
+    display: block;
+    height: 8px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: $green;
+  }
+
+  * {
+    opacity: 0;
+  }
+}
+
+.widget-wrapper {
+  padding: 10px 24px;
+  margin: 0;
+
+  .icon-action {
+    opacity: 0;
+  }
+
+  &.is-selected {
+    outline: 2px solid $blue-6;
+
+    .icon-action {
+      opacity: 1;
+    }
+  }
+}
