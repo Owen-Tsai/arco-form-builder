@@ -62,6 +62,7 @@ const props = defineProps({
 })
 
 const computedRules = (rules?: string) => {
+  if (props.production) return undefined
   let result
   try {
     if (rules && rules.trim() !== '') {
