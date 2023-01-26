@@ -244,11 +244,9 @@ export type ConfigDatePicker = ConfigOf<'datePicker'>
 export type ConfigGrid = ConfigOf<'grid'> & {
   cols: OptGridCol[]
 }
-export type ConfigGridCol = ConfigOf<'gridCol'>
 export type ConfigTab = ConfigOf<'tab'> & {
   panes: OptTabPane[]
 }
-export type ConfigTabPane = ConfigOf<'tabPane'>
 
 export type Widget =
   | ConfigInput
