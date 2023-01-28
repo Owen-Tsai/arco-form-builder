@@ -186,7 +186,7 @@ export type OptGrid = {
 
 export type OptGridCol = {
   span?: number
-  widgets?: Widget[]
+  widgets: Widget[]
 }
 
 export type OptTab = {
@@ -197,7 +197,7 @@ export type OptTab = {
 
 export type OptTabPane = {
   name?: string
-  widgets?: Widget[]
+  widgets: Widget[]
 }
 
 // #endregion

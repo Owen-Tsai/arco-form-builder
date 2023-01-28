@@ -38,12 +38,12 @@
               class="widget-action-icon absolute bottom-0 right-0 z-20"
               @click="onWidgetDelete(index)"
             >
-              <s-icon :name="DeleteBinFill" :size="16" />
+              <Icon :name="DeleteBinFill" :size="16" />
             </button>
             <button
               class="widget-action-icon absolute top-0 left-0 cursor-move drag-handler z-50"
             >
-              <s-icon :name="DragMove" :size="16" />
+              <Icon :name="DragMove" :size="16" />
             </button>
           </template>
         </a-row>

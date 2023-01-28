@@ -21,7 +21,7 @@ export type DataSourceConfig = {
   variable: VariableDataSource
 }
 
-export type Scheme = {
+export type Schema = {
   formConfig: FormConfig
   widgetsConfig: WidgetsConfig
   dataSourcesConfig: DataSourceConfig
@@ -31,5 +31,5 @@ export type Scheme = {
 export type FormBuilderContext = {
   selectedWidget: Ref<Widget | undefined>
   setSelectedWidget: (w: Widget) => void
-  scheme: Scheme
+  schema: Schema
 }

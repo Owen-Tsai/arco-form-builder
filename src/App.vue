@@ -4,18 +4,19 @@
       <Stencil />
     </aside>
     <main>
-      <Canvas class="canvas" :scheme="scheme" />
+      <Canvas class="canvas" :schema="schema" />
     </main>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref, provide } from 'vue'
-import { Scheme, formDataCtxKey } from '@/types/builder'
+import { Schema, formDataCtxKey } from '@/types/builder'
+import { useWidgetActions } from '@/hooks/use-widgets'
 import Stencil from './components/stencil/Stencil.vue'
 import Canvas from './components/private/Canvas.vue'
 
-const scheme = ref<Scheme>({
+const schema = ref<Schema>({
   dataSourcesConfig: {
     remote: [],
     variable: {},
@@ -25,7 +26,9 @@ const scheme = ref<Scheme>({
   widgetsConfig: [],
 })
 
-provide(formDataCtxKey, scheme.value.formConfig)
+provide(formDataCtxKey, schema.value.formConfig)
+
+useWidgetActions(schema.value)
 </script>
 
 <style lang="scss" scoped>

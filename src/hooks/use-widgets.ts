@@ -1,4 +1,6 @@
-import type { Widget } from '@/types/widget'
+import { ref, provide, Ref } from 'vue'
+import { FormBuilderContext, formBuilderCtxKey, Schema } from '@/types/builder'
+import { Widget, OptGridCol } from '@/types/widget'
 
 export const widgetsInitConfig: Record<string, Widget> = {
   grid: {
@@ -145,3 +147,48 @@ export const widgetsInitConfig: Record<string, Widget> = {
 }
 
 export const widgets = Object.values(widgetsInitConfig)
+
+export const useDraggableWidgets = (
+  context: FormBuilderContext | undefined,
+  // eslint-disable-next-line no-shadow
+  widgets: Ref<Widget[]>
+) => {
+  const isWidgetSelected = (uid: string) => {
+    return context?.selectedWidget.value?.uid === uid
+  }
+
+  const onWidgetSelect = (idx: number) => {
+    context?.setSelectedWidget(widgets.value[idx])
+  }
+
+  const onWidgetDelete = (idx: number) => {
+    widgets.value.splice(idx, 1)
+  }
+
+  const onWrapperClick = (idx: number, col: OptGridCol) => {
+    if (col.widgets?.length === 0) {
+      context?.setSelectedWidget(widgets.value[idx])
+    }
+  }
+
+  return {
+    isWidgetSelected,
+    onWidgetDelete,
+    onWidgetSelect,
+    onWrapperClick,
+  }
+}
+
+export const useWidgetActions = (schema: Schema) => {
+  const selectedWidget = ref<Widget>()
+
+  const setSelectedWidget = (widget: Widget) => {
+    selectedWidget.value = widget
+  }
+
+  provide<FormBuilderContext>(formBuilderCtxKey, {
+    schema,
+    selectedWidget,
+    setSelectedWidget,
+  })
+}
