@@ -28,16 +28,38 @@ $green: #22c55e;
 .widget-wrapper {
   padding: 10px 24px;
   margin: 0;
-
-  .icon-action {
-    opacity: 0;
-  }
+  position: relative;
 
   &.is-selected {
     outline: 2px solid $blue-6;
+  }
+  .icon-action {
+    position: absolute;
 
-    .icon-action {
-      opacity: 1;
+    &.button-tl {
+      top: 0;
+      left: 0;
+    }
+    &.button-br {
+      bottom: 0;
+      right: 0;
+    }
+  }
+}
+
+.widget-wrapper-grid {
+  .grid-col {
+    min-height: 36px;
+    border: 1px dashed $gray-4;
+  }
+}
+
+.canvas {
+  & > .arco-form {
+    flex-grow: 1;
+
+    & > .draggable-area {
+      flex-grow: 1;
     }
   }
 }

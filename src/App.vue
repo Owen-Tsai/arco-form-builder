@@ -11,8 +11,13 @@
 
 <script lang="ts" setup>
 import { ref, provide } from 'vue'
-import { Schema, formDataCtxKey } from '@/types/builder'
-import { useWidgetActions } from '@/hooks/use-widgets'
+import {
+  Schema,
+  formDataCtxKey,
+  formBuilderCtxKey,
+  FormBuilderContext,
+} from '@/types/builder'
+import { Widget } from '@/types/widget'
 import Stencil from './components/stencil/Stencil.vue'
 import Canvas from './components/private/Canvas.vue'
 
@@ -26,9 +31,19 @@ const schema = ref<Schema>({
   widgetsConfig: [],
 })
 
-provide(formDataCtxKey, schema.value.formConfig)
+const selectedWidget = ref<Widget>()
 
-useWidgetActions(schema.value)
+const setSelectedWidget = (widget: Widget) => {
+  selectedWidget.value = widget
+}
+
+provide<FormBuilderContext>(formBuilderCtxKey, {
+  schema: schema.value,
+  selectedWidget,
+  setSelectedWidget,
+})
+
+provide(formDataCtxKey, schema.value.formConfig)
 </script>
 
 <style lang="scss" scoped>
@@ -52,12 +67,13 @@ aside {
 }
 main {
   flex-grow: 1;
+  height: 100vh;
   padding: 32px;
-  filter: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07))
-    drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));
 
   .canvas {
     background-color: #fff;
+    filter: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07))
+      drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));
   }
 }
 </style>

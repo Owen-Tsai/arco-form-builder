@@ -1,8 +1,6 @@
 <template>
   <div class="canvas">
-    <div class="form-container">
-      <CanvasLayout :schema="schema" />
-    </div>
+    <CanvasLayout :schema="schema" />
   </div>
 </template>
 
@@ -22,12 +20,9 @@ defineProps({
 </script>
 
 <style lang="scss" scoped>
-.canvas,
-.form,
-.draggable-container {
-  min-height: calc(100vh);
-}
-.form-container {
+.canvas {
+  display: flex;
+  flex-direction: column;
   min-height: 100%;
   padding: 16px 24px;
 }

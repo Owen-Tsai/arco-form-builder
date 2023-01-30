@@ -14,7 +14,7 @@
         handle: '.drag-handler',
       }"
       class="draggable-area"
-      :swap-threshold="0.1"
+      :swap-threshold="0.05"
       item-key="uid"
     >
       <template #item="{ element, index }: ItemSlot">
@@ -36,23 +36,21 @@
               class="grid-col"
               @click="onWrapperClick(index, col)"
             >
-              <div class="nested-widget-list bg-green-50">
-                <NestedDraggable :list="col.widgets" />
+              <div class="draggable-area">
+                <NestedWidgetContainer :list="col.widgets" />
               </div>
             </a-col>
-            <template v-if="isWidgetSelected(element.uid)">
-              <button
-                class="widget-action-icon absolute bottom-0 right-0 z-20"
-                @click="onWidgetDelete(index)"
-              >
-                <Icon :name="DeleteBinFill" :size="16" />
-              </button>
-              <button
-                class="widget-action-icon absolute top-0 left-0 cursor-move drag-handler z-50"
-              >
-                <Icon :name="DragMove" :size="16" />
-              </button>
-            </template>
+            <IconAction
+              v-show="isWidgetSelected(element.uid)"
+              class="button-tl drag-handler"
+              :icon="DragMove"
+            />
+            <IconAction
+              v-show="isWidgetSelected(element.uid)"
+              class="button-br"
+              :icon="DeleteBinFill"
+              @click="onWidgetDelete(index)"
+            />
           </a-row>
         </template>
         <template v-else-if="element.type === 'tab'">
@@ -71,28 +69,30 @@
               :title="pane.name"
               @click="onWrapperClick(index, pane)"
             >
-              <div class="nested-widget-list bg-green-50">
-                <NestedDraggable :list="pane.widgets" />
+              <div class="draggable-area">
+                <NestedWidgetContainer :list="pane.widgets" />
               </div>
             </a-tab-pane>
 
-            <template v-if="isWidgetSelected(element.uid)">
-              <button
-                class="widget-action-icon absolute bottom-0 right-0 z-20"
-                @click="onWidgetDelete(index)"
-              >
-                <Icon :name="DeleteBinFill" :size="16" />
-              </button>
-              <button
-                class="widget-action-icon absolute top-0 left-0 cursor-move drag-handler z-50"
-              >
-                <Icon :name="DragMove" :size="16" />
-              </button>
-            </template>
+            <IconAction
+              v-show="isWidgetSelected(element.uid)"
+              class="button-tl drag-handler"
+              :icon="DragMove"
+            />
+            <IconAction
+              v-show="isWidgetSelected(element.uid)"
+              class="button-br"
+              :icon="DeleteBinFill"
+              @click="onWidgetDelete(index)"
+            />
           </a-tabs>
         </template>
         <template v-else>
-          <!-- all widgets using v-if/else directive -->
+          <DraggableWidget
+            :widget="element"
+            :index="index"
+            :parent-widget-list="widgets"
+          />
         </template>
       </template>
     </Draggable>
@@ -100,14 +100,15 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, inject, PropType } from 'vue'
+import { ref, PropType } from 'vue'
 import Draggable from 'vuedraggable'
 import { DragMove, DeleteBinFill } from '@salmon-ui/icons'
-import { useDraggableWidgets } from '@/hooks/use-widgets'
-import { Schema, FormBuilderContext, formBuilderCtxKey } from '@/types/builder'
+import { useBuilderInjection } from '@/hooks/use-widgets'
+import { Schema } from '@/types/builder'
 import { Widget } from '@/types/widget'
-import Icon from '@/components/private/Icon.vue'
-import NestedDraggable from './DraggableWidget.vue'
+import IconAction from '@/components/private/IconAction.vue'
+import NestedWidgetContainer from './NestedWidgetContainer.vue'
+import DraggableWidget from './DraggableWidget.vue'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 type ItemSlot = {
@@ -124,8 +125,6 @@ const props = defineProps({
 
 const widgets = ref<Widget[]>(props.schema.widgetsConfig)
 
-const context = inject<FormBuilderContext>(formBuilderCtxKey)
-
-const { isWidgetSelected, onWidgetDelete, onWidgetSelect, onWrapperClick } =
-  useDraggableWidgets(context, widgets)
+const { isWidgetSelected, onWidgetSelect, onWidgetDelete, onWrapperClick } =
+  useBuilderInjection(widgets)
 </script>
