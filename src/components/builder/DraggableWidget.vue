@@ -12,6 +12,11 @@
       :config="widget.config"
       :uid="widget.uid"
     />
+    <InputNumber
+      v-if="widget.type === 'inputNumber'"
+      :config="widget.config"
+      :uid="widget.uid"
+    />
     <IconAction
       v-show="isWidgetSelected(widget.uid)"
       class="button-tl drag-handler"
@@ -27,12 +32,13 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, PropType } from 'vue'
+import { ref, PropType } from 'vue'
 import { DeleteBinFill, DragMove } from '@salmon-ui/icons'
 import { FormWidget, Widget } from '@/types/widget'
 import { useBuilderInjection } from '@/hooks/use-widgets'
+import Input from '../renderer/widgets/Input.vue'
+import InputNumber from '../renderer/widgets/InputNumber.vue'
 import IconAction from '../private/IconAction.vue'
-import Input from './widgets/Input.vue'
 
 const props = defineProps({
   widget: {
