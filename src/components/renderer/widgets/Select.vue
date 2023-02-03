@@ -17,13 +17,12 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType, inject, ref, toRefs } from 'vue'
+import { PropType } from 'vue'
 import axios from 'axios'
 import { OptSelect } from '@/types/widget'
-import { DataSourceRemoteEntry, VariableDataSource } from '@/types/data-source'
 import useForm from '@/hooks/use-form-injection'
 import useLoading from '@/hooks/use-loading'
-import { useRemoteData, useVariableData } from '@/hooks/use-data-source'
+import { useDataSource } from '@/hooks/use-data-source'
 
 type Option = { label: string; value: string }
 
@@ -39,24 +38,10 @@ const props = defineProps({
 })
 
 // TODO: provide context variables
-const variablesMap = inject<VariableDataSource>(
-  'variables-map'
-) as VariableDataSource
-
-const options = ref<Option[]>()
-
-const { dataSource, dataSourceType } = toRefs(props.config)
-
-if (dataSourceType.value === 'static') {
-  options.value = dataSource.value as Option[]
-}
-if (dataSourceType.value === 'remote') {
-  const data = useRemoteData(dataSource.value as DataSourceRemoteEntry)
-  options.value = data.value
-}
-if (dataSourceType.value === 'variable') {
-  options.value = variablesMap[dataSource.value as string].value as Option[]
-}
+const options = useDataSource(
+  props.config.dataSourceType,
+  props.config.dataSource
+)
 
 const { form } = useForm()
 const { isLoading, setLoading } = useLoading()
@@ -68,7 +53,10 @@ const handleSearch = () => {
     props.config.remoteSearchUrl.trim() !== ''
   ) {
     const { remoteSearchUrl: url, remoteSearchMethod: method } = props.config
-    axios({ method, url })
+    axios({
+      method,
+      url: `${url}?search=${form[props.uid]}`,
+    })
       .then((res) => {
         options.value = res.data as Option[]
       })

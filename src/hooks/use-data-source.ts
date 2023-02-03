@@ -1,10 +1,14 @@
-import { ref } from 'vue'
+import { ref, inject } from 'vue'
 import axios from 'axios'
-import { DataSourceRemoteEntry, VariableDataSource } from '@/types/data-source'
+import {
+  DataSourceRemoteEntry,
+  VariableDataSource,
+  DataSourceType,
+} from '@/types/data-source'
 
-export const useRemoteData = (source: DataSourceRemoteEntry) => {
+export const useRemoteData = <T>(source: DataSourceRemoteEntry) => {
   const { type, url } = source
-  const data = ref<any>()
+  const data = ref<T>()
 
   axios({
     method: type,
@@ -16,9 +20,25 @@ export const useRemoteData = (source: DataSourceRemoteEntry) => {
   return data
 }
 
-export const useVariableData = (
-  variableKey: string,
-  sources: VariableDataSource
+export const useDataSource = <T>(
+  type: DataSourceType,
+  dataSource: string | DataSourceRemoteEntry | T
 ) => {
-  return sources[variableKey]
+  const options = ref<T>()
+  const variablesMap = inject<VariableDataSource>(
+    'variables-map'
+  ) as VariableDataSource
+
+  if (type === 'static') {
+    options.value = dataSource as T
+  }
+  if (type === 'remote') {
+    const data = useRemoteData<T>(dataSource as DataSourceRemoteEntry)
+    options.value = data.value
+  }
+  if (type === 'variable') {
+    options.value = variablesMap[dataSource as string].value as T
+  }
+
+  return options
 }
