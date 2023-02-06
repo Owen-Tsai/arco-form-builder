@@ -12,6 +12,8 @@ export type FormConfig = {
   labelAlign?: 'left' | 'right'
   layout?: 'horizontal' | 'vertical'
   size?: 'mini' | 'small' | 'medium' | 'large'
+  labelSpan?: number
+  wrapperSpan?: number
 }
 
 export type WidgetsConfig = Widget[]
