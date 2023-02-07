@@ -144,6 +144,14 @@ export const widgetsInitConfig: Record<string, Widget> = {
       ],
     },
   },
+  datePicker: {
+    name: '日期选择器',
+    type: 'datePicker',
+    uid: '',
+    config: {
+      mode: 'date',
+    },
+  },
 }
 
 export const widgets = Object.values(widgetsInitConfig)

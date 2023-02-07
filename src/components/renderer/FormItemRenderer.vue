@@ -32,6 +32,11 @@
       :uid="widget.uid"
       :config="widget.config"
     />
+    <DatePicker
+      v-if="widget.type === 'datePicker'"
+      :uid="widget.uid"
+      :config="widget.config"
+    />
   </a-form-item>
 </template>
 
@@ -43,6 +48,7 @@ import InputNumber from './widgets/InputNumber.vue'
 import InputTag from './widgets/InputTag.vue'
 import Textarea from './widgets/Textarea.vue'
 import Select from './widgets/Select.vue'
+import DatePicker from './widgets/DatePicker.vue'
 
 const props = defineProps({
   widget: {

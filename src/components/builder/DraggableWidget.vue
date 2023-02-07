@@ -17,6 +17,11 @@
       :config="widget.config"
       :uid="widget.uid"
     />
+    <DatePicker
+      v-if="widget.type === 'datePicker'"
+      :uid="widget.uid"
+      :config="widget.config"
+    />
     <IconAction
       v-show="isWidgetSelected(widget.uid)"
       class="button-tl drag-handler"
@@ -38,6 +43,7 @@ import { FormWidget, Widget } from '@/types/widget'
 import { useBuilderInjection } from '@/hooks/use-widgets'
 import Input from '../renderer/widgets/Input.vue'
 import InputNumber from '../renderer/widgets/InputNumber.vue'
+import DatePicker from '../renderer/widgets/DatePicker.vue'
 import IconAction from '../private/IconAction.vue'
 
 const props = defineProps({
