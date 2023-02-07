@@ -1,11 +1,14 @@
 <template>
   <div class="page">
-    <aside>
+    <aside class="left">
       <Stencil />
     </aside>
     <main>
       <Canvas class="canvas" :schema="schema" />
     </main>
+    <aside class="right">
+      <ConfigPanel :schema="schema" />
+    </aside>
   </div>
 </template>
 
@@ -20,13 +23,20 @@ import {
 import { Widget } from '@/types/widget'
 import Stencil from './components/stencil/Stencil.vue'
 import Canvas from './components/private/Canvas.vue'
+import ConfigPanel from './components/config-panel/ConfigPanel.vue'
 
 const schema = ref<Schema>({
   dataSourcesConfig: {
     remote: [],
     variable: {},
   },
-  formConfig: {},
+  formConfig: {
+    labelAlign: 'left',
+    layout: 'vertical',
+    size: 'medium',
+    labelSpan: 4,
+    wrapperSpan: 20,
+  },
   formData: {},
   widgetsConfig: [],
 })
@@ -56,24 +66,32 @@ provide(formDataCtxKey, schema.value.formConfig)
 }
 aside {
   width: 236px;
-  padding: 16px;
   flex-shrink: 0;
-  border-right: 1px solid $gray-2;
-  background-color: #fff;
   height: 100vh;
   position: sticky;
   top: 0;
-  left: 0;
+  background-color: #fff;
+
+  &.left {
+    left: 0;
+    padding: 16px;
+    border-right: 1px solid $gray-2;
+  }
+  &.right {
+    right: 0;
+    border-left: 1px solid $gray-2;
+  }
 }
 main {
   flex-grow: 1;
   height: 100vh;
   padding: 32px;
+  overflow: auto;
 
   .canvas {
     background-color: #fff;
-    filter: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07))
-      drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+      0 4px 6px -4px rgb(0 0 0 / 0.1);
   }
 }
 </style>

@@ -4,6 +4,8 @@
     :label-align="schema.formConfig.labelAlign"
     :layout="schema.formConfig.layout"
     :size="schema.formConfig.size"
+    :wrapper-col-props="{ span: schema.formConfig.wrapperSpan, offset: 0 }"
+    :label-col-props="{ span: schema.formConfig.labelSpan, offset: 0 }"
   >
     <Draggable
       :list="widgets"
