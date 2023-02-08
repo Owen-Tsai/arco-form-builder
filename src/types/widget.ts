@@ -11,6 +11,8 @@ type CommonOpts = {
   label?: string
   width?: string
   fieldName?: string
+  labelSpan?: number
+  wrapperSpan?: number
 }
 
 type CascaderOption = {
@@ -132,7 +134,8 @@ export type OptRate = {
   count?: number
   allowHalf?: boolean
   color?: string
-} & Omit<InteractiveStateOpts, 'readonly'> &
+  grading?: boolean
+} & InteractiveStateOpts &
   Omit<CommonOpts, 'width'> &
   ValidationOpts
 
@@ -143,6 +146,7 @@ export type OptSlider = {
   direction?: 'vertical' | 'horizontal'
   showTicks?: boolean
   range?: boolean
+  marks?: string
 } & Omit<InteractiveStateOpts, 'readonly'> &
   CommonOpts &
   ValidationOpts
@@ -160,7 +164,7 @@ export type OptCascader = {
 
 export type OptDatePicker = {
   allowClear?: boolean
-  placeholder?: string
+  placeholder?: string | string[]
   format?: string
   mode:
     | 'date'
@@ -260,6 +264,7 @@ export type Widget =
   | ConfigRate
   | ConfigSlider
   | ConfigCascader
+  | ConfigDatePicker
   | ConfigGrid
   | ConfigTab
 // #endregion
