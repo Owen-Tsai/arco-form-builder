@@ -7,7 +7,7 @@
       <Canvas class="canvas" :schema="schema" />
     </main>
     <aside class="right">
-      <ConfigPanel :schema="schema" />
+      <ConfigPanel :schema="schema" :selected-widget="selectedWidget" />
     </aside>
   </div>
 </template>
@@ -41,6 +41,8 @@ const schema = ref<Schema>({
   widgetsConfig: [],
 })
 
+const form = ref({})
+
 const selectedWidget = ref<Widget>()
 
 const setSelectedWidget = (widget: Widget) => {
@@ -53,12 +55,10 @@ provide<FormBuilderContext>(formBuilderCtxKey, {
   setSelectedWidget,
 })
 
-provide(formDataCtxKey, schema.value.formConfig)
+provide(formDataCtxKey, form.value)
 </script>
 
 <style lang="scss" scoped>
-@use '@/styles/var.scss' as *;
-
 .page {
   display: flex;
   position: relative;
@@ -75,11 +75,11 @@ aside {
   &.left {
     left: 0;
     padding: 16px;
-    border-right: 1px solid $gray-2;
+    border-right: 1px solid var(--color-border-2);
   }
   &.right {
     right: 0;
-    border-left: 1px solid $gray-2;
+    border-left: 1px solid var(--color-border-2);
   }
 }
 main {

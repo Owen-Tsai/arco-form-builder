@@ -1,6 +1,4 @@
-@use './var.scss' as *;
-
-$green: #22c55e;
+@use './mixins.scss' as *;
 
 .dragging-ghost {
   height: 0;
@@ -8,6 +6,7 @@ $green: #22c55e;
   padding: 0 !important;
   margin: 0 !important;
   border: 0 !important;
+  outline: 0 !important;
 
   &::before {
     content: "";
@@ -17,7 +16,7 @@ $green: #22c55e;
     position: absolute;
     top: 0;
     left: 0;
-    background-color: $green;
+    background-color: rgb(var(--success-6));
   }
 
   * {
@@ -29,12 +28,15 @@ $green: #22c55e;
   padding: 10px 24px;
   margin: 0;
   position: relative;
+  user-select: none;
+  outline: 1px dashed var(--color-border-3);
 
   &.is-selected {
-    outline: 2px solid $blue-6;
+    outline: 2px solid rgb(var(--primary-6));
   }
   .icon-action {
     position: absolute;
+    z-index: 20;
 
     &.button-tl {
       top: 0;
@@ -45,12 +47,29 @@ $green: #22c55e;
       right: 0;
     }
   }
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+  }
+  &:not(.is-selected):hover {
+    background-color: var(--color-primary-light-1);
+    outline-color: rgb(var(--primary-6));
+  }
+
+  & + & {
+    margin-top: 4px;
+  }
 }
 
 .widget-wrapper-grid {
   .grid-col {
     min-height: 36px;
-    border: 1px dashed $gray-4;
+    border: 1px dashed var(--color-border-4);
   }
 }
 
@@ -60,6 +79,25 @@ $green: #22c55e;
 
     & > .draggable-area {
       flex-grow: 1;
+    }
+  }
+}
+
+.config-panel {
+  .form {
+    .boolean-config-field {
+      @include flex-center-v;
+      justify-content: space-between;
+    
+      & + .boolean-config-field {
+        margin-top: 16px;
+      }
+    }
+
+    .label {
+      display: block;
+      font-size: 14px;
+      color: var(--color-text-2);
     }
   }
 }
