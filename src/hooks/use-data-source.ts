@@ -30,7 +30,18 @@ export const useDataSource = <T>(
   ) as VariableDataSource
 
   if (type === 'static') {
-    options.value = dataSource as T
+    if (typeof dataSource === 'string') {
+      let result
+      try {
+        // eslint-disable-next-line no-eval
+        result = eval(`_ = ${dataSource}`)
+      } catch (e) {
+        // nothing
+      }
+      options.value = result as T
+    } else {
+      options.value = dataSource as T
+    }
   }
   if (type === 'remote') {
     const data = useRemoteData<T>(dataSource as DataSourceRemoteEntry)

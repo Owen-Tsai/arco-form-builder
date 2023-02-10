@@ -12,3 +12,5 @@ export const generateUID = (len = 8) => {
 export const walkTree = () => {
   // TODO
 }
+
+export const inputEvtNames = ['input', 'change', 'focus', 'blur']

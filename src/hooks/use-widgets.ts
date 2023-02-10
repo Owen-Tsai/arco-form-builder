@@ -45,7 +45,10 @@ export const widgetsInitConfig: Record<string, Widget> = {
     name: '文本域',
     type: 'textarea',
     uid: '',
-    config: {},
+    config: {
+      minRows: 4,
+      maxRows: 10,
+    },
   },
   select: {
     name: '下拉选择器',

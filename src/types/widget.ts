@@ -34,7 +34,7 @@ export type OptInput = {
   showWordLimit?: boolean
   placeholder?: string
   prefix?: string
-  affix?: string
+  suffix?: string
 } & CommonOpts &
   InteractiveStateOpts &
   ValidationOpts
@@ -47,7 +47,7 @@ export type OptInputNumber = {
   precision?: number
   step?: number
   prefix?: string
-  affix?: string
+  suffix?: string
 } & CommonOpts &
   InteractiveStateOpts &
   ValidationOpts
@@ -57,7 +57,7 @@ export type OptInputTag = {
   placeholder?: string
   limit?: number
   prefix?: string
-  affix?: string
+  suffix?: string
 } & CommonOpts &
   InteractiveStateOpts &
   ValidationOpts
