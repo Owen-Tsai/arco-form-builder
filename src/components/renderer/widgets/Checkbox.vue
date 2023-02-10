@@ -1,19 +1,19 @@
 <template>
-  <a-radio-group
+  <a-checkbox-group
     v-model="form[uid]"
     :direction="config.direction"
     :disabled="config.disabled"
   >
-    <a-radio v-for="(opt, i) in options" :key="i" :value="opt.value">
+    <a-checkbox v-for="(opt, i) in options" :key="i" :value="opt.value">
       {{ opt.label }}
-    </a-radio>
-  </a-radio-group>
+    </a-checkbox>
+  </a-checkbox-group>
 </template>
 
 <script lang="ts" setup>
 import { PropType } from 'vue'
 import { OptRadio } from '@/types/widget'
-import useForm from '@/hooks/use-form-injection'
+import { useFormData } from '@/hooks/use-context'
 import { useDataSource } from '@/hooks/use-data-source'
 
 const props = defineProps({
@@ -32,5 +32,5 @@ const options = useDataSource(
   props.config.dataSource
 )
 
-const { form } = useForm()
+const { form } = useFormData()
 </script>

@@ -8,14 +8,14 @@
     :placeholder="config.placeholder"
   >
     <template v-if="config.prefix" #prepend>{{ config.prefix }}</template>
-    <template v-if="config.affix" #append>{{ config.affix }}</template>
+    <template v-if="config.suffix" #append>{{ config.suffix }}</template>
   </a-input-tag>
 </template>
 
 <script lang="ts" setup>
 import { PropType } from 'vue'
 import { OptInputTag } from '@/types/widget'
-import useForm from '@/hooks/use-form-injection'
+import { useFormData } from '@/hooks/use-context'
 
 defineProps({
   config: {
@@ -28,5 +28,5 @@ defineProps({
   },
 })
 
-const { form } = useForm()
+const { form } = useFormData()
 </script>

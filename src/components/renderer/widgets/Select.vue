@@ -20,7 +20,7 @@
 import { PropType } from 'vue'
 import axios from 'axios'
 import { OptSelect } from '@/types/widget'
-import useForm from '@/hooks/use-form-injection'
+import { useFormData } from '@/hooks/use-context'
 import useLoading from '@/hooks/use-loading'
 import { useDataSource } from '@/hooks/use-data-source'
 
@@ -43,7 +43,7 @@ const options = useDataSource(
   props.config.dataSource
 )
 
-const { form } = useForm()
+const { form } = useFormData()
 const { isLoading, setLoading } = useLoading()
 
 const handleSearch = () => {

@@ -1,0 +1,47 @@
+<template>
+  <a-slider
+    v-model="form[uid]"
+    :step="config.step"
+    :min="config.min"
+    :marks="marks"
+    :max="config.max"
+    :direction="config.direction"
+    :disabled="config.disabled"
+    :show-ticks="config.showTicks"
+    :range="config.range"
+  />
+</template>
+
+<script lang="ts" setup>
+import { computed, PropType } from 'vue'
+import { OptSlider } from '@/types/widget'
+import { useFormData } from '@/hooks/use-context'
+
+const props = defineProps({
+  config: {
+    type: Object as PropType<OptSlider>,
+    required: true,
+  },
+  uid: {
+    type: String,
+    required: true,
+  },
+})
+
+const marks = computed(() => {
+  const str = props.config.marks
+  let result
+  try {
+    if (str && str.trim() !== '') {
+      // eslint-disable-next-line no-eval
+      result = eval(`_ = ${str}`)
+    }
+  } catch (e) {
+    // nothing
+  }
+
+  return result
+})
+
+const { form } = useFormData()
+</script>

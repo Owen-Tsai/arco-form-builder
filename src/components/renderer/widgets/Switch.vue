@@ -1,23 +1,22 @@
 <template>
-  <a-textarea
+  <a-switch
     v-model="form[uid]"
-    :allow-clear="config.allowClear"
-    :auto-size="{ minRows: config.minRows, maxRows: config.maxRows }"
     :disabled="config.disabled"
-    :max-length="config.maxLength"
-    :show-word-limit="config.showWordLimit"
-    :placeholder="config.placeholder"
+    :type="config.type"
+    :direction="config.checkedValue"
+    :checked-value="config.checkedValue"
+    :unchecked-value="config.uncheckedValue"
   />
 </template>
 
 <script lang="ts" setup>
 import { PropType } from 'vue'
-import { OptTextarea } from '@/types/widget'
+import { OptSwitch } from '@/types/widget'
 import { useFormData } from '@/hooks/use-context'
 
 defineProps({
   config: {
-    type: Object as PropType<OptTextarea>,
+    type: Object as PropType<OptSwitch>,
     required: true,
   },
   uid: {

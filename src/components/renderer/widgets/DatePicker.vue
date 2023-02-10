@@ -41,7 +41,7 @@
 <script lang="ts" setup>
 import { ref, PropType } from 'vue'
 import { OptDatePicker } from '@/types/widget'
-import useForm from '@/hooks/use-form-injection'
+import { useFormData } from '@/hooks/use-context'
 
 const props = defineProps({
   config: {
@@ -54,7 +54,7 @@ const props = defineProps({
   },
 })
 
-const { form } = useForm()
+const { form } = useFormData()
 
 const properties = ref({
   allowClear: props.config.allowClear,

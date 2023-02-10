@@ -13,7 +13,7 @@
 <script lang="ts" setup>
 import { PropType } from 'vue'
 import { OptRadio } from '@/types/widget'
-import useForm from '@/hooks/use-form-injection'
+import { useFormData } from '@/hooks/use-context'
 import { useDataSource } from '@/hooks/use-data-source'
 
 const props = defineProps({
@@ -32,5 +32,5 @@ const options = useDataSource(
   props.config.dataSource
 )
 
-const { form } = useForm()
+const { form } = useFormData()
 </script>
