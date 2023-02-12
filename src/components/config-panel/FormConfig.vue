@@ -1,5 +1,5 @@
 <template>
-  <a-form :model="config" layout="vertical">
+  <a-form :model="config" layout="vertical" class="form">
     <a-form-item label="表单尺寸">
       <a-select v-model="config.size">
         <a-option label="mini" />
@@ -14,17 +14,15 @@
         <a-option label="vertical" />
       </a-select>
     </a-form-item>
-    <a-form-item
-      v-show="config.layout === 'horizontal'"
-      label="标签宽度占比/24"
-    >
-      <a-input-number v-model="config.labelSpan" />
+    <a-form-item v-show="config.layout === 'horizontal'" label="标签宽度占比">
+      <a-input-number v-model="config.labelSpan" hide-button>
+        <template #suffix>/24</template>
+      </a-input-number>
     </a-form-item>
-    <a-form-item
-      v-show="config.layout === 'horizontal'"
-      label="控件宽度占比/24"
-    >
-      <a-input-number v-model="config.wrapperSpan" />
+    <a-form-item v-show="config.layout === 'horizontal'" label="控件宽度占比">
+      <a-input-number v-model="config.wrapperSpan" hide-button>
+        <template #suffix>/24</template>
+      </a-input-number>
     </a-form-item>
     <a-form-item label="标签对齐方式">
       <a-select v-model="config.labelAlign">
@@ -55,3 +53,9 @@ const config = computed({
   },
 })
 </script>
+
+<style lang="scss" scoped>
+.form {
+  padding: 16px;
+}
+</style>
