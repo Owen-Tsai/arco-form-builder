@@ -5,9 +5,9 @@
   <a-form-item label="字段标签">
     <a-input v-model="widget.label" allow-clear />
   </a-form-item>
-  <!-- <a-form-item label="默认值">
+  <a-form-item label="默认值">
     <a-input v-model="form[props.config.uid]" allow-clear />
-  </a-form-item> -->
+  </a-form-item>
   <a-form-item label="宽度">
     <a-input
       v-model="widget.width"
@@ -74,6 +74,7 @@
 import { computed, PropType } from 'vue'
 import { ConfigInputNumber } from '@/types/widget'
 import { inputEvtNames } from '@/utils'
+import { useFormData } from '@/hooks/use-context'
 
 const emit = defineEmits(['update:config'])
 const props = defineProps({
@@ -88,6 +89,6 @@ const widget = computed({
     emit('update:config', val)
   },
 })
-</script>
 
-<style lang="scss" scoped></style>
+const { form } = useFormData()
+</script>

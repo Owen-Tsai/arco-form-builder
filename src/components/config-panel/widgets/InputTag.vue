@@ -5,7 +5,7 @@
   <a-form-item label="字段标签">
     <a-input v-model="widget.label" allow-clear />
   </a-form-item>
-  <!-- <div style="margin-bottom: 16px">
+  <div style="margin-bottom: 16px">
     <span class="label">默认值</span>
     <div class="value-list">
       <div
@@ -27,7 +27,7 @@
       </div>
     </div>
     <a-button size="small" long type="outline" @click="add">新增</a-button>
-  </div> -->
+  </div>
   <a-form-item label="宽度">
     <a-input
       v-model="widget.width"
@@ -76,6 +76,7 @@ import { computed, PropType } from 'vue'
 import { IconClose } from '@arco-design/web-vue/es/icon'
 import { inputEvtNames } from '@/utils'
 import { ConfigInputTag } from '@/types/widget'
+import { useFormData } from '@/hooks/use-context'
 
 const emit = defineEmits(['update:config'])
 
@@ -92,6 +93,16 @@ const widget = computed({
     emit('update:config', val)
   },
 })
+
+const { form } = useFormData()
+
+const add = () => {
+  form[props.config.uid].push('')
+}
+
+const removeValueFromList = (idx: number) => {
+  ;(form[props.config.uid] as string[]).splice(idx, 1)
+}
 </script>
 
 <style lang="scss" scoped>
