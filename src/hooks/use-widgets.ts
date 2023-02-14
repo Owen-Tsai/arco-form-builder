@@ -56,10 +56,12 @@ export const widgetsInitConfig: Record<string, Widget> = {
     uid: '',
     config: {
       dataSourceType: 'static',
-      dataSource: [
-        { label: '选项1', value: 'option 1' },
-        { label: '选项2', value: 'option 2' },
-      ],
+      data: {
+        static: [
+          { label: '选项1', value: 'option 1' },
+          { label: '选项2', value: 'option 2' },
+        ],
+      },
       remoteSearchMethod: 'get',
     },
   },
@@ -69,10 +71,12 @@ export const widgetsInitConfig: Record<string, Widget> = {
     uid: '',
     config: {
       dataSourceType: 'static',
-      dataSource: [
-        { label: '选项1', value: 'option 1' },
-        { label: '选项2', value: 'option 2' },
-      ],
+      data: {
+        static: [
+          { label: '选项1', value: 'option 1' },
+          { label: '选项2', value: 'option 2' },
+        ],
+      },
     },
   },
   checkbox: {
@@ -81,10 +85,12 @@ export const widgetsInitConfig: Record<string, Widget> = {
     uid: '',
     config: {
       dataSourceType: 'static',
-      dataSource: [
-        { label: '选项1', value: 'option 1' },
-        { label: '选项2', value: 'option 2' },
-      ],
+      data: {
+        static: [
+          { label: '选项1', value: 'option 1' },
+          { label: '选项2', value: 'option 2' },
+        ],
+      },
     },
   },
   switch: {
@@ -111,40 +117,42 @@ export const widgetsInitConfig: Record<string, Widget> = {
     uid: '',
     config: {
       dataSourceType: 'static',
-      dataSource: [
-        {
-          label: '山东省',
-          value: '1',
-          children: [
-            {
-              label: '济南市',
-              value: '1-1',
-              children: [
-                { label: '历下区', value: '1-1-1' },
-                { label: '市中区', value: '1-1-2' },
-                { label: '历城区', value: '1-1-3' },
-              ],
-            },
-            {
-              label: '泰安市',
-              value: '1-2',
-              children: [
-                { label: '岱岳区', value: '1-2-1' },
-                { label: '泰山区', value: '1-2-2' },
-              ],
-            },
-          ],
-        },
-        {
-          label: '北京市',
-          value: '2',
-          children: [
-            { label: '朝阳区', value: '2-1' },
-            { label: '东城区', value: '2-2' },
-            { label: '海淀区区', value: '2-3' },
-          ],
-        },
-      ],
+      data: {
+        static: [
+          {
+            label: '山东省',
+            value: '1',
+            children: [
+              {
+                label: '济南市',
+                value: '1-1',
+                children: [
+                  { label: '历下区', value: '1-1-1' },
+                  { label: '市中区', value: '1-1-2' },
+                  { label: '历城区', value: '1-1-3' },
+                ],
+              },
+              {
+                label: '泰安市',
+                value: '1-2',
+                children: [
+                  { label: '岱岳区', value: '1-2-1' },
+                  { label: '泰山区', value: '1-2-2' },
+                ],
+              },
+            ],
+          },
+          {
+            label: '北京市',
+            value: '2',
+            children: [
+              { label: '朝阳区', value: '2-1' },
+              { label: '东城区', value: '2-2' },
+              { label: '海淀区区', value: '2-3' },
+            ],
+          },
+        ],
+      },
     },
   },
   datePicker: {

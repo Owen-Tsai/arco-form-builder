@@ -21,6 +21,11 @@ type CascaderOption = {
   children?: CascaderOption[]
 }
 
+export type CommonValue = {
+  label?: string
+  value: string
+}
+
 type ValidationTrigger = 'input' | 'change' | 'blur' | 'focus'
 
 type ValidationOpts = {
@@ -64,7 +69,6 @@ export type OptInputTag = {
 
 export type OptTextarea = {
   allowClear?: boolean
-  autoSize?: boolean
   showWordLimit?: boolean
   maxLength?: number
   minRows?: number
@@ -88,12 +92,7 @@ export type OptSelect = {
 } & CommonOpts &
   InteractiveStateOpts &
   ValidationOpts &
-  DataSourceOpts<
-    {
-      label: string
-      value: string
-    }[]
-  >
+  DataSourceOpts<CommonValue[]>
 
 export type OptRadio = {
   type?: 'radio' | 'button'
@@ -101,24 +100,14 @@ export type OptRadio = {
 } & Omit<InteractiveStateOpts, 'readonly'> &
   CommonOpts &
   ValidationOpts &
-  DataSourceOpts<
-    {
-      label: string
-      value: string
-    }[]
-  >
+  DataSourceOpts<CommonValue[]>
 
 export type OptCheckbox = {
   direction?: 'horizontal' | 'vertical'
 } & Omit<InteractiveStateOpts, 'readonly'> &
   CommonOpts &
   ValidationOpts &
-  DataSourceOpts<
-    {
-      label: string
-      value: string
-    }[]
-  >
+  DataSourceOpts<CommonValue[]>
 
 export type OptSwitch = {
   checkedValue?: boolean | string

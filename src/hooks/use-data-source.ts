@@ -1,10 +1,6 @@
-import { ref, inject } from 'vue'
+import { ref } from 'vue'
 import axios from 'axios'
-import {
-  DataSourceRemoteEntry,
-  VariableDataSource,
-  DataSourceType,
-} from '@/types/data-source'
+import { DataSourceRemoteEntry, DataSourceOpts } from '@/types/data-source'
 
 export const useRemoteData = <T>(source: DataSourceRemoteEntry) => {
   const { type, url } = source
@@ -20,35 +16,35 @@ export const useRemoteData = <T>(source: DataSourceRemoteEntry) => {
   return data
 }
 
-export const useDataSource = <T>(
-  type: DataSourceType,
-  dataSource: string | DataSourceRemoteEntry | T
-) => {
+export const useDataSource = <T>(dataSourceOpts: DataSourceOpts<T>) => {
   const options = ref<T>()
-  const variablesMap = inject<VariableDataSource>(
-    'variables-map'
-  ) as VariableDataSource
-
-  if (type === 'static') {
-    if (typeof dataSource === 'string') {
-      let result
+  // const variablesMap = inject<VariableDataSource>(
+  //   'variables-map'
+  // ) as VariableDataSource
+  if (dataSourceOpts.dataSourceType === 'static') {
+    let result
+    const { static: staticData } = dataSourceOpts.data
+    if (typeof staticData === 'string') {
+      // in this case, the Object string need to be parsed
       try {
         // eslint-disable-next-line no-eval
-        result = eval(`_ = ${dataSource}`)
+        result = eval(`_ = ${staticData}`)
       } catch (e) {
         // nothing
       }
       options.value = result as T
     } else {
-      options.value = dataSource as T
+      // the staticData is of type T
+      options.value = staticData
     }
-  }
-  if (type === 'remote') {
-    const data = useRemoteData<T>(dataSource as DataSourceRemoteEntry)
+  } else if (dataSourceOpts.dataSourceType === 'remote') {
+    const data = useRemoteData<T>(
+      dataSourceOpts.data.remote as DataSourceRemoteEntry
+    )
     options.value = data.value
-  }
-  if (type === 'variable') {
-    options.value = variablesMap[dataSource as string].value as T
+  } else {
+    // TODO
+    // dataSourceType === 'variable'
   }
 
   return options

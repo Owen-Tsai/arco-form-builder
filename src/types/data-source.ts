@@ -16,5 +16,9 @@ export type VariableDataSource = Record<string, DataSourceVariableEntry>
 
 export type DataSourceOpts<T> = {
   dataSourceType: DataSourceType
-  dataSource: string | DataSourceRemoteEntry | T
+  data: {
+    static: T
+    remote?: DataSourceRemoteEntry
+    variable?: string
+  }
 }
