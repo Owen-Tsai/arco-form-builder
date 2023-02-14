@@ -1,6 +1,10 @@
 import { ref } from 'vue'
 import axios from 'axios'
-import { DataSourceRemoteEntry, DataSourceOpts } from '@/types/data-source'
+import {
+  DataSourceRemoteEntry,
+  DataSourceOpts,
+  DataSourceType,
+} from '@/types/data-source'
 
 export const useRemoteData = <T>(source: DataSourceRemoteEntry) => {
   const { type, url } = source
@@ -16,14 +20,17 @@ export const useRemoteData = <T>(source: DataSourceRemoteEntry) => {
   return data
 }
 
-export const useDataSource = <T>(dataSourceOpts: DataSourceOpts<T>) => {
+export const useDataSource = <T>(
+  dataSourceType: DataSourceType,
+  data: DataSourceOpts<T>['data']
+) => {
   const options = ref<T>()
   // const variablesMap = inject<VariableDataSource>(
   //   'variables-map'
   // ) as VariableDataSource
-  if (dataSourceOpts.dataSourceType === 'static') {
+  if (dataSourceType === 'static') {
     let result
-    const { static: staticData } = dataSourceOpts.data
+    const { static: staticData } = data
     if (typeof staticData === 'string') {
       // in this case, the Object string need to be parsed
       try {
@@ -37,11 +44,9 @@ export const useDataSource = <T>(dataSourceOpts: DataSourceOpts<T>) => {
       // the staticData is of type T
       options.value = staticData
     }
-  } else if (dataSourceOpts.dataSourceType === 'remote') {
-    const data = useRemoteData<T>(
-      dataSourceOpts.data.remote as DataSourceRemoteEntry
-    )
-    options.value = data.value
+  } else if (dataSourceType === 'remote') {
+    const res = useRemoteData<T>(data.remote as DataSourceRemoteEntry)
+    options.value = res.value
   } else {
     // TODO
     // dataSourceType === 'variable'
