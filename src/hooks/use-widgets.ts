@@ -46,8 +46,8 @@ export const widgetsInitConfig: Record<string, Widget> = {
     type: 'textarea',
     uid: '',
     config: {
-      minRows: 4,
-      maxRows: 10,
+      minRows: 3,
+      maxRows: 6,
     },
   },
   select: {

@@ -7,6 +7,7 @@
     :max-length="config.maxLength"
     :show-word-limit="config.showWordLimit"
     :placeholder="config.placeholder"
+    :readonly="config.readonly"
   />
 </template>
 
