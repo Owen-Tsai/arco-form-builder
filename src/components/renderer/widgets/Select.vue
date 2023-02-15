@@ -7,7 +7,7 @@
     :disabled="config.disabled"
     :limit="config.limit"
     :loading="isLoading"
-    :multiple="config.limit !== 0"
+    :multiple="config.limit !== undefined && config.limit > 1"
     @search="handleSearch"
   >
     <a-option v-for="(opt, i) in options" :key="i" :value="opt.value">
@@ -38,10 +38,7 @@ const props = defineProps({
 })
 
 // TODO: provide context variables
-const options = useDataSource(
-  props.config.dataSourceType,
-  props.config.dataSource
-)
+const options = useDataSource(props.config.dataSourceType, props.config.data)
 
 const { form } = useFormData()
 const { isLoading, setLoading } = useLoading()
