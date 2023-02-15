@@ -1,29 +1,5 @@
 @use './mixins.scss' as *;
 
-.dragging-ghost {
-  height: 0;
-  position: relative;
-  padding: 0 !important;
-  margin: 0 !important;
-  border: 0 !important;
-  outline: 0 !important;
-
-  &::before {
-    content: "";
-    display: block;
-    height: 8px;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: rgb(var(--success-6));
-  }
-
-  * {
-    opacity: 0;
-  }
-}
-
 .widget-wrapper {
   padding: 10px 24px;
   margin: 0;

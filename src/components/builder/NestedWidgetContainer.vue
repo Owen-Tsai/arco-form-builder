@@ -3,7 +3,6 @@
     :list="list"
     v-bind="{
       group: 'widgets',
-      ghostClass: 'dragging-ghost',
       animation: 200,
       handle: '.drag-handler',
     }"
