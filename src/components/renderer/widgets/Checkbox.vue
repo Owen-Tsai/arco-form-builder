@@ -27,10 +27,7 @@ const props = defineProps({
   },
 })
 
-const options = useDataSource(
-  props.config.dataSourceType,
-  props.config.dataSource
-)
+const options = useDataSource(props.config.dataSourceType, props.config.data)
 
 const { form } = useFormData()
 </script>
