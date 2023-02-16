@@ -3,6 +3,7 @@
     v-model="form[uid]"
     :direction="config.direction"
     :disabled="config.disabled"
+    :type="config.type"
   >
     <a-radio v-for="(opt, i) in options" :key="i" :value="opt.value">
       {{ opt.label }}
@@ -27,10 +28,7 @@ const props = defineProps({
   },
 })
 
-const options = useDataSource(
-  props.config.dataSourceType,
-  props.config.dataSource
-)
+const options = useDataSource(props.config.dataSourceType, props.config.data)
 
 const { form } = useFormData()
 </script>
