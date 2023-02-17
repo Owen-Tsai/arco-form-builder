@@ -42,12 +42,20 @@
     </a-select>
   </div>
   <a-form-item label="默认值" style="margin-top: 16px">
-    <a-input
-      v-if="widget.dataSourceType !== 'static'"
+    <template v-if="widget.dataSourceType !== 'static'">
+      <a-input-tag
+        v-if="isMultiple"
+        v-model="form[props.config.uid]"
+        placeholder="按下回车键新增"
+      />
+      <a-input v-else v-model="form[props.config.uid]" allow-clear />
+    </template>
+    <a-select
+      v-else
       v-model="form[props.config.uid]"
+      :multiple="isMultiple"
       allow-clear
-    />
-    <a-select v-else v-model="form[props.config.uid]" allow-clear>
+    >
       <a-option
         v-for="(opt, i) in widget.data.static"
         :key="i"
@@ -128,11 +136,13 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, PropType } from 'vue'
+import { ref, computed, watch, PropType } from 'vue'
 import { IconClose } from '@arco-design/web-vue/es/icon'
 import { inputEvtNames } from '@/utils'
 import { ConfigSelect } from '@/types/widget'
 import { useFormData, useBuilderContext } from '@/hooks/use-context'
+
+const cachedValue = ref<string | string[]>()
 
 const emit = defineEmits(['update:config'])
 
@@ -155,6 +165,10 @@ const { schema } = useBuilderContext()
 
 const remoteDataSource = computed(() => schema.dataSourcesConfig.remote)
 
+const isMultiple = computed(
+  () => !!widget.value.limit && widget.value.limit > 1
+)
+
 const addOption = () => {
   widget.value.data.static.push({
     label: '',
@@ -165,6 +179,20 @@ const addOption = () => {
 const removeOption = (idx: number) => {
   widget.value.data.static.splice(idx, 1)
 }
+
+watch(
+  () => isMultiple.value,
+  (val) => {
+    const t = form[props.config.uid]
+    const isArray = Array.isArray(cachedValue.value)
+    if (val) {
+      form[props.config.uid] = isArray ? cachedValue.value : []
+    } else {
+      form[props.config.uid] = isArray ? '' : cachedValue.value
+    }
+    cachedValue.value = t
+  }
+)
 </script>
 
 <style lang="scss" scoped>
