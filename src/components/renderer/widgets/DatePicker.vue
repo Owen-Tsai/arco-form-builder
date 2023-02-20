@@ -3,37 +3,43 @@
     v-if="config.mode === 'date'"
     v-bind="properties"
     :placeholder="config.placeholder"
-    style="width: 100%"
+    class="date-picker-sub-item"
+    :style="{ width: config.width }"
   />
   <a-week-picker
     v-else-if="config.mode === 'week'"
     v-bind="properties"
     :placeholder="config.placeholder"
-    style="width: 100%"
+    class="date-picker-sub-item"
+    :style="{ width: config.width }"
   />
   <a-quarter-picker
     v-else-if="config.mode === 'quarter'"
     v-bind="properties"
     :placeholder="config.placeholder"
-    style="width: 100%"
+    :style="{ width: config.width }"
+    class="date-picker-sub-item"
   />
   <a-month-picker
     v-else-if="config.mode === 'month'"
     v-bind="properties"
     :placeholder="config.placeholder"
-    style="width: 100%"
+    :style="{ width: config.width }"
+    class="date-picker-sub-item"
   />
   <a-year-picker
     v-else-if="config.mode === 'year'"
     v-bind="properties"
     :placeholder="config.placeholder"
-    style="width: 100%"
+    :style="{ width: config.width }"
+    class="date-picker-sub-item"
   />
   <a-range-picker
     v-else
     v-bind="properties"
     :placeholder="(config.placeholder as string[])"
-    style="width: 100%"
+    :style="{ width: config.width }"
+    class="date-picker-sub-item"
     :mode="(config.mode.replace('range', '') as ('date' | 'week' | 'month' | 'quarter' | 'year'))"
   />
 </template>
@@ -65,8 +71,8 @@ const properties = ref({
 })
 </script>
 
-<style lang="scss" scoped>
-.item {
+<style lang="scss">
+.date-picker-sub-item {
   width: 100%;
 }
 </style>

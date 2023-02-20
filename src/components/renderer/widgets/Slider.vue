@@ -5,10 +5,10 @@
     :min="config.min"
     :marks="marks"
     :max="config.max"
-    :direction="config.direction"
     :disabled="config.disabled"
     :show-ticks="config.showTicks"
     :range="config.range"
+    :style="{ width: config.width }"
   />
 </template>
 

@@ -9,6 +9,7 @@
     :placeholder="config.placeholder"
     :precision="config.precision"
     :step="config.step"
+    :style="{ width: config.width }"
   >
     <template v-if="config.prefix" #prepend>{{ config.prefix }}</template>
     <template v-if="config.suffix" #append>{{ config.suffix }}</template>

@@ -6,6 +6,7 @@
     :readonly="config.readonly"
     :max-tag-count="config.limit"
     :placeholder="config.placeholder"
+    :style="{ width: config.width }"
   >
     <template v-if="config.prefix" #prepend>{{ config.prefix }}</template>
     <template v-if="config.suffix" #append>{{ config.suffix }}</template>

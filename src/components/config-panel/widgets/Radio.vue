@@ -57,6 +57,13 @@
       </a-option>
     </a-select>
   </a-form-item>
+  <a-form-item label="宽度">
+    <a-input
+      v-model="widget.width"
+      placeholder="输入含单位(%/px)的数值"
+      allow-clear
+    />
+  </a-form-item>
   <a-form-item label="排列方式">
     <a-select v-model="widget.direction" default-value="horizontal">
       <a-option value="horizontal">水平排列</a-option>

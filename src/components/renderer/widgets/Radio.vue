@@ -4,6 +4,7 @@
     :direction="config.direction"
     :disabled="config.disabled"
     :type="config.type"
+    :style="{ width: config.width }"
   >
     <a-radio v-for="(opt, i) in options" :key="i" :value="opt.value">
       {{ opt.label }}

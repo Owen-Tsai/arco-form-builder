@@ -8,6 +8,7 @@
     :limit="config.limit"
     :loading="isLoading"
     :multiple="config.limit !== undefined && config.limit > 1"
+    :style="{ width: config.width }"
     @search="handleSearch"
   >
     <a-option v-for="(opt, i) in options" :key="i" :value="opt.value">

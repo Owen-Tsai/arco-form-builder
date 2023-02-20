@@ -8,6 +8,7 @@
     :show-word-limit="config.showWordLimit"
     :placeholder="config.placeholder"
     :readonly="config.readonly"
+    :style="{ width: config.width }"
   />
 </template>
 

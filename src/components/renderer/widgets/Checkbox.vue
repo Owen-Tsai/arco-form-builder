@@ -3,6 +3,7 @@
     v-model="form[uid]"
     :direction="config.direction"
     :disabled="config.disabled"
+    :style="{ width: config.width }"
   >
     <a-checkbox v-for="(opt, i) in options" :key="i" :value="opt.value">
       {{ opt.label }}
