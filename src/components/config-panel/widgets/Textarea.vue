@@ -23,31 +23,9 @@
   </a-form-item>
   <a-form-item label="最小行数">
     <a-input-number v-model="widget.minRows" allow-clear />
-    <template #extra>
-      <a-tooltip
-        content="该配置项在改变后无法在画布中实时展示效果，如需预览变更请进入预览模式"
-        position="br"
-      >
-        <span class="extra-info">
-          该项配置不是响应式的
-          <Icon :name="Question" />
-        </span>
-      </a-tooltip>
-    </template>
   </a-form-item>
   <a-form-item label="最大行数">
     <a-input-number v-model="widget.maxRows" allow-clear />
-    <template #extra>
-      <a-tooltip
-        content="该配置项在改变后无法在画布中实时展示效果，如需预览变更请进入预览模式"
-        position="br"
-      >
-        <span class="extra-info">
-          该项配置不是响应式的
-          <Icon :name="Question" />
-        </span>
-      </a-tooltip>
-    </template>
   </a-form-item>
   <div class="boolean-config-field">
     <span class="label">是否禁用</span>
@@ -85,11 +63,9 @@
 
 <script lang="ts" setup>
 import { computed, PropType } from 'vue'
-import { Question } from '@salmon-ui/icons'
 import { inputEvtNames } from '@/utils'
 import { ConfigTextarea } from '@/types/widget'
 import { useFormData } from '@/hooks/use-context'
-import Icon from '@/components/private/Icon.vue'
 
 const emit = defineEmits(['update:config'])
 
@@ -109,15 +85,3 @@ const widget = computed({
 
 const { form } = useFormData()
 </script>
-
-<style lang="scss" scoped>
-.extra-info {
-  display: flex;
-  align-items: center;
-  cursor: default;
-  .icon {
-    margin-left: 4px;
-    font-size: 16px;
-  }
-}
-</style>

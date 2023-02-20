@@ -1,5 +1,6 @@
 <template>
   <a-textarea
+    :key="key"
     v-model="form[uid]"
     :allow-clear="config.allowClear"
     :auto-size="{ minRows: config.minRows, maxRows: config.maxRows }"
@@ -13,11 +14,13 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from 'vue'
+import { watch, PropType, ref } from 'vue'
 import { OptTextarea } from '@/types/widget'
 import { useFormData } from '@/hooks/use-context'
 
-defineProps({
+const key = ref(0)
+
+const props = defineProps({
   config: {
     type: Object as PropType<OptTextarea>,
     required: true,
@@ -29,4 +32,11 @@ defineProps({
 })
 
 const { form } = useFormData()
+
+watch(
+  () => [props.config.minRows, props.config.maxRows],
+  () => {
+    key.value++
+  }
+)
 </script>

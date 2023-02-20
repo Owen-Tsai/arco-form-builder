@@ -36,19 +36,19 @@
   <a-form-item label="后缀">
     <a-input v-model="widget.suffix" allow-clear />
   </a-form-item>
-  <div class="boolean-config">
+  <div class="boolean-config-field">
     <span class="label">是否禁用</span>
     <a-switch v-model="widget.disabled" />
   </div>
-  <div class="boolean-config mt-4">
+  <div class="boolean-config-field">
     <span class="label">是否必填</span>
     <a-switch v-model="widget.required" />
   </div>
-  <div class="boolean-config mt-4">
+  <div class="boolean-config-field">
     <span class="label">是否只读</span>
     <a-switch v-model="widget.readonly" />
   </div>
-  <div class="boolean-config my-4">
+  <div class="boolean-config-field" style="margin-bottom: 16px">
     <span class="label">允许清除</span>
     <a-switch v-model="widget.allowClear" />
   </div>
