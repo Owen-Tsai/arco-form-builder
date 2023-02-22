@@ -16,8 +16,10 @@
         <a-input v-model="form[config.uid][i]" />
         <a-button
           size="small"
-          type="text"
+          type="outline"
           status="danger"
+          style="flex-shrink: 0"
+          class="btn"
           @click="removeValueFromList(i)"
         >
           <template #icon>
@@ -109,7 +111,13 @@ const removeValueFromList = (idx: number) => {
 .value-list {
   margin-top: 8px;
   &-item {
+    margin-bottom: 8px;
     display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn {
+    flex-shrink: 0;
   }
 }
 </style>
