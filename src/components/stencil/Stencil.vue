@@ -25,6 +25,7 @@ import { computed, PropType, type Component } from 'vue'
 import Draggable from 'vuedraggable'
 import { cloneDeep } from 'lodash'
 import { widgets } from '@/hooks/use-widgets'
+import { useFormData } from '@/hooks/use-context'
 import { generateUID } from '@/utils'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import type { Widget, WidgetName } from '@/types/widget'
@@ -45,6 +46,7 @@ const props = defineProps({
       'rate',
       'slider',
       'cascader',
+      'datePicker',
       'grid',
       'tab',
     ],
@@ -55,6 +57,8 @@ const props = defineProps({
   },
 })
 
+const { form } = useFormData()
+
 const widgetsList = computed(() =>
   widgets.filter((w) => props.components.includes(w.type))
 )
@@ -62,6 +66,11 @@ const widgetsList = computed(() =>
 const cloneWidgetConfigFromRaw = (widget: Widget) => {
   const uid = generateUID()
   widget.uid = uid
+  if (['inputTag'].includes(widget.type)) {
+    form[uid] = []
+  } else {
+    form[uid] = undefined
+  }
   return cloneDeep(widget)
 }
 </script>

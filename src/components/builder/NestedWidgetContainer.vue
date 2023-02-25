@@ -7,7 +7,7 @@
       handle: '.drag-handler',
     }"
     item-key="uid"
-    :swap-threshold="0.05"
+    :swap-threshold="0.1"
   >
     <template #item="{ element, index }: { element: Widget, index: number }">
       <div>

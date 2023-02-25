@@ -15,7 +15,7 @@
         handle: '.drag-handler',
       }"
       class="draggable-area"
-      :swap-threshold="0.05"
+      :swap-threshold="0.1"
       item-key="uid"
     >
       <template #item="{ element, index }: ItemSlot">

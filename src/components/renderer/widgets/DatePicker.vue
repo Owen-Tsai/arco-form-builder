@@ -2,6 +2,7 @@
   <a-date-picker
     v-if="config.mode === 'date'"
     v-bind="properties"
+    v-model="form[uid]"
     :placeholder="config.placeholder"
     class="date-picker-sub-item"
     :style="{ width: config.width }"
@@ -9,6 +10,7 @@
   <a-week-picker
     v-else-if="config.mode === 'week'"
     v-bind="properties"
+    v-model="form[uid]"
     :placeholder="config.placeholder"
     class="date-picker-sub-item"
     :style="{ width: config.width }"
@@ -16,6 +18,7 @@
   <a-quarter-picker
     v-else-if="config.mode === 'quarter'"
     v-bind="properties"
+    v-model="form[uid]"
     :placeholder="config.placeholder"
     :style="{ width: config.width }"
     class="date-picker-sub-item"
@@ -23,6 +26,7 @@
   <a-month-picker
     v-else-if="config.mode === 'month'"
     v-bind="properties"
+    v-model="form[uid]"
     :placeholder="config.placeholder"
     :style="{ width: config.width }"
     class="date-picker-sub-item"
@@ -30,6 +34,7 @@
   <a-year-picker
     v-else-if="config.mode === 'year'"
     v-bind="properties"
+    v-model="form[uid]"
     :placeholder="config.placeholder"
     :style="{ width: config.width }"
     class="date-picker-sub-item"
@@ -37,6 +42,7 @@
   <a-range-picker
     v-else
     v-bind="properties"
+    v-model="form[uid]"
     :placeholder="(config.placeholder as string[])"
     :style="{ width: config.width }"
     class="date-picker-sub-item"
@@ -67,7 +73,6 @@ const properties = ref({
   format: props.config.format,
   readonly: props.config.readonly,
   disabled: props.config.disabled,
-  modelValue: form[props.uid],
 })
 </script>
 
