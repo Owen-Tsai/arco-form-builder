@@ -15,6 +15,11 @@ type CommonOpts = {
   wrapperSpan?: number
 }
 
+type EventOpts = {
+  onChange?: string
+  onBlur?: string
+}
+
 type CascaderOption = {
   label?: string
   value?: string
@@ -42,7 +47,8 @@ export type OptInput = {
   suffix?: string
 } & CommonOpts &
   InteractiveStateOpts &
-  ValidationOpts
+  ValidationOpts &
+  EventOpts
 
 export type OptInputNumber = {
   allowClear?: boolean
@@ -110,8 +116,8 @@ export type OptCheckbox = {
   DataSourceOpts<CommonValue[]>
 
 export type OptSwitch = {
-  checkedValue?: boolean | string
-  uncheckedValue?: boolean | string
+  checkedValue?: string
+  uncheckedValue?: string
   checkedColor?: string
   uncheckedColor?: string
   type?: 'circle' | 'round' | 'line'
@@ -132,7 +138,6 @@ export type OptSlider = {
   step?: number
   min?: number
   max?: number
-  direction?: 'vertical' | 'horizontal'
   showTicks?: boolean
   range?: boolean
   marks?: string
@@ -167,6 +172,21 @@ export type OptDatePicker = {
     | 'quarter-range'
     | 'year-range'
 } & InteractiveStateOpts &
+  CommonOpts &
+  ValidationOpts
+
+export type OptUpload = {
+  type: 'list' | 'picture'
+  action?: string
+  multiple?: boolean
+  tip?: string
+  withCookie?: boolean
+  limit?: number
+  accept?: string
+  beforeUpload?: string
+  beforeRemove?: string
+  required?: boolean
+} & Pick<InteractiveStateOpts, 'disabled'> &
   CommonOpts &
   ValidationOpts
 
@@ -209,6 +229,7 @@ type OptsMap = {
   slider: OptSlider
   cascader: OptCascader
   datePicker: OptDatePicker
+  upload: OptUpload
   grid: OptGrid
   gridCol: OptGridCol
   tab: OptTab
@@ -234,6 +255,7 @@ export type ConfigRate = ConfigOf<'rate'>
 export type ConfigSlider = ConfigOf<'slider'>
 export type ConfigCascader = ConfigOf<'cascader'>
 export type ConfigDatePicker = ConfigOf<'datePicker'>
+export type ConfigUpload = ConfigOf<'upload'>
 export type ConfigGrid = ConfigOf<'grid'> & {
   cols: OptGridCol[]
 }
@@ -254,6 +276,7 @@ export type Widget =
   | ConfigSlider
   | ConfigCascader
   | ConfigDatePicker
+  | ConfigUpload
   | ConfigGrid
   | ConfigTab
 // #endregion

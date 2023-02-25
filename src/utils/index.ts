@@ -14,3 +14,9 @@ export const walkTree = () => {
 }
 
 export const inputEvtNames = ['input', 'change', 'focus', 'blur']
+
+export const safeEval = (str: string) => {
+  console.log(str)
+  // eslint-disable-next-line no-eval
+  return eval?.(`'use strict';${str}`)
+}
