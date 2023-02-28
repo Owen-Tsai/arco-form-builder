@@ -30,12 +30,27 @@
         <a-option label="right" />
       </a-select>
     </a-form-item>
+    <a-form-item label="数据源">
+      <a-button long @click="dataSourcePanelVisible = true">
+        数据源设置
+      </a-button>
+      <DataSourcePanel
+        :visible="dataSourcePanelVisible"
+        @close="dataSourcePanelVisible = false"
+      />
+    </a-form-item>
+    <a-form-item label="动作">
+      <a-button long>表单组件动作设置</a-button>
+    </a-form-item>
   </a-form>
 </template>
 
 <script lang="ts" setup>
-import { PropType, computed } from 'vue'
+import { ref, PropType, computed } from 'vue'
 import { FormConfig } from '@/types/builder'
+import DataSourcePanel from './DataSourcePanel.vue'
+
+const dataSourcePanelVisible = ref(false)
 
 const props = defineProps({
   config: {

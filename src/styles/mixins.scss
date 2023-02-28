@@ -13,3 +13,19 @@
   display: flex;
   justify-content: center;
 }
+
+@mixin rounded-left($r) {
+  border-top-left-radius: $r;
+  border-bottom-left-radius: $r;
+}
+
+@mixin rounded-right($r) {
+  border-top-right-radius: $r;
+  border-bottom-right-radius: $r;
+}
+
+@mixin ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
