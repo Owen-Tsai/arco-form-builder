@@ -1,6 +1,7 @@
 import { Ref } from 'vue'
 import { Widget } from './widget'
 import { RemoteDataSource, VariableDataSource } from './data-source'
+import { WidgetAction } from './action'
 
 export type FormData = Record<string, any>
 
@@ -23,10 +24,13 @@ export type DataSourceConfig = {
   variable: VariableDataSource
 }
 
+export type WidgetActionConfig = WidgetAction[]
+
 export type Schema = {
   formConfig: FormConfig
   widgetsConfig: WidgetsConfig
   dataSourcesConfig: DataSourceConfig
+  widgetActionConfig: WidgetActionConfig
   formData: FormData
 }
 

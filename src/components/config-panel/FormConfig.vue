@@ -40,8 +40,14 @@
       />
     </a-form-item>
     <a-form-item label="动作">
-      <a-button long>表单组件动作设置</a-button>
+      <a-button long @click="widgetActionPanelVisible = true">
+        表单组件动作设置
+      </a-button>
     </a-form-item>
+    <WidgetActionPanel
+      :visible="widgetActionPanelVisible"
+      @close="widgetActionPanelVisible = false"
+    />
   </a-form>
 </template>
 
@@ -49,8 +55,10 @@
 import { ref, PropType, computed } from 'vue'
 import { FormConfig } from '@/types/builder'
 import DataSourcePanel from './DataSourcePanel.vue'
+import WidgetActionPanel from './WidgetActionPanel.vue'
 
 const dataSourcePanelVisible = ref(false)
+const widgetActionPanelVisible = ref(false)
 
 const props = defineProps({
   config: {

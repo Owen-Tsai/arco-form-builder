@@ -30,6 +30,7 @@ const schema = ref<Schema>({
     remote: [],
     variable: {},
   },
+  widgetActionConfig: [],
   formConfig: {
     labelAlign: 'left',
     layout: 'vertical',

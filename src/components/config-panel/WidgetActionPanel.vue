@@ -8,12 +8,12 @@
     @ok="close"
     @cancel="close"
   >
-    <template #title>数据源设置</template>
+    <template #title>表单控件动作设置</template>
     <div class="config-container">
       <!-- left -->
       <div class="item-list-wrapper">
         <div
-          v-for="(item, i) in schema.dataSourcesConfig.remote"
+          v-for="(item, i) in schema.widgetActionConfig"
           :key="i"
           :class="[
             'item',
@@ -23,12 +23,11 @@
           ]"
           @click="activeIndex = i"
         >
-          <span class="type">{{ item.type }}</span>
           <span class="name">{{ item.name }}</span>
         </div>
         <div class="shadow-item" @click="addEntry">
           <Icon :name="Add" />
-          新增数据源
+          新增动作
         </div>
       </div>
       <!-- right -->
@@ -37,20 +36,14 @@
           <a-form-item label="名称">
             <a-input v-model="activeItem.name" />
           </a-form-item>
-          <a-form-item label="请求方式">
-            <a-radio-group v-model="activeItem.type">
-              <a-radio value="get">get</a-radio>
-              <a-radio value="post">post</a-radio>
-            </a-radio-group>
-          </a-form-item>
-          <a-form-item label="API 地址">
-            <a-input v-model="activeItem.url" />
+          <a-form-item label="函数体">
+            <a-textarea v-model="activeItem.functionBody" />
           </a-form-item>
           <a-form-item>
-            <a-button status="danger" @click="removeEntry">移除数据源</a-button>
+            <a-button status="danger" @click="removeEntry">移除动作</a-button>
           </a-form-item>
         </a-form>
-        <a-empty v-else description="请添加一个数据源" />
+        <a-empty v-else description="请添加一个动作" />
       </div>
     </div>
   </a-modal>
@@ -76,24 +69,23 @@ const { schema } = inject<FormBuilderContext>(
 const emit = defineEmits(['close'])
 
 const activeIndex = ref<number | undefined>(
-  schema.dataSourcesConfig.remote.length === 0 ? undefined : 0
+  schema.widgetActionConfig.length === 0 ? undefined : 0
 )
 const activeItem = computed({
   get: () =>
     activeIndex.value === undefined
       ? undefined
-      : schema.dataSourcesConfig.remote[activeIndex.value],
+      : schema.widgetActionConfig[activeIndex.value],
   set: (val) => {
     if (activeIndex.value === undefined || val === undefined) return
-    schema.dataSourcesConfig.remote[activeIndex.value] = val
+    schema.widgetActionConfig[activeIndex.value] = val
   },
 })
 
 const addEntry = () => {
-  schema.dataSourcesConfig.remote.push({
-    name: '新数据源',
-    type: 'get',
-    url: '',
+  schema.widgetActionConfig.push({
+    name: '新函数',
+    functionBody: '',
   })
 }
 
@@ -136,18 +128,8 @@ const close = () => {
   .item {
     border: 1px solid var(--color-border-3);
     color: var(--color-text-2);
-    .type {
-      background-color: rgb(var(--primary-1));
-      color: rgb(var(--primary-6));
-      font-weight: bold;
-      text-transform: uppercase;
-      padding: 4px 8px;
-      @include rounded-left(4px);
-    }
-    .name {
-      padding: 0 8px;
-      @include ellipsis;
-    }
+    padding: 4px 15px;
+    @include ellipsis;
 
     &:hover,
     &.is-active {
