@@ -91,7 +91,7 @@ const addEntry = () => {
 
 const removeEntry = () => {
   if (activeIndex.value === undefined) return
-  schema.dataSourcesConfig.remote.splice(activeIndex.value, 1)
+  schema.widgetActionConfig.splice(activeIndex.value, 1)
 }
 
 const close = () => {
@@ -149,5 +149,13 @@ const close = () => {
 
 .item-form {
   flex-grow: 1;
+}
+
+.name {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
+  display: inline-block;
+  overflow: hidden;
 }
 </style>
