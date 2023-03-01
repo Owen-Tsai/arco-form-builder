@@ -14,6 +14,12 @@
   justify-content: center;
 }
 
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 @mixin rounded-left($r) {
   border-top-left-radius: $r;
   border-bottom-left-radius: $r;

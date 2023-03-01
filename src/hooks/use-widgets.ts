@@ -27,7 +27,9 @@ export const widgetsInitConfig: Record<string, Widget> = {
     name: '输入框',
     type: 'input',
     uid: '',
-    config: {},
+    config: {
+      actions: {},
+    },
   },
   inputNumber: {
     name: '数字输入框',
@@ -161,6 +163,14 @@ export const widgetsInitConfig: Record<string, Widget> = {
     uid: '',
     config: {
       mode: 'date',
+    },
+  },
+  upload: {
+    name: '文件上传',
+    type: 'upload',
+    uid: '',
+    config: {
+      type: 'list',
     },
   },
 }

@@ -1,4 +1,5 @@
 import { DataSourceOpts } from './data-source'
+import { WidgetActionConfig } from './action'
 
 // #region options
 type InteractiveStateOpts = {
@@ -13,11 +14,6 @@ type CommonOpts = {
   fieldName?: string
   labelSpan?: number
   wrapperSpan?: number
-}
-
-type EventOpts = {
-  onChange?: string
-  onBlur?: string
 }
 
 type CascaderOption = {
@@ -38,6 +34,10 @@ type ValidationOpts = {
   trigger?: ValidationTrigger[]
 }
 
+type EventActionOpts = {
+  actions: WidgetActionConfig
+}
+
 export type OptInput = {
   allowClear?: boolean
   maxLength?: number
@@ -48,7 +48,7 @@ export type OptInput = {
 } & CommonOpts &
   InteractiveStateOpts &
   ValidationOpts &
-  EventOpts
+  EventActionOpts
 
 export type OptInputNumber = {
   allowClear?: boolean
