@@ -11,12 +11,38 @@
     <Slider v-if="config.type === 'slider'" :config="config" />
     <Rate v-if="config.type === 'rate'" :config="config" />
     <DatePicker v-if="config.type === 'datePicker'" :config="config" />
+
+    <template v-if="config.type !== 'grid' && config.type !== 'tab'">
+      <!-- validation config -->
+      <a-form-item label="自定义校验规则">
+        <a-textarea
+          v-model="config.config.rules"
+          :auto-size="{ minRows: 4, maxRows: 6 }"
+        />
+      </a-form-item>
+      <a-form-item label="校验触发时机">
+        <a-select
+          v-model="config.config.trigger"
+          multiple
+          :allow-search="false"
+        >
+          <a-option
+            v-for="opt in inputEvtNames"
+            :key="opt"
+            :value="opt"
+            :label="opt"
+          />
+        </a-select>
+      </a-form-item>
+      <ActionConfig :widget="(widget as FormWidget)" />
+    </template>
   </a-form>
 </template>
 
 <script lang="ts" setup>
 import { PropType, computed } from 'vue'
-import { Widget } from '@/types/widget'
+import { FormWidget, Widget } from '@/types/widget'
+import { inputEvtNames } from '@/utils'
 import Input from './widgets/Input.vue'
 import InputNumber from './widgets/InputNumber.vue'
 import InputTag from './widgets/InputTag.vue'
@@ -28,6 +54,7 @@ import Switch from './widgets/Switch.vue'
 import Slider from './widgets/Slider.vue'
 import Rate from './widgets/Rate.vue'
 import DatePicker from './widgets/DatePicker.vue'
+import ActionConfig from './private/ActionConfig.vue'
 
 const props = defineProps({
   widget: {
@@ -54,5 +81,6 @@ const config = computed({
 }
 .form {
   padding: 16px;
+  padding-bottom: 48px;
 }
 </style>
