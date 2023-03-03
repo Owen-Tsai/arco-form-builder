@@ -61,7 +61,8 @@ export type OptInputNumber = {
   suffix?: string
 } & CommonOpts &
   InteractiveStateOpts &
-  ValidationOpts
+  ValidationOpts &
+  EventActionOpts
 
 export type OptInputTag = {
   allowClear?: boolean
@@ -71,7 +72,8 @@ export type OptInputTag = {
   suffix?: string
 } & CommonOpts &
   InteractiveStateOpts &
-  ValidationOpts
+  ValidationOpts &
+  EventActionOpts
 
 export type OptTextarea = {
   allowClear?: boolean
@@ -82,7 +84,8 @@ export type OptTextarea = {
   placeholder?: string
 } & InteractiveStateOpts &
   CommonOpts &
-  ValidationOpts
+  ValidationOpts &
+  EventActionOpts
 
 export type OptSelect = {
   allowClear?: boolean
@@ -98,7 +101,8 @@ export type OptSelect = {
 } & CommonOpts &
   InteractiveStateOpts &
   ValidationOpts &
-  DataSourceOpts<CommonValue[]>
+  DataSourceOpts<CommonValue[]> &
+  EventActionOpts
 
 export type OptRadio = {
   type?: 'radio' | 'button'
@@ -106,14 +110,16 @@ export type OptRadio = {
 } & Omit<InteractiveStateOpts, 'readonly'> &
   CommonOpts &
   ValidationOpts &
-  DataSourceOpts<CommonValue[]>
+  DataSourceOpts<CommonValue[]> &
+  EventActionOpts
 
 export type OptCheckbox = {
   direction?: 'horizontal' | 'vertical'
 } & Omit<InteractiveStateOpts, 'readonly'> &
   CommonOpts &
   ValidationOpts &
-  DataSourceOpts<CommonValue[]>
+  DataSourceOpts<CommonValue[]> &
+  EventActionOpts
 
 export type OptSwitch = {
   checkedValue?: string
@@ -123,7 +129,8 @@ export type OptSwitch = {
   type?: 'circle' | 'round' | 'line'
 } & Omit<InteractiveStateOpts, 'readonly'> &
   Omit<CommonOpts, 'width'> &
-  ValidationOpts
+  ValidationOpts &
+  EventActionOpts
 
 export type OptRate = {
   count?: number
@@ -132,7 +139,8 @@ export type OptRate = {
   grading?: boolean
 } & InteractiveStateOpts &
   Omit<CommonOpts, 'width'> &
-  ValidationOpts
+  ValidationOpts &
+  EventActionOpts
 
 export type OptSlider = {
   step?: number
@@ -143,7 +151,8 @@ export type OptSlider = {
   marks?: string
 } & Omit<InteractiveStateOpts, 'readonly'> &
   CommonOpts &
-  ValidationOpts
+  ValidationOpts &
+  EventActionOpts
 
 export type OptCascader = {
   allowClear?: boolean
@@ -154,7 +163,8 @@ export type OptCascader = {
 } & InteractiveStateOpts &
   CommonOpts &
   ValidationOpts &
-  DataSourceOpts<CascaderOption[]>
+  DataSourceOpts<CascaderOption[]> &
+  EventActionOpts
 
 export type OptDatePicker = {
   allowClear?: boolean
@@ -173,7 +183,8 @@ export type OptDatePicker = {
     | 'year-range'
 } & InteractiveStateOpts &
   CommonOpts &
-  ValidationOpts
+  ValidationOpts &
+  EventActionOpts
 
 export type OptUpload = {
   type: 'list' | 'picture'
@@ -188,7 +199,8 @@ export type OptUpload = {
   required?: boolean
 } & Pick<InteractiveStateOpts, 'disabled'> &
   CommonOpts &
-  ValidationOpts
+  ValidationOpts &
+  EventActionOpts
 
 export type OptGrid = {
   width?: string

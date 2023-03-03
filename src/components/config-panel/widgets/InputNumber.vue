@@ -52,28 +52,11 @@
     <span class="label">允许清除</span>
     <a-switch v-model="widget.allowClear" />
   </div>
-  <a-form-item label="自定义校验规则">
-    <a-textarea
-      v-model="widget.rules"
-      :auto-size="{ minRows: 4, maxRows: 6 }"
-    />
-  </a-form-item>
-  <a-form-item label="校验触发时机">
-    <a-select v-model="widget.trigger" :allow-search="false" multiple>
-      <a-option
-        v-for="opt in inputEvtNames"
-        :key="opt"
-        :value="opt"
-        :label="opt"
-      />
-    </a-select>
-  </a-form-item>
 </template>
 
 <script setup lang="ts">
 import { computed, PropType } from 'vue'
 import { ConfigInputNumber } from '@/types/widget'
-import { inputEvtNames } from '@/utils'
 import { useFormData } from '@/hooks/use-context'
 
 const emit = defineEmits(['update:config'])

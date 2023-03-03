@@ -74,6 +74,16 @@
       display: block;
       font-size: 14px;
       color: var(--color-text-2);
+      line-height: 1.5715;
     }
+  }
+}
+
+.codemirror-editor {
+  display: block !important;
+  outline: none !important;
+
+  .cm-focused {
+    outline: none;
   }
 }

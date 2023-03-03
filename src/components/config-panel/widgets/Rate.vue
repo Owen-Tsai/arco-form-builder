@@ -31,27 +31,10 @@
     <span class="label">是否禁用</span>
     <a-switch v-model="widget.disabled" />
   </div>
-  <a-form-item label="自定义校验规则">
-    <a-textarea
-      v-model="widget.rules"
-      :auto-size="{ minRows: 4, maxRows: 6 }"
-    />
-  </a-form-item>
-  <a-form-item label="校验触发时机">
-    <a-select v-model="widget.trigger" :allow-search="false" multiple>
-      <a-option
-        v-for="opt in inputEvtNames"
-        :key="opt"
-        :value="opt"
-        :label="opt"
-      />
-    </a-select>
-  </a-form-item>
 </template>
 
 <script lang="ts" setup>
 import { computed, PropType } from 'vue'
-import { inputEvtNames } from '@/utils'
 import { ConfigRate } from '@/types/widget'
 import { useFormData } from '@/hooks/use-context'
 

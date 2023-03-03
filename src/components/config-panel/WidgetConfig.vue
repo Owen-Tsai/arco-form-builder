@@ -14,12 +14,16 @@
 
     <template v-if="config.type !== 'grid' && config.type !== 'tab'">
       <!-- validation config -->
-      <a-form-item label="自定义校验规则">
-        <a-textarea
+      <div>
+        <span class="label">自定义校验规则</span>
+        <Codemirror
           v-model="config.config.rules"
-          :auto-size="{ minRows: 4, maxRows: 6 }"
+          :tab-size="2"
+          :extensions="[javascript()]"
+          class="codemirror-editor"
+          style="height: 180px"
         />
-      </a-form-item>
+      </div>
       <a-form-item label="校验触发时机">
         <a-select
           v-model="config.config.trigger"
@@ -41,6 +45,8 @@
 
 <script lang="ts" setup>
 import { PropType, computed } from 'vue'
+import { Codemirror } from 'vue-codemirror'
+import { javascript } from '@codemirror/lang-javascript'
 import { FormWidget, Widget } from '@/types/widget'
 import { inputEvtNames } from '@/utils'
 import Input from './widgets/Input.vue'
@@ -54,7 +60,7 @@ import Switch from './widgets/Switch.vue'
 import Slider from './widgets/Slider.vue'
 import Rate from './widgets/Rate.vue'
 import DatePicker from './widgets/DatePicker.vue'
-import ActionConfig from './private/ActionConfig.vue'
+import ActionConfig from './widgets/ActionConfig.vue'
 
 const props = defineProps({
   widget: {
@@ -82,5 +88,11 @@ const config = computed({
 .form {
   padding: 16px;
   padding-bottom: 48px;
+}
+
+.codemirror-editor {
+  margin-bottom: 16px;
+  margin-top: 8px;
+  border: 1px solid var(--color-border-2);
 }
 </style>

@@ -10,7 +10,7 @@
         <div class="header">
           {{ evtName }}
           <div class="icons">
-            <IconCode />
+            <IconCode @click="panelVisible = true" />
             <IconDelete @click="deleteAction(evtName)" />
           </div>
         </div>
@@ -42,14 +42,19 @@
       </a-dropdown>
     </div>
   </div>
+
+  <WidgetActionPanel :visible="panelVisible" @close="panelVisible = false" />
 </template>
 
 <script lang="ts" setup>
-import { computed, PropType } from 'vue'
+import { ref, computed, PropType } from 'vue'
 import { IconCode, IconDelete } from '@arco-design/web-vue/es/icon'
 import { FormWidget } from '@/types/widget'
 import { ActionEvent } from '@/types/action'
 import { useBuilderContext } from '@/hooks/use-context'
+import WidgetActionPanel from '../WidgetActionPanel.vue'
+
+const panelVisible = ref(false)
 
 const props = defineProps({
   widget: {
