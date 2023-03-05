@@ -35,13 +35,17 @@ export const widgetsInitConfig: Record<string, Widget> = {
     name: '数字输入框',
     type: 'inputNumber',
     uid: '',
-    config: {},
+    config: {
+      actions: {},
+    },
   },
   inputTag: {
     name: '标签输入框',
     type: 'inputTag',
     uid: '',
-    config: {},
+    config: {
+      actions: {},
+    },
   },
   textarea: {
     name: '文本域',
@@ -50,6 +54,7 @@ export const widgetsInitConfig: Record<string, Widget> = {
     config: {
       minRows: 3,
       maxRows: 6,
+      actions: {},
     },
   },
   select: {
@@ -57,6 +62,7 @@ export const widgetsInitConfig: Record<string, Widget> = {
     type: 'select',
     uid: '',
     config: {
+      actions: {},
       dataSourceType: 'static',
       data: {
         static: [
@@ -72,6 +78,7 @@ export const widgetsInitConfig: Record<string, Widget> = {
     type: 'radio',
     uid: '',
     config: {
+      actions: {},
       dataSourceType: 'static',
       data: {
         static: [
@@ -86,6 +93,7 @@ export const widgetsInitConfig: Record<string, Widget> = {
     type: 'checkbox',
     uid: '',
     config: {
+      actions: {},
       dataSourceType: 'static',
       data: {
         static: [
@@ -99,25 +107,32 @@ export const widgetsInitConfig: Record<string, Widget> = {
     name: '开关',
     type: 'switch',
     uid: '',
-    config: {},
+    config: {
+      actions: {},
+    },
   },
   rate: {
     name: '评分',
     type: 'rate',
     uid: '',
-    config: {},
+    config: {
+      actions: {},
+    },
   },
   slider: {
     name: '滑动输入条',
     type: 'slider',
     uid: '',
-    config: {},
+    config: {
+      actions: {},
+    },
   },
   cascader: {
     name: '级联选择器',
     type: 'cascader',
     uid: '',
     config: {
+      actions: {},
       dataSourceType: 'static',
       data: {
         static: [
@@ -163,6 +178,7 @@ export const widgetsInitConfig: Record<string, Widget> = {
     uid: '',
     config: {
       mode: 'date',
+      actions: {},
     },
   },
   upload: {
@@ -171,6 +187,7 @@ export const widgetsInitConfig: Record<string, Widget> = {
     uid: '',
     config: {
       type: 'list',
+      actions: {},
     },
   },
 }
