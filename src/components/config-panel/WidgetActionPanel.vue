@@ -50,16 +50,17 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, inject, computed } from 'vue'
+import { ref, inject, computed, watchEffect } from 'vue'
 import { Add } from '@salmon-ui/icons'
 import { FormBuilderContext, formBuilderCtxKey } from '@/types/builder'
 import Icon from '@/components/private/Icon.vue'
 
-defineProps({
+const props = defineProps({
   visible: {
     type: Boolean,
     default: false,
   },
+  active: String,
 })
 
 const { schema } = inject<FormBuilderContext>(
@@ -97,6 +98,15 @@ const removeEntry = () => {
 const close = () => {
   emit('close')
 }
+
+watchEffect(() => {
+  if (props.active) {
+    const idx = schema.widgetActionConfig.findIndex(
+      (e) => e.name === props.active
+    )
+    activeIndex.value = idx === -1 ? undefined : idx
+  }
+})
 </script>
 
 <style lang="scss" scoped>

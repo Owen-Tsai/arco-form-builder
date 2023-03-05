@@ -10,7 +10,7 @@
         <div class="header">
           {{ evtName }}
           <div class="icons">
-            <IconCode @click="panelVisible = true" />
+            <IconCode @click="openModal(evtName)" />
             <IconDelete @click="deleteAction(evtName)" />
           </div>
         </div>
@@ -43,7 +43,11 @@
     </div>
   </div>
 
-  <WidgetActionPanel :visible="panelVisible" @close="panelVisible = false" />
+  <WidgetActionPanel
+    :visible="panelVisible"
+    :active="defaultActiveActionItem"
+    @close="panelVisible = false"
+  />
 </template>
 
 <script lang="ts" setup>
@@ -55,6 +59,7 @@ import { useBuilderContext } from '@/hooks/use-context'
 import WidgetActionPanel from '../WidgetActionPanel.vue'
 
 const panelVisible = ref(false)
+const defaultActiveActionItem = ref<string>()
 
 const props = defineProps({
   widget: {
@@ -92,6 +97,11 @@ const addAction = (act: ActionEvent) => {
 
 const deleteAction = (evt: ActionEvent) => {
   delete config.value.actions[evt]
+}
+
+const openModal = (evt: ActionEvent) => {
+  defaultActiveActionItem.value = config.value.actions[evt]
+  panelVisible.value = true
 }
 </script>
 
