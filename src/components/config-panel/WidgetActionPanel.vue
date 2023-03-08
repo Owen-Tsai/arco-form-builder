@@ -37,7 +37,13 @@
             <a-input v-model="activeItem.name" />
           </a-form-item>
           <a-form-item label="函数体">
-            <a-textarea v-model="activeItem.functionBody" />
+            <Codemirror
+              v-model="activeItem.functionBody"
+              :tab-size="2"
+              :extensions="[javascript()]"
+              class="codemirror-editor"
+              style="height: 120px"
+            />
           </a-form-item>
           <a-form-item>
             <a-button status="danger" @click="removeEntry">移除动作</a-button>
@@ -51,6 +57,8 @@
 
 <script lang="ts" setup>
 import { ref, inject, computed, watchEffect } from 'vue'
+import { Codemirror } from 'vue-codemirror'
+import { javascript } from '@codemirror/lang-javascript'
 import { Add } from '@salmon-ui/icons'
 import { FormBuilderContext, formBuilderCtxKey } from '@/types/builder'
 import Icon from '@/components/private/Icon.vue'
@@ -167,5 +175,10 @@ watchEffect(() => {
   width: 100%;
   display: inline-block;
   overflow: hidden;
+}
+
+.codemirror-editor {
+  border: 1px solid var(--color-border-2);
+  width: 100%;
 }
 </style>
