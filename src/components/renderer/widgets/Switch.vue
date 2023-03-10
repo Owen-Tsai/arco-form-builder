@@ -6,6 +6,7 @@
     :direction="config.checkedValue"
     :checked-value="config.checkedValue"
     :unchecked-value="config.uncheckedValue"
+    @change="handler('onChange')"
   />
 </template>
 
@@ -13,8 +14,9 @@
 import { PropType } from 'vue'
 import { OptSwitch } from '@/types/widget'
 import { useFormData } from '@/hooks/use-context'
+import useEvents from '@/hooks/use-events'
 
-defineProps({
+const props = defineProps({
   config: {
     type: Object as PropType<OptSwitch>,
     required: true,
@@ -26,4 +28,5 @@ defineProps({
 })
 
 const { form } = useFormData()
+const { handler } = useEvents(props.uid, props.config.actions)
 </script>

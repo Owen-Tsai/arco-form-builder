@@ -10,6 +10,7 @@
     :placeholder="config.placeholder"
     :readonly="config.readonly"
     :style="{ width: config.width }"
+    @change="handler('onChange')"
   />
 </template>
 
@@ -17,6 +18,7 @@
 import { watch, PropType, ref } from 'vue'
 import { OptTextarea } from '@/types/widget'
 import { useFormData } from '@/hooks/use-context'
+import useEvents from '@/hooks/use-events'
 
 const key = ref(0)
 
@@ -32,6 +34,7 @@ const props = defineProps({
 })
 
 const { form } = useFormData()
+const { handler } = useEvents(props.uid, props.config.actions)
 
 watch(
   () => [props.config.minRows, props.config.maxRows],

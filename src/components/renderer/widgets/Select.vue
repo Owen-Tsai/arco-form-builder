@@ -10,6 +10,10 @@
     :multiple="config.limit !== undefined && config.limit > 1"
     :style="{ width: config.width }"
     @search="handleSearch"
+    @change="handler('onChange')"
+    @input-value-change="handler('onInput')"
+    @focus="handler('onFocus')"
+    @blur="handler('onBlur')"
   >
     <a-option v-for="(opt, i) in options" :key="i" :value="opt.value">
       {{ opt.label }}
@@ -24,6 +28,7 @@ import { OptSelect } from '@/types/widget'
 import { useFormData } from '@/hooks/use-context'
 import useLoading from '@/hooks/use-loading'
 import { useDataSource } from '@/hooks/use-data-source'
+import useEvents from '@/hooks/use-events'
 
 type Option = { label: string; value: string }
 
@@ -43,6 +48,7 @@ const options = useDataSource(props.config.dataSourceType, props.config.data)
 
 const { form } = useFormData()
 const { isLoading, setLoading } = useLoading()
+const { handler } = useEvents(props.uid, props.config.actions)
 
 const handleSearch = () => {
   setLoading(true)

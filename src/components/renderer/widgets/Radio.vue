@@ -5,6 +5,7 @@
     :disabled="config.disabled"
     :type="config.type"
     :style="{ width: config.width }"
+    @change="handler('onChange')"
   >
     <a-radio v-for="(opt, i) in options" :key="i" :value="opt.value">
       {{ opt.label }}
@@ -17,6 +18,7 @@ import { PropType } from 'vue'
 import { OptRadio } from '@/types/widget'
 import { useFormData } from '@/hooks/use-context'
 import { useDataSource } from '@/hooks/use-data-source'
+import useEvents from '@/hooks/use-events'
 
 const props = defineProps({
   config: {
@@ -32,4 +34,6 @@ const props = defineProps({
 const options = useDataSource(props.config.dataSourceType, props.config.data)
 
 const { form } = useFormData()
+
+const { handler } = useEvents(props.uid, props.config.actions)
 </script>

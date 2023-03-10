@@ -6,7 +6,7 @@
     <a-input v-model="widget.label" allow-clear />
   </a-form-item>
   <a-form-item label="默认值">
-    <a-input v-model="form[props.config.uid]" allow-clear />
+    <a-input-number v-model="form[props.config.uid]" allow-clear />
   </a-form-item>
   <a-form-item label="宽度">
     <a-input

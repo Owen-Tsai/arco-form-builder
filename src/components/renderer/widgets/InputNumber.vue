@@ -10,6 +10,10 @@
     :precision="config.precision"
     :step="config.step"
     :style="{ width: config.width }"
+    @change="handler('onChange')"
+    @input="handler('onInput')"
+    @focus="handler('onFocus')"
+    @blur="handler('onBlur')"
   >
     <template v-if="config.prefix" #prepend>{{ config.prefix }}</template>
     <template v-if="config.suffix" #append>{{ config.suffix }}</template>
@@ -20,8 +24,9 @@
 import { PropType } from 'vue'
 import { OptInputNumber } from '@/types/widget'
 import { useFormData } from '@/hooks/use-context'
+import useEvents from '@/hooks/use-events'
 
-defineProps({
+const props = defineProps({
   config: {
     type: Object as PropType<OptInputNumber>,
     required: true,
@@ -33,4 +38,5 @@ defineProps({
 })
 
 const { form } = useFormData()
+const { handler } = useEvents(props.uid, props.config.actions)
 </script>

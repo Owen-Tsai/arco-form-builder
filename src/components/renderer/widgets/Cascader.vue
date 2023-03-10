@@ -8,6 +8,7 @@
     :multiple="!!config.limit && config.limit > 0"
     :check-strictly="config.strict"
     :options="value"
+    @change="handler('onChange')"
   />
 </template>
 
@@ -16,6 +17,7 @@ import { PropType } from 'vue'
 import { OptCascader } from '@/types/widget'
 import { useDataSource } from '@/hooks/use-data-source'
 import { useFormData } from '@/hooks/use-context'
+import useEvents from '@/hooks/use-events'
 
 const props = defineProps({
   config: {
@@ -30,8 +32,7 @@ const props = defineProps({
 
 const { form } = useFormData()
 
-const { value } = useDataSource(
-  props.config.dataSourceType,
-  props.config.dataSource
-)
+const { value } = useDataSource(props.config.dataSourceType, props.config.data)
+
+const { handler } = useEvents(props.uid, props.config.actions)
 </script>

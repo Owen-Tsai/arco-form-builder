@@ -7,6 +7,7 @@
     :readonly="config.readonly"
     :disabled="config.disabled"
     :color="config.color"
+    @change="handler('onChange')"
   />
 </template>
 
@@ -14,8 +15,9 @@
 import { PropType } from 'vue'
 import { OptRate } from '@/types/widget'
 import { useFormData } from '@/hooks/use-context'
+import useEvents from '@/hooks/use-events'
 
-defineProps({
+const props = defineProps({
   config: {
     type: Object as PropType<OptRate>,
     required: true,
@@ -27,4 +29,6 @@ defineProps({
 })
 
 const { form } = useFormData()
+
+const { handler } = useEvents(props.uid, props.config.actions)
 </script>

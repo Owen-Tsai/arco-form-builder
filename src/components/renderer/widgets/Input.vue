@@ -8,10 +8,10 @@
     :placeholder="config.placeholder"
     :show-word-limit="config.showWordLimit"
     :style="{ width: config.width }"
-    @change="(value) => handler(`'${value}'`, 'onChange')"
-    @input="(value) => handler(`'${value}'`, 'onInput')"
-    @focus="(value) => handler(`'${value}'`, 'onFocus')"
-    @blur="(value) => handler(`'${value}'`, 'onBlur')"
+    @change="handler('onChange')"
+    @input="handler('onInput')"
+    @focus="handler('onFocus')"
+    @blur="handler('onBlur')"
   >
     <template v-if="config.prefix" #prepend>{{ config.prefix }}</template>
     <template v-if="config.suffix" #append>{{ config.suffix }}</template>
@@ -37,5 +37,5 @@ const props = defineProps({
 
 const { form } = useFormData()
 
-const { handler } = useEvents(props.config.actions)
+const { handler } = useEvents(props.uid, props.config.actions)
 </script>

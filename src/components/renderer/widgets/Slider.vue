@@ -9,6 +9,7 @@
     :show-ticks="config.showTicks"
     :range="config.range"
     :style="{ width: config.width }"
+    @change="handler('onChange')"
   />
 </template>
 
@@ -16,6 +17,7 @@
 import { computed, PropType } from 'vue'
 import { OptSlider } from '@/types/widget'
 import { useFormData } from '@/hooks/use-context'
+import useEvents from '@/hooks/use-events'
 
 const props = defineProps({
   config: {
@@ -44,4 +46,5 @@ const marks = computed(() => {
 })
 
 const { form } = useFormData()
+const { handler } = useEvents(props.uid, props.config.actions)
 </script>
