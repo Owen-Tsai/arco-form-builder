@@ -11,12 +11,12 @@
       <widget-renderer v-if="item !== undefined" :widget="item" />
     </template>
 
-    <pre>{{ data }}</pre>
+    <pre>{{ form }}</pre>
   </a-form>
 </template>
 
 <script lang="ts" setup>
-import { ref, PropType } from 'vue'
+import { PropType } from 'vue'
 import { Schema } from '@/types/builder'
 import { useFormData } from '@/hooks/use-context'
 import WidgetRenderer from './WidgetRenderer.vue'
@@ -28,10 +28,5 @@ defineProps({
   },
 })
 
-const data = ref({})
-const { form } = useFormData()
-
-defineExpose({
-  data,
-})
+const { form } = useFormData('prod')
 </script>

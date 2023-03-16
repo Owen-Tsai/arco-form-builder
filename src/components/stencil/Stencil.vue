@@ -110,7 +110,7 @@ const visible = ref({
   formData: false,
 })
 
-const { form } = useFormData()
+const { form } = useFormData('prod')
 let { schema } = useBuilderContext()
 
 const schemaRef = ref(schema)
