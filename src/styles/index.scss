@@ -12,7 +12,6 @@
   }
   .icon-action {
     position: absolute;
-    z-index: 20;
 
     &.button-tl {
       top: 0;
@@ -30,7 +29,6 @@
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 10;
   }
   &:not(.is-selected):hover {
     background-color: var(--color-primary-light-1);
