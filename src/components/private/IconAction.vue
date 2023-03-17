@@ -1,12 +1,13 @@
 <template>
   <button class="icon-action">
-    <Icon :name="icon" />
+    <slot>
+      <component :is="icon" />
+    </slot>
   </button>
 </template>
 
 <script lang="ts" setup>
 import { PropType, type Component } from 'vue'
-import Icon from './Icon.vue'
 
 defineProps({
   icon: {
@@ -28,5 +29,10 @@ defineProps({
   padding: 4px;
   font-size: 16px;
   cursor: pointer;
+
+  svg {
+    height: 1em;
+    width: 1em;
+  }
 }
 </style>
