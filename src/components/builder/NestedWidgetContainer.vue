@@ -36,12 +36,12 @@
           <IconAction
             v-show="isWidgetSelected(element.uid)"
             class="button-tl drag-handler"
-            :icon="DragMove"
+            :icon="IconDragArrow"
           />
           <IconAction
             v-show="isWidgetSelected(element.uid)"
             class="button-br"
-            :icon="DeleteBinFill"
+            :icon="IconDelete"
             @click="onWidgetDelete(index)"
           />
         </a-row>
@@ -60,7 +60,7 @@
 // only support grid-layout as nested widget container for the moment
 import { ref, PropType } from 'vue'
 import Draggable from 'vuedraggable'
-import { DragMove, DeleteBinFill } from '@salmon-ui/icons'
+import { IconDragArrow, IconDelete } from '@arco-design/web-vue/es/icon'
 import { Widget } from '@/types/widget'
 import { useBuilderInjection } from '@/hooks/use-widgets'
 import DraggableWidget from './DraggableWidget.vue'

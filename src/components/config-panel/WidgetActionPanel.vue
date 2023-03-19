@@ -26,7 +26,7 @@
           <span class="name">{{ item.name }}</span>
         </div>
         <div class="shadow-item" @click="addEntry">
-          <Icon :name="Add" />
+          <IconPlus />
           新增动作
         </div>
       </div>
@@ -59,7 +59,7 @@
 import { ref, inject, computed, watchEffect } from 'vue'
 import { Codemirror } from 'vue-codemirror'
 import { javascript } from '@codemirror/lang-javascript'
-import { Add } from '@salmon-ui/icons'
+import { IconPlus } from '@arco-design/web-vue/es/icon'
 import { FormBuilderContext, formBuilderCtxKey } from '@/types/builder'
 import Icon from '@/components/private/Icon.vue'
 

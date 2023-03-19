@@ -6,29 +6,22 @@
   position: relative;
   user-select: none;
   outline: 1px dashed var(--color-border-3);
+  z-index: 50;
 
   &.is-selected {
     outline: 2px solid rgb(var(--primary-6));
   }
-  .icon-action {
-    position: absolute;
-
-    &.button-tl {
+  .arco-form-item-wrapper-col {
+    position: relative;
+    &::before {
+      content: "";
+      position: absolute;
       top: 0;
       left: 0;
+      height: 100%;
+      width: 100%;
+      z-index: 1;
     }
-    &.button-br {
-      bottom: 0;
-      right: 0;
-    }
-  }
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
   }
   &:not(.is-selected):hover {
     background-color: var(--color-primary-light-1);
@@ -37,6 +30,20 @@
 
   & + & {
     margin-top: 4px;
+  }
+}
+
+.icon-action {
+  position: absolute;
+  z-index: 50 !important;
+
+  &.button-tl {
+    top: 0;
+    left: 0;
+  }
+  &.button-br {
+    bottom: 0;
+    right: 0;
   }
 }
 

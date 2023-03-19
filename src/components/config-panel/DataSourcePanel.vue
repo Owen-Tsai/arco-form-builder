@@ -27,7 +27,7 @@
           <span class="name">{{ item.name }}</span>
         </div>
         <div class="shadow-item" @click="addEntry">
-          <Icon :name="Add" />
+          <IconPlus />
           新增数据源
         </div>
       </div>
@@ -58,7 +58,7 @@
 
 <script lang="ts" setup>
 import { ref, inject, computed } from 'vue'
-import { Add } from '@salmon-ui/icons'
+import { IconPlus } from '@arco-design/web-vue/es/icon'
 import { FormBuilderContext, formBuilderCtxKey } from '@/types/builder'
 import Icon from '@/components/private/Icon.vue'
 
@@ -124,7 +124,7 @@ const close = () => {
     padding: 4px;
     justify-content: center;
 
-    .icon {
+    svg {
       margin-right: 4px;
     }
 

@@ -40,7 +40,7 @@
       >
         <span class="extra-info">
           该项配置不是响应式的
-          <Icon :name="Question" />
+          <IconQuestion />
         </span>
       </a-tooltip>
     </template>
@@ -54,7 +54,7 @@
       >
         <span class="extra-info">
           该项配置不是响应式的
-          <Icon :name="Question" />
+          <IconQuestion />
         </span>
       </a-tooltip>
     </template>
@@ -103,7 +103,7 @@
 
 <script lang="ts" setup>
 import { ref, computed, watch, PropType } from 'vue'
-import { Question } from '@salmon-ui/icons'
+import { IconQuestion } from '@arco-design/web-vue/es/icon'
 import { ConfigDatePicker } from '@/types/widget'
 import { useFormData } from '@/hooks/use-context'
 import Icon from '@/components/private/Icon.vue'
