@@ -6,14 +6,25 @@
   position: relative;
   user-select: none;
   outline: 1px dashed var(--color-border-3);
-  z-index: 50;
   background-color: #fff;
+  margin-bottom: 4px;
+
+  .widget-uid-caption {
+    position: absolute;
+    font-size: 12px;
+    color: rgb(var(--primary-6));
+    right: 8px;
+    top: 4px;
+    opacity: 0.5;
+  }
 
   &.is-selected {
     outline: 2px solid rgb(var(--primary-6));
+    .widget-uid-caption {
+      opacity: 1;
+    }
   }
   .arco-form-item-wrapper-col {
-    position: relative;
     &::before {
       content: "";
       position: absolute;
@@ -28,9 +39,14 @@
     background-color: var(--color-primary-light-1);
     outline-color: rgb(var(--primary-6));
   }
+}
 
-  & + & {
-    margin-top: 4px;
+.widget-renderer {
+  
+  .is-selected {
+    .widget-uid-caption {
+      opacity: 1;
+    }
   }
 }
 

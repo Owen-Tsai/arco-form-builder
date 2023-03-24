@@ -33,6 +33,7 @@
               <NestedWidgetContainer :list="col.widgets" />
             </div>
           </a-col>
+          <span class="widget-uid-caption">{{ element.uid }}</span>
           <IconAction
             v-show="isWidgetSelected(element.uid)"
             class="button-tl drag-handler"
@@ -63,6 +64,7 @@ import Draggable from 'vuedraggable'
 import { IconDragArrow, IconDelete } from '@arco-design/web-vue/es/icon'
 import { Widget } from '@/types/widget'
 import { useBuilderInjection } from '@/hooks/use-widgets'
+import IconAction from '../private/IconAction.vue'
 import DraggableWidget from './DraggableWidget.vue'
 
 const props = defineProps({
