@@ -211,6 +211,7 @@ export const useBuilderInjection = (widgetList: Ref<Widget[]>) => {
 
   const onWidgetDelete = (idx: number) => {
     widgetList.value.splice(idx, 1)
+    ;(context as FormBuilderContext).selectedWidget.value = undefined
   }
 
   const onWrapperClick = (idx: number, col: OptGridCol) => {
