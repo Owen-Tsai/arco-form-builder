@@ -7,6 +7,7 @@
   user-select: none;
   outline: 1px dashed var(--color-border-3);
   z-index: 50;
+  background-color: #fff;
 
   &.is-selected {
     outline: 2px solid rgb(var(--primary-6));
@@ -48,9 +49,22 @@
 }
 
 .widget-wrapper-grid {
+  padding-left: 16px;
+  padding-right: 16px;
+  @include mx-0;
   .grid-col {
     min-height: 36px;
-    border: 1px dashed var(--color-border-4);
+    .draggable-area {
+      min-height: 36px;
+      outline: 1px dashed var(--color-border-3);
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  .widget-wrapper {
+    padding-left: 16px;
+    padding-right: 16px;
   }
 }
 

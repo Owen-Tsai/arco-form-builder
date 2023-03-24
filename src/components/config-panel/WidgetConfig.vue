@@ -12,6 +12,8 @@
     <Rate v-if="config.type === 'rate'" :config="config" />
     <DatePicker v-if="config.type === 'datePicker'" :config="config" />
 
+    <Grid v-if="config.type === 'grid'" :widget="config" />
+
     <template v-if="config.type !== 'grid' && config.type !== 'tab'">
       <!-- validation config -->
       <div>
@@ -49,6 +51,7 @@ import { Codemirror } from 'vue-codemirror'
 import { javascript } from '@codemirror/lang-javascript'
 import { FormWidget, Widget } from '@/types/widget'
 import { inputEvtNames } from '@/utils'
+import Grid from './widgets/Grid.vue'
 import Input from './widgets/Input.vue'
 import InputNumber from './widgets/InputNumber.vue'
 import InputTag from './widgets/InputTag.vue'

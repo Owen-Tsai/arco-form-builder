@@ -35,3 +35,13 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+@mixin mx-0 {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+@mixin px-0 {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}

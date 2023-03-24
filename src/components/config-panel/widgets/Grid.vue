@@ -35,6 +35,7 @@
       <a-option value="start">顶部对齐</a-option>
       <a-option value="center">居中</a-option>
       <a-option value="end">底部对齐</a-option>
+      <a-option value="stretch">拉伸填充</a-option>
     </a-select>
   </a-form-item>
 </template>

@@ -11,7 +11,11 @@ export const widgetsInitConfig: Record<string, Widget> = {
       { span: 12, widgets: [] },
       { span: 12, widgets: [] },
     ],
-    config: {},
+    config: {
+      gutter: 16,
+      align: 'stretch',
+      justify: 'start',
+    },
   },
   tab: {
     name: '标签页',
