@@ -84,6 +84,21 @@
   }
 }
 
+.widget-wrapper-tab {
+  padding-left: 16px;
+  padding-right: 16px;
+  .widget-wrapper {
+    padding-left: 8px;
+    padding-right: 8px;
+    margin: 2px;
+  }
+  .draggable-area {
+    min-height: 36px;
+    height: 100%;
+    width: 100%;
+  }
+}
+
 .canvas {
   & > .arco-form {
     flex-grow: 1;

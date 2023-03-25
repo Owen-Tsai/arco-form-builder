@@ -20,30 +20,28 @@
     >
       <template #item="{ element, index }: ItemSlot">
         <template v-if="element.type === 'grid'">
-          <div class="widget-renderer">
-            <a-row
-              class="widget-wrapper widget-wrapper-grid"
-              :class="{
-                'is-selected': isWidgetSelected(element.uid),
-              }"
-              :align="element.config.align"
-              :justify="element.config.justify"
-              :gutter="element.config.gutter"
-              style=""
-              @click.self="onWidgetSelect(index)"
+          <a-row
+            class="widget-wrapper widget-wrapper-grid"
+            :class="{
+              'is-selected': isWidgetSelected(element.uid),
+            }"
+            :align="element.config.align"
+            :justify="element.config.justify"
+            :gutter="element.config.gutter"
+            style=""
+            @click.self="onWidgetSelect(index)"
+          >
+            <a-col
+              v-for="(col, i) in element.cols"
+              :key="i"
+              :span="col.span || 0"
+              class="grid-col"
+              @click="onWrapperClick(index, col)"
             >
-              <a-col
-                v-for="(col, i) in element.cols"
-                :key="i"
-                :span="col.span || 0"
-                class="grid-col"
-                @click="onWrapperClick(index, col)"
-              >
-                <div class="draggable-area">
-                  <NestedWidgetContainer :list="col.widgets" />
-                </div>
-              </a-col>
-            </a-row>
+              <div class="draggable-area">
+                <NestedWidgetContainer :list="col.widgets" />
+              </div>
+            </a-col>
             <span class="widget-uid-caption">{{ element.uid }}</span>
             <IconAction
               v-show="isWidgetSelected(element.uid)"
@@ -56,13 +54,13 @@
               :icon="IconDelete"
               @click="onWidgetDelete(index)"
             />
-          </div>
+          </a-row>
         </template>
         <template v-else-if="element.type === 'tab'">
           <a-tabs
             :type="element.config.type"
             :size="element.config.size"
-            class="widget-wrapper"
+            class="widget-wrapper widget-wrapper-tab"
             :class="{
               'is-selected': isWidgetSelected(element.uid),
             }"
@@ -72,6 +70,7 @@
               v-for="(pane, i) in element.panes"
               :key="i"
               :title="pane.name"
+              class="tab-pane"
               @click="onWrapperClick(index, pane)"
             >
               <div class="draggable-area">
@@ -79,6 +78,7 @@
               </div>
             </a-tab-pane>
 
+            <span class="widget-uid-caption">{{ element.uid }}</span>
             <IconAction
               v-show="isWidgetSelected(element.uid)"
               class="button-tl drag-handler"

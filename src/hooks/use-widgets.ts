@@ -1,6 +1,6 @@
 import { inject, Ref } from 'vue'
 import { FormBuilderContext, formBuilderCtxKey } from '@/types/builder'
-import { Widget, OptGridCol } from '@/types/widget'
+import { Widget, OptGridCol, OptTabPane } from '@/types/widget'
 
 export const widgetsInitConfig: Record<string, Widget> = {
   grid: {
@@ -214,8 +214,8 @@ export const useBuilderInjection = (widgetList: Ref<Widget[]>) => {
     ;(context as FormBuilderContext).selectedWidget.value = undefined
   }
 
-  const onWrapperClick = (idx: number, col: OptGridCol) => {
-    if (col.widgets?.length === 0) {
+  const onWrapperClick = (idx: number, nested: OptGridCol | OptTabPane) => {
+    if (nested.widgets?.length === 0) {
       context?.setSelectedWidget(widgetList.value[idx])
     }
   }

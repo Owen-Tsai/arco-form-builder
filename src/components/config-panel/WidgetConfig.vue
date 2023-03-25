@@ -13,6 +13,7 @@
     <DatePicker v-if="config.type === 'datePicker'" :config="config" />
 
     <Grid v-if="config.type === 'grid'" :widget="config" />
+    <Tab v-if="config.type === 'tab'" :widget="config" />
 
     <template v-if="config.type !== 'grid' && config.type !== 'tab'">
       <!-- validation config -->
@@ -52,6 +53,7 @@ import { javascript } from '@codemirror/lang-javascript'
 import { FormWidget, Widget } from '@/types/widget'
 import { inputEvtNames } from '@/utils'
 import Grid from './widgets/Grid.vue'
+import Tab from './widgets/Tab.vue'
 import Input from './widgets/Input.vue'
 import InputNumber from './widgets/InputNumber.vue'
 import InputTag from './widgets/InputTag.vue'
