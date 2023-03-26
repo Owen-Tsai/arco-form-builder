@@ -28,7 +28,6 @@
             :align="element.config.align"
             :justify="element.config.justify"
             :gutter="element.config.gutter"
-            style=""
             @click.self="onWidgetSelect(index)"
           >
             <a-col

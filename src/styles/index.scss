@@ -7,7 +7,10 @@
   user-select: none;
   outline: 1px dashed var(--color-border-3);
   background-color: #fff;
-  margin-bottom: 4px;
+  
+  &:not(:last-child) {
+    margin-bottom: 4px;
+  }
 
   .widget-uid-caption {
     position: absolute;
@@ -72,7 +75,7 @@
     min-height: 36px;
     .draggable-area {
       min-height: 36px;
-      outline: 1px dashed var(--color-border-3);
+      background-color: rgb(var(--success-1));
       height: 100%;
       width: 100%;
     }
@@ -90,12 +93,15 @@
   .widget-wrapper {
     padding-left: 8px;
     padding-right: 8px;
-    margin: 2px;
   }
   .draggable-area {
     min-height: 36px;
+    background-color: rgb(var(--success-1));
     height: 100%;
     width: 100%;
+  }
+  .arco-tabs-pane {
+    padding: 2px;
   }
 }
 
