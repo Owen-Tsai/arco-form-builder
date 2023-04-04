@@ -1,0 +1,185 @@
+{
+  "dataSourcesConfig": { "remote": [], "variable": {} },
+  "widgetActionConfig": [],
+  "formConfig": {
+    "labelAlign": "left",
+    "layout": "vertical",
+    "size": "medium",
+    "labelSpan": 4,
+    "wrapperSpan": 20
+  },
+  "formData": {},
+  "widgetsConfig": [
+    {
+      "name": "栅格布局",
+      "type": "grid",
+      "uid": "wtohceYA",
+      "cols": [
+        {
+          "span": 12,
+          "widgets": [
+            {
+              "name": "输入框",
+              "type": "input",
+              "uid": "yodnJjCd",
+              "config": {
+                "actions": {},
+                "fieldName": "name",
+                "label": "姓名",
+                "required": true
+              }
+            }
+          ]
+        },
+        {
+          "span": 12,
+          "widgets": [
+            {
+              "name": "输入框",
+              "type": "input",
+              "uid": "N9oxmm5V",
+              "config": {
+                "actions": {},
+                "fieldName": "id",
+                "label": "证件号",
+                "placeholder": "填写身份证号或护照号码",
+                "required": true
+              }
+            }
+          ]
+        }
+      ],
+      "config": {}
+    },
+    {
+      "name": "栅格布局",
+      "type": "grid",
+      "uid": "Cshjoc0z",
+      "cols": [
+        {
+          "span": 12,
+          "widgets": [
+            {
+              "name": "数字输入框",
+              "type": "inputNumber",
+              "uid": "FQazp0jg",
+              "config": {
+                "actions": {},
+                "fieldName": "age",
+                "label": "年龄",
+                "min": 0,
+                "max": 99,
+                "precision": 1,
+                "step": 1,
+                "suffix": "周岁",
+                "required": false
+              }
+            }
+          ]
+        },
+        {
+          "span": 12,
+          "widgets": [
+            {
+              "name": "单选组合",
+              "type": "radio",
+              "uid": "7p4VWiHv",
+              "config": {
+                "actions": {},
+                "dataSourceType": "static",
+                "data": {
+                  "static": [
+                    { "label": "男", "value": "option 1" },
+                    { "label": "女", "value": "option 2" }
+                  ]
+                },
+                "label": "性别",
+                "fieldName": "gender"
+              }
+            }
+          ]
+        }
+      ],
+      "config": {}
+    },
+    {
+      "name": "栅格布局",
+      "type": "grid",
+      "uid": "i8M5xqE5",
+      "cols": [
+        {
+          "span": 24,
+          "widgets": [
+            {
+              "name": "文本域",
+              "type": "textarea",
+              "uid": "7dhuEDF8",
+              "config": {
+                "minRows": 3,
+                "maxRows": 6,
+                "actions": {},
+                "label": "个人简介",
+                "fieldName": "intro",
+                "maxLength": 200,
+                "showWordLimit": true
+              }
+            }
+          ]
+        },
+        { "span": 0, "widgets": [] }
+      ],
+      "config": {}
+    },
+    {
+      "name": "栅格布局",
+      "type": "grid",
+      "uid": "EE6AIOPZ",
+      "cols": [
+        {
+          "span": 8,
+          "widgets": [
+            {
+              "name": "滑动输入条",
+              "type": "slider",
+              "uid": "mo9gO6Yi",
+              "config": { "actions": {} }
+            }
+          ]
+        },
+        {
+          "span": 8,
+          "widgets": [
+            {
+              "name": "评分",
+              "type": "rate",
+              "uid": "a1GnvwMq",
+              "config": { "actions": {}, "count": 8 }
+            }
+          ]
+        },
+        {
+          "span": 8,
+          "widgets": [
+            {
+              "name": "下拉选择器",
+              "type": "select",
+              "uid": "wGxqt2Yt",
+              "config": {
+                "actions": {},
+                "dataSourceType": "static",
+                "data": {
+                  "static": [
+                    { "label": "选项1", "value": "option 1" },
+                    { "label": "选项2", "value": "option 2" }
+                  ]
+                },
+                "remoteSearchMethod": "get"
+              }
+            }
+          ]
+        }
+      ],
+      "config": {}
+    }
+  ]
+}

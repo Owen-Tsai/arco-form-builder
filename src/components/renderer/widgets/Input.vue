@@ -1,7 +1,7 @@
 <template>
   <a-input
     v-model="form[uid]"
-    :default-value="mode === 'prod' ? formDev?.[uid] : undefined"
+    :default-value="config.defaultValue"
     :allow-clear="config.allowClear"
     :disabled="config.disabled"
     :readonly="config.readonly"
@@ -35,12 +35,12 @@ const props = defineProps({
     required: true,
   },
   mode: {
-    type: String as PropType<'dev' | 'prod'>,
+    type: String as PropType<'prod' | 'dev'>,
     default: 'dev',
   },
 })
 
-const { form, formDev } = useFormData(props.mode)
+const { form } = useFormData()
 
 const { handler } = useEvents(props.uid, props.config.actions)
 </script>

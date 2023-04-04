@@ -38,7 +38,6 @@ const schema = ref<Schema>({
     labelSpan: 4,
     wrapperSpan: 20,
   },
-  formData: {},
   widgetsConfig: [],
 })
 

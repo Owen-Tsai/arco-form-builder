@@ -1,6 +1,7 @@
 <template>
   <a-rate
     v-model="form[uid]"
+    :default-value="config.defaultValue"
     :count="config.count"
     :allow-half="config.allowHalf"
     :grading="config.grading"

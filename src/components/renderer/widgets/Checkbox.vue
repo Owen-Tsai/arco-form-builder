@@ -1,6 +1,7 @@
 <template>
   <a-checkbox-group
     v-model="form[uid]"
+    :default-value="config.defaultValue"
     :direction="config.direction"
     :disabled="config.disabled"
     :style="{ width: config.width }"
@@ -14,14 +15,14 @@
 
 <script lang="ts" setup>
 import { PropType } from 'vue'
-import { OptRadio } from '@/types/widget'
+import { OptCheckbox } from '@/types/widget'
 import { useFormData } from '@/hooks/use-context'
 import { useDataSource } from '@/hooks/use-data-source'
 import useEvents from '@/hooks/use-events'
 
 const props = defineProps({
   config: {
-    type: Object as PropType<OptRadio>,
+    type: Object as PropType<OptCheckbox>,
     required: true,
   },
   uid: {

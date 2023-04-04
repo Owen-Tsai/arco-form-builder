@@ -1,6 +1,7 @@
 <template>
   <a-select
     v-model="form[uid]"
+    :default-value="config.defaultValue"
     :allow-clear="config.allowClear"
     :allow-create="config.allowCreate"
     :allow-search="config.allowSearch"

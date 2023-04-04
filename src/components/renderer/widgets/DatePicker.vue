@@ -69,6 +69,7 @@ const props = defineProps({
 const { form } = useFormData()
 
 const properties = ref({
+  defaultValue: props.config.defaultValue as any,
   allowClear: props.config.allowClear,
   format: props.config.format,
   readonly: props.config.readonly,

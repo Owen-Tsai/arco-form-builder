@@ -1,6 +1,7 @@
 <template>
   <a-radio-group
     v-model="form[uid]"
+    :default-value="config.defaultValue"
     :direction="config.direction"
     :disabled="config.disabled"
     :type="config.type"

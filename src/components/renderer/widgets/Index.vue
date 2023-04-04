@@ -22,6 +22,7 @@
       v-if="widget.type === 'inputTag'"
       :config="widget.config"
       :uid="widget.uid"
+      mode="prod"
     />
     <Textarea
       v-if="widget.type === 'textarea'"

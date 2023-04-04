@@ -1,6 +1,7 @@
 <template>
   <a-switch
     v-model="form[uid]"
+    :default-checked="config.defaultValue"
     :disabled="config.disabled"
     :type="config.type"
     :direction="config.checkedValue"

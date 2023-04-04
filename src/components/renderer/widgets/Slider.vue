@@ -1,6 +1,7 @@
 <template>
   <a-slider
     v-model="form[uid]"
+    :default-value="config.defaultValue"
     :step="config.step"
     :min="config.min"
     :marks="marks"

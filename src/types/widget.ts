@@ -39,6 +39,7 @@ type EventActionOpts = {
 }
 
 export type OptInput = {
+  defaultValue?: string
   allowClear?: boolean
   maxLength?: number
   showWordLimit?: boolean
@@ -51,6 +52,7 @@ export type OptInput = {
   EventActionOpts
 
 export type OptInputNumber = {
+  defaultValue?: number
   allowClear?: boolean
   min?: number
   max?: number
@@ -65,6 +67,7 @@ export type OptInputNumber = {
   EventActionOpts
 
 export type OptInputTag = {
+  defaultValue?: string[]
   allowClear?: boolean
   placeholder?: string
   limit?: number
@@ -76,6 +79,7 @@ export type OptInputTag = {
   EventActionOpts
 
 export type OptTextarea = {
+  defaultValue?: string
   allowClear?: boolean
   showWordLimit?: boolean
   maxLength?: number
@@ -88,6 +92,7 @@ export type OptTextarea = {
   EventActionOpts
 
 export type OptSelect = {
+  defaultValue?: string
   allowClear?: boolean
   allowSearch?: boolean
   allowCreate?: boolean
@@ -105,6 +110,7 @@ export type OptSelect = {
   EventActionOpts
 
 export type OptRadio = {
+  defaultValue?: string
   type?: 'radio' | 'button'
   direction?: 'horizontal' | 'vertical'
 } & Omit<InteractiveStateOpts, 'readonly'> &
@@ -114,6 +120,7 @@ export type OptRadio = {
   EventActionOpts
 
 export type OptCheckbox = {
+  defaultValue?: string[]
   direction?: 'horizontal' | 'vertical'
 } & Omit<InteractiveStateOpts, 'readonly'> &
   CommonOpts &
@@ -122,6 +129,7 @@ export type OptCheckbox = {
   EventActionOpts
 
 export type OptSwitch = {
+  defaultValue?: boolean
   checkedValue?: string
   uncheckedValue?: string
   checkedColor?: string
@@ -133,6 +141,7 @@ export type OptSwitch = {
   EventActionOpts
 
 export type OptRate = {
+  defaultValue?: number
   count?: number
   allowHalf?: boolean
   color?: string
@@ -143,6 +152,7 @@ export type OptRate = {
   EventActionOpts
 
 export type OptSlider = {
+  defaultValue?: number
   step?: number
   min?: number
   max?: number
@@ -155,11 +165,13 @@ export type OptSlider = {
   EventActionOpts
 
 export type OptCascader = {
+  defaultValue?: string
   allowClear?: boolean
   allowSearch?: boolean
   placeholder?: string
   limit?: number
   strict?: boolean
+  pathSelection?: boolean
 } & InteractiveStateOpts &
   CommonOpts &
   ValidationOpts &
@@ -167,6 +179,7 @@ export type OptCascader = {
   EventActionOpts
 
 export type OptDatePicker = {
+  defaultValue?: string | string[]
   allowClear?: boolean
   placeholder?: string | string[]
   format?: string

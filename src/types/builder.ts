@@ -31,7 +31,6 @@ export type Schema = {
   widgetsConfig: WidgetsConfig
   dataSourcesConfig: DataSourceConfig
   widgetActionConfig: WidgetActionConfig
-  formData: FormData
 }
 
 export type FormBuilderContext = {

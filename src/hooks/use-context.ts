@@ -17,16 +17,8 @@ export const useBuilderContext = () => {
   }
 }
 
-export const useFormData = (mode = 'dev') => {
-  const formProd = inject<FormData>(formDataCtxKey) as FormData
-  const formDev = useBuilderContext().schema.formData
+export const useFormData = () => {
+  const form = inject<FormData>(formDataCtxKey) as FormData
 
-  return mode === 'dev'
-    ? {
-        form: formDev,
-      }
-    : {
-        form: formProd,
-        formDev,
-      }
+  return { form }
 }

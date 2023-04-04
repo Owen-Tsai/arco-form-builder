@@ -1,6 +1,7 @@
 <template>
   <a-cascader
     v-model="form[uid]"
+    :default-input-value="config.defaultValue"
     :placeholder="config.placeholder"
     :disabled="config.disabled"
     :allow-search="config.allowSearch"

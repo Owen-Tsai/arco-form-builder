@@ -75,6 +75,7 @@ import { useFormData, useBuilderContext } from '@/hooks/use-context'
 import { generateUID } from '@/utils'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import type { Widget, WidgetName } from '@/types/widget'
+import type { FormData } from '@/types/builder'
 import Viewer from '@/components/renderer/Viewer.vue'
 import DraggableItem from './Item.vue'
 
@@ -110,7 +111,7 @@ const visible = ref({
   formData: false,
 })
 
-const { form } = useFormData('prod')
+const { form } = useFormData()
 let { schema } = useBuilderContext()
 
 const schemaRef = ref(schema)

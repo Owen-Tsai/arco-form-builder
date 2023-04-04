@@ -2,6 +2,7 @@
   <a-textarea
     :key="key"
     v-model="form[uid]"
+    :default-value="config.defaultValue"
     :allow-clear="config.allowClear"
     :auto-size="{ minRows: config.minRows, maxRows: config.maxRows }"
     :disabled="config.disabled"
