@@ -9,11 +9,11 @@
     <span class="label">默认值</span>
     <div class="value-list">
       <div
-        v-for="(item, i) in form[config.uid]"
+        v-for="(item, i) in widget.defaultValue"
         :key="i"
         class="value-list-item"
       >
-        <a-input v-model="form[config.uid][i]" />
+        <a-input v-model="widget.defaultValue[i]" />
         <a-button
           size="small"
           type="outline"
@@ -61,7 +61,6 @@
 import { computed, PropType } from 'vue'
 import { IconClose } from '@arco-design/web-vue/es/icon'
 import { ConfigInputTag } from '@/types/widget'
-import { useFormData } from '@/hooks/use-context'
 
 const emit = defineEmits(['update:config'])
 
@@ -79,14 +78,12 @@ const widget = computed({
   },
 })
 
-const { form } = useFormData()
-
 const add = () => {
-  form[props.config.uid].push('')
+  widget.value.defaultValue.push('')
 }
 
 const removeValueFromList = (idx: number) => {
-  ;(form[props.config.uid] as string[]).splice(idx, 1)
+  widget.value.defaultValue.splice(idx, 1)
 }
 </script>
 

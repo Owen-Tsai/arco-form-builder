@@ -1,6 +1,6 @@
 <template>
   <a-form
-    :model="schema.formData"
+    :model="model"
     :label-align="schema.formConfig.labelAlign"
     :layout="schema.formConfig.layout"
     :size="schema.formConfig.size"
@@ -126,6 +126,9 @@ const props = defineProps({
     required: true,
   },
 })
+
+// an empty model for data binding in dev mode
+const model = ref({})
 
 const widgets = ref<Widget[]>(props.schema.widgetsConfig)
 

@@ -49,6 +49,7 @@ export const widgetsInitConfig: Record<string, Widget> = {
     uid: '',
     config: {
       actions: {},
+      defaultValue: [],
     },
   },
   textarea: {
@@ -105,6 +106,7 @@ export const widgetsInitConfig: Record<string, Widget> = {
           { label: '选项2', value: 'option 2' },
         ],
       },
+      defaultValue: [],
     },
   },
   switch: {

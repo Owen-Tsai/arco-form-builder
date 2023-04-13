@@ -33,31 +33,9 @@
         allow-clear
       />
     </template>
-    <template #extra>
-      <a-tooltip
-        content="该配置项在改变后无法在画布中实时展示效果，如需预览变更请进入预览模式"
-        position="br"
-      >
-        <span class="extra-info">
-          该项配置不是响应式的
-          <IconQuestion />
-        </span>
-      </a-tooltip>
-    </template>
   </a-form-item>
   <a-form-item label="日期格式">
     <a-input v-model="widget.format" default-value="YYYY-MM-DD" allow-clear />
-    <template #extra>
-      <a-tooltip
-        content="该配置项在改变后无法在画布中实时展示效果，如需预览变更请进入预览模式"
-        position="br"
-      >
-        <span class="extra-info">
-          该项配置不是响应式的
-          <IconQuestion />
-        </span>
-      </a-tooltip>
-    </template>
   </a-form-item>
   <a-form-item label="宽度">
     <a-input
@@ -103,10 +81,8 @@
 
 <script lang="ts" setup>
 import { ref, computed, watch, PropType } from 'vue'
-import { IconQuestion } from '@arco-design/web-vue/es/icon'
 import { ConfigDatePicker } from '@/types/widget'
 import { useFormData } from '@/hooks/use-context'
-import Icon from '@/components/private/Icon.vue'
 
 const cachedValue = ref<string | string[]>()
 const cachedPlaceholder = ref<string | string[]>()

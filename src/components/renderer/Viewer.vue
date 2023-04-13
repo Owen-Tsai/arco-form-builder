@@ -28,5 +28,5 @@ defineProps({
   },
 })
 
-const { form } = useFormData('prod')
+const { form } = useFormData()
 </script>

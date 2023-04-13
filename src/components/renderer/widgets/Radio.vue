@@ -1,5 +1,6 @@
 <template>
   <a-radio-group
+    :key="config.defaultValue"
     v-model="form[uid]"
     :default-value="config.defaultValue"
     :direction="config.direction"

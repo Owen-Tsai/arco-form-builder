@@ -41,13 +41,39 @@
       </a-option>
     </a-select>
   </div>
-  <a-form-item label="默认值" style="margin-top: 16px">
-    <a-input
-      v-if="widget.dataSourceType !== 'static'"
+  <div style="margin-top: 16px; margin-bottom: 20px">
+    <span class="label">默认值</span>
+    <div v-if="widget.dataSourceType !== 'static'">
+      <div class="value-list" style="margin-top: 8px">
+        <div
+          v-for="(item, i) in widget.defaultValue"
+          :key="i"
+          class="value-list-item"
+        >
+          <a-input v-model="widget.defaultValue[i]" />
+          <a-button
+            size="small"
+            type="outline"
+            status="danger"
+            style="flex-shrink: 0"
+            class="btn"
+            @click="removeValueFromList(i)"
+          >
+            <template #icon>
+              <IconClose />
+            </template>
+          </a-button>
+        </div>
+      </div>
+      <a-button size="small" long type="outline" @click="add">新增</a-button>
+    </div>
+    <a-select
+      v-else
       v-model="form[props.config.uid]"
       allow-clear
-    />
-    <a-select v-else v-model="form[props.config.uid]" allow-clear>
+      multiple
+      style="margin-top: 8px"
+    >
       <a-option
         v-for="(opt, i) in widget.data.static"
         :key="i"
@@ -56,7 +82,7 @@
         {{ opt.label || opt.value }}
       </a-option>
     </a-select>
-  </a-form-item>
+  </div>
   <a-form-item label="宽度">
     <a-input
       v-model="widget.width"
@@ -112,6 +138,14 @@ const addOption = () => {
 
 const removeOption = (idx: number) => {
   widget.value.data.static.splice(idx, 1)
+}
+
+const removeValueFromList = (i: number) => {
+  widget.value.defaultValue.splice(i, 1)
+}
+
+const add = () => {
+  widget.value.defaultValue.push('')
 }
 </script>
 

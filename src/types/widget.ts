@@ -67,7 +67,7 @@ export type OptInputNumber = {
   EventActionOpts
 
 export type OptInputTag = {
-  defaultValue?: string[]
+  defaultValue: string[]
   allowClear?: boolean
   placeholder?: string
   limit?: number
@@ -120,7 +120,7 @@ export type OptRadio = {
   EventActionOpts
 
 export type OptCheckbox = {
-  defaultValue?: string[]
+  defaultValue: string[]
   direction?: 'horizontal' | 'vertical'
 } & Omit<InteractiveStateOpts, 'readonly'> &
   CommonOpts &

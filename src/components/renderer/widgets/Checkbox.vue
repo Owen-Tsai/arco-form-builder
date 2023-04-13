@@ -1,5 +1,6 @@
 <template>
   <a-checkbox-group
+    :key="config.defaultValue?.toString()"
     v-model="form[uid]"
     :default-value="config.defaultValue"
     :direction="config.direction"

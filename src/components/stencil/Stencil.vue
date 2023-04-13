@@ -73,9 +73,7 @@ import { javascript } from '@codemirror/lang-javascript'
 import { widgets } from '@/hooks/use-widgets'
 import { useFormData, useBuilderContext } from '@/hooks/use-context'
 import { generateUID } from '@/utils'
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import type { Widget, WidgetName } from '@/types/widget'
-import type { FormData } from '@/types/builder'
 import Viewer from '@/components/renderer/Viewer.vue'
 import DraggableItem from './Item.vue'
 
@@ -130,11 +128,6 @@ const computedSchema = computed({
 const cloneWidgetConfigFromRaw = (widget: Widget) => {
   const uid = generateUID()
   widget.uid = uid
-  if (['inputTag'].includes(widget.type)) {
-    form[uid] = []
-  } else {
-    form[uid] = undefined
-  }
   return cloneDeep(widget)
 }
 </script>

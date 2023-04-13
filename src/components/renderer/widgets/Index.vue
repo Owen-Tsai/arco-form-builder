@@ -10,19 +10,16 @@
       v-if="widget.type === 'input'"
       :config="widget.config"
       :uid="widget.uid"
-      mode="prod"
     />
     <InputNumber
       v-if="widget.type === 'inputNumber'"
       :config="widget.config"
       :uid="widget.uid"
-      mode="prod"
     />
     <InputTag
       v-if="widget.type === 'inputTag'"
       :config="widget.config"
       :uid="widget.uid"
-      mode="prod"
     />
     <Textarea
       v-if="widget.type === 'textarea'"

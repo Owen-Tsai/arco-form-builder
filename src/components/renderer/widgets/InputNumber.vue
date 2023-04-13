@@ -1,5 +1,6 @@
 <template>
   <a-input-number
+    :key="config.defaultValue"
     v-model="form[uid]"
     :default-value="config.defaultValue"
     :allow-clear="config.allowClear"
@@ -35,10 +36,6 @@ const props = defineProps({
   uid: {
     type: String,
     required: true,
-  },
-  mode: {
-    type: String as PropType<'dev' | 'prod'>,
-    default: 'dev',
   },
 })
 
