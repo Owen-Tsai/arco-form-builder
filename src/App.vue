@@ -19,6 +19,7 @@ import {
   formDataCtxKey,
   formBuilderCtxKey,
   FormBuilderContext,
+  FormDataContext,
 } from '@/types/builder'
 import { Widget } from '@/types/widget'
 import Stencil from './components/stencil/Stencil.vue'
@@ -49,13 +50,20 @@ const setSelectedWidget = (widget: Widget) => {
   selectedWidget.value = widget
 }
 
+const resetForm = () => {
+  form.value = {}
+}
+
 provide<FormBuilderContext>(formBuilderCtxKey, {
   schema: schema.value,
   selectedWidget,
   setSelectedWidget,
 })
 
-provide(formDataCtxKey, form.value)
+provide<FormDataContext>(formDataCtxKey, {
+  form,
+  resetForm,
+})
 </script>
 
 <style lang="scss" scoped>

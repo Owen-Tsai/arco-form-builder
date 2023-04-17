@@ -1,7 +1,7 @@
 <template>
   <a-textarea
-    :key="key"
-    v-model="form[uid]"
+    :key="`${key}${config.defaultValue}`"
+    v-model="modelValue"
     :default-value="config.defaultValue"
     :allow-clear="config.allowClear"
     :auto-size="{ minRows: config.minRows, maxRows: config.maxRows }"
@@ -18,7 +18,7 @@
 <script lang="ts" setup>
 import { watch, PropType, ref } from 'vue'
 import { OptTextarea } from '@/types/widget'
-import { useFormData } from '@/hooks/use-context'
+import { useModelValue } from '@/hooks/use-context'
 import useEvents from '@/hooks/use-events'
 
 const key = ref(0)
@@ -32,9 +32,13 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  mode: {
+    type: String as PropType<'prod' | 'dev'>,
+    default: 'dev',
+  },
 })
 
-const { form } = useFormData()
+const { modelValue } = useModelValue(props.uid, props.mode)
 const { handler } = useEvents(props.uid, props.config.actions)
 
 watch(

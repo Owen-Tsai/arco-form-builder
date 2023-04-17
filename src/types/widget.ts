@@ -92,7 +92,7 @@ export type OptTextarea = {
   EventActionOpts
 
 export type OptSelect = {
-  defaultValue?: string
+  defaultValue?: string | string[]
   allowClear?: boolean
   allowSearch?: boolean
   allowCreate?: boolean
@@ -152,7 +152,7 @@ export type OptRate = {
   EventActionOpts
 
 export type OptSlider = {
-  defaultValue?: number
+  defaultValue?: number | [number, number]
   step?: number
   min?: number
   max?: number

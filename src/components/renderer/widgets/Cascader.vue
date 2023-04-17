@@ -1,7 +1,8 @@
 <template>
   <a-cascader
-    v-model="form[uid]"
-    :default-input-value="config.defaultValue"
+    :key="config.defaultValue"
+    v-model="modelValue"
+    :default-value="config.defaultValue"
     :placeholder="config.placeholder"
     :disabled="config.disabled"
     :allow-search="config.allowSearch"
@@ -17,7 +18,7 @@
 import { PropType } from 'vue'
 import { OptCascader } from '@/types/widget'
 import { useDataSource } from '@/hooks/use-data-source'
-import { useFormData } from '@/hooks/use-context'
+import { useModelValue } from '@/hooks/use-context'
 import useEvents from '@/hooks/use-events'
 
 const props = defineProps({
@@ -29,9 +30,13 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  mode: {
+    type: String as PropType<'prod' | 'dev'>,
+    default: 'dev',
+  },
 })
 
-const { form } = useFormData()
+const { modelValue } = useModelValue(props.uid, props.mode)
 
 const { value } = useDataSource(props.config.dataSourceType, props.config.data)
 

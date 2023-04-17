@@ -38,3 +38,8 @@ export type FormBuilderContext = {
   setSelectedWidget: (w: Widget) => void
   schema: Schema
 }
+
+export type FormDataContext = {
+  form: Ref<FormData>
+  resetForm: () => void
+}

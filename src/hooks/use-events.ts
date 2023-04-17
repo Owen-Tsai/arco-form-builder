@@ -33,7 +33,7 @@ const useEvents = (uid: string, actions: WidgetActionConfig) => {
   const { form } = useFormData()
 
   const handler = (action: ActionEvent) => {
-    const val = serializeValue(form[uid])
+    const val = serializeValue(form.value[uid])
     try {
       const func = schema.widgetActionConfig.filter(
         (e) => e.name === actions[action]

@@ -10,6 +10,7 @@
     <Switch v-if="config.type === 'switch'" :config="config" />
     <Slider v-if="config.type === 'slider'" :config="config" />
     <Rate v-if="config.type === 'rate'" :config="config" />
+    <Cascader v-if="config.type === 'cascader'" :config="config" />
     <DatePicker v-if="config.type === 'datePicker'" :config="config" />
 
     <Grid v-if="config.type === 'grid'" :widget="config" />
@@ -65,6 +66,7 @@ import Switch from './widgets/Switch.vue'
 import Slider from './widgets/Slider.vue'
 import Rate from './widgets/Rate.vue'
 import DatePicker from './widgets/DatePicker.vue'
+import Cascader from './widgets/Cascader.vue'
 import ActionConfig from './widgets/ActionConfig.vue'
 
 const props = defineProps({

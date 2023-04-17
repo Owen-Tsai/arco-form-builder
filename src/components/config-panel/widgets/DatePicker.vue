@@ -20,15 +20,17 @@
     </a-select>
   </a-form-item>
   <a-form-item label="默认值">
+    <!-- eslint-disable vue/valid-v-model -->
     <a-input
       v-if="!widget.mode.includes('range')"
-      v-model="form[props.config.uid]"
+      v-model="(widget.defaultValue as string)"
       allow-clear
     />
+    <!-- eslint-enable vue/valid-v-model -->
     <template v-else>
-      <a-input v-model="form[props.config.uid][0]" allow-clear />
+      <a-input v-model="(widget.defaultValue as string[])[0]" allow-clear />
       <a-input
-        v-model="form[props.config.uid][1]"
+        v-model="(widget.defaultValue as string[])[1]"
         style="margin-top: 8px"
         allow-clear
       />
@@ -80,12 +82,8 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, watch, PropType } from 'vue'
+import { computed, PropType } from 'vue'
 import { ConfigDatePicker } from '@/types/widget'
-import { useFormData } from '@/hooks/use-context'
-
-const cachedValue = ref<string | string[]>()
-const cachedPlaceholder = ref<string | string[]>()
 
 const emit = defineEmits(['update:config'])
 
@@ -102,32 +100,6 @@ const widget = computed({
     emit('update:config', val)
   },
 })
-
-const { form } = useFormData()
-
-watch(
-  () => widget.value.mode,
-  (val) => {
-    const t = form[props.config.uid]
-    const p = widget.value.placeholder
-    const isValueArray = Array.isArray(cachedValue.value)
-    const isPlaceholderArray = Array.isArray(cachedPlaceholder.value)
-
-    if (val.includes('range')) {
-      form[props.config.uid] = isValueArray ? cachedValue.value : []
-      widget.value.placeholder = isPlaceholderArray
-        ? cachedPlaceholder.value
-        : []
-    } else {
-      form[props.config.uid] = isValueArray ? '' : cachedValue.value
-      widget.value.placeholder = isPlaceholderArray
-        ? ''
-        : cachedPlaceholder.value
-    }
-    cachedValue.value = t
-    cachedPlaceholder.value = p
-  }
-)
 </script>
 
 <style lang="scss" scoped>

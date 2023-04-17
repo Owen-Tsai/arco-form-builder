@@ -6,7 +6,7 @@
     <a-input v-model="widget.label" allow-clear />
   </a-form-item>
   <a-form-item label="默认值">
-    <a-input-number v-model="form[props.config.uid]" allow-clear />
+    <a-input-number v-model="widget.defaultValue" allow-clear />
   </a-form-item>
   <a-form-item label="分数上限">
     <a-input-number v-model="widget.count" :min="1" :step="1" :precision="0" />
@@ -36,7 +36,6 @@
 <script lang="ts" setup>
 import { computed, PropType } from 'vue'
 import { ConfigRate } from '@/types/widget'
-import { useFormData } from '@/hooks/use-context'
 
 const emit = defineEmits(['update:config'])
 
@@ -53,6 +52,4 @@ const widget = computed({
     emit('update:config', val)
   },
 })
-
-const { form } = useFormData()
 </script>

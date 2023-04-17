@@ -8,17 +8,23 @@
   <a-form-item label="默认值">
     <span v-if="widget.range" class="value-range">
       <a-input-number
-        v-model="form[props.config.uid][0]"
+        v-model="(widget.defaultValue as number[])[0]"
         placeholder="起始值"
         allow-clear
       />
       <a-input-number
-        v-model="form[props.config.uid][1]"
+        v-model="(widget.defaultValue as number[])[1]"
         placeholder="终止值"
         allow-clear
       />
     </span>
-    <a-input-number v-else v-model="form[props.config.uid]" allow-clear />
+    <!-- eslint-disable vue/valid-v-model -->
+    <a-input-number
+      v-else
+      v-model="(widget.defaultValue as number)"
+      allow-clear
+    />
+    <!-- eslint-enable vue/valid-v-model -->
   </a-form-item>
   <a-form-item label="宽度">
     <a-input
@@ -53,11 +59,10 @@
 <script lang="ts" setup>
 import { ref, computed, watch, PropType } from 'vue'
 import { ConfigSlider } from '@/types/widget'
-import { useFormData } from '@/hooks/use-context'
 
 const emit = defineEmits(['update:config'])
 
-const cachedVal = ref<number | number[]>()
+const cachedVal = ref<number | [number, number]>()
 
 const props = defineProps({
   config: {
@@ -73,16 +78,14 @@ const widget = computed({
   },
 })
 
-const { form } = useFormData()
-
 watch(
   () => widget.value.range,
   (val) => {
-    const t = form[props.config.uid]
+    const t = widget.value.defaultValue
     if (val) {
-      form[props.config.uid] = cachedVal.value || [0, 0]
+      widget.value.defaultValue = cachedVal.value || [0, 0]
     } else {
-      form[props.config.uid] = cachedVal.value || 0
+      widget.value.defaultValue = cachedVal.value || 0
     }
     cachedVal.value = t
   }

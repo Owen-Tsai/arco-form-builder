@@ -2,7 +2,7 @@
   <a-date-picker
     v-if="config.mode === 'date'"
     v-bind="properties"
-    v-model="form[uid]"
+    v-model="modelValue"
     :placeholder="config.placeholder"
     class="date-picker-sub-item"
     :style="{ width: config.width }"
@@ -10,7 +10,7 @@
   <a-week-picker
     v-else-if="config.mode === 'week'"
     v-bind="properties"
-    v-model="form[uid]"
+    v-model="modelValue"
     :placeholder="config.placeholder"
     class="date-picker-sub-item"
     :style="{ width: config.width }"
@@ -18,7 +18,7 @@
   <a-quarter-picker
     v-else-if="config.mode === 'quarter'"
     v-bind="properties"
-    v-model="form[uid]"
+    v-model="modelValue"
     :placeholder="config.placeholder"
     :style="{ width: config.width }"
     class="date-picker-sub-item"
@@ -26,7 +26,7 @@
   <a-month-picker
     v-else-if="config.mode === 'month'"
     v-bind="properties"
-    v-model="form[uid]"
+    v-model="modelValue"
     :placeholder="config.placeholder"
     :style="{ width: config.width }"
     class="date-picker-sub-item"
@@ -34,7 +34,7 @@
   <a-year-picker
     v-else-if="config.mode === 'year'"
     v-bind="properties"
-    v-model="form[uid]"
+    v-model="modelValue"
     :placeholder="config.placeholder"
     :style="{ width: config.width }"
     class="date-picker-sub-item"
@@ -42,7 +42,7 @@
   <a-range-picker
     v-else
     v-bind="properties"
-    v-model="form[uid]"
+    v-model="modelValue"
     :placeholder="(config.placeholder as string[])"
     :style="{ width: config.width }"
     class="date-picker-sub-item"
@@ -53,7 +53,7 @@
 <script lang="ts" setup>
 import { ref, PropType } from 'vue'
 import { OptDatePicker } from '@/types/widget'
-import { useFormData } from '@/hooks/use-context'
+import { useModelValue } from '@/hooks/use-context'
 
 const props = defineProps({
   config: {
@@ -64,9 +64,13 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  mode: {
+    type: String as PropType<'prod' | 'dev'>,
+    default: 'dev',
+  },
 })
 
-const { form } = useFormData()
+const { modelValue } = useModelValue(props.uid, props.mode)
 
 const properties = ref({
   defaultValue: props.config.defaultValue as any,

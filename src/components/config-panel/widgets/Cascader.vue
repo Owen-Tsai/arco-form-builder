@@ -27,8 +27,8 @@
       </a-option>
     </a-select>
   </div>
-  <a-form-item label="默认值">
-    <a-input v-model="form[props.config.uid]" allow-clear />
+  <a-form-item label="默认值" style="margin-top: 16px">
+    <a-input v-model="widget.defaultValue" allow-clear />
   </a-form-item>
   <a-form-item label="宽度">
     <a-input
@@ -47,7 +47,7 @@ import { ref, computed, watch, PropType } from 'vue'
 import { Codemirror } from 'vue-codemirror'
 import { javascript } from '@codemirror/lang-javascript'
 import { ConfigCascader } from '@/types/widget'
-import { useFormData, useBuilderContext } from '@/hooks/use-context'
+import { useBuilderContext } from '@/hooks/use-context'
 
 const emit = defineEmits(['update:config'])
 
@@ -69,9 +69,7 @@ const widget = computed({
 
 const remoteDataSource = computed(() => schema.dataSourcesConfig.remote)
 
-const { form } = useFormData()
-
-const rawJson = ref(JSON.stringify(widget.value.data.static))
+const rawJson = ref(JSON.stringify(widget.value.data.static, null, 2))
 
 watch(
   () => rawJson.value,

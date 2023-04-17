@@ -1,7 +1,6 @@
 <template>
   <div class="stencil">
     <div class="group">
-      <!-- <div class="group-title">组件</div> -->
       <div class="group-content">
         <Draggable
           :list="widgetsList"
@@ -20,7 +19,7 @@
 
     <div class="group" style="margin-top: 24px">
       <a-space style="display: block" direction="vertical">
-        <a-button long type="primary" @click="visible.viewer = true">
+        <a-button long type="primary" @click="handleViewStart">
           测试用：预览表单
         </a-button>
         <a-button long @click="visible.schema = true">
@@ -47,7 +46,9 @@
       :visible="visible.viewer"
       hide-cancel
       fullscreen
-      @ok="visible.viewer = false"
+      unmount-on-close
+      @ok="handleViewEnd"
+      @close="handleViewEnd"
     >
       <template #title>表单预览</template>
       <Viewer :schema="schemaRef" />
@@ -109,7 +110,7 @@ const visible = ref({
   formData: false,
 })
 
-const { form } = useFormData()
+const { form, resetForm } = useFormData()
 let { schema } = useBuilderContext()
 
 const schemaRef = ref(schema)
@@ -129,6 +130,15 @@ const cloneWidgetConfigFromRaw = (widget: Widget) => {
   const uid = generateUID()
   widget.uid = uid
   return cloneDeep(widget)
+}
+
+const handleViewStart = () => {
+  visible.value.viewer = true
+}
+
+const handleViewEnd = () => {
+  resetForm()
+  visible.value.viewer = false
 }
 </script>
 

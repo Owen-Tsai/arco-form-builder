@@ -1,5 +1,6 @@
 <template>
   <a-slider
+    :key="config.defaultValue?.toString()"
     v-model="form[uid]"
     :default-value="config.defaultValue"
     :step="config.step"

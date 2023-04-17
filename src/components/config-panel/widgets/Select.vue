@@ -43,16 +43,18 @@
   </div>
   <a-form-item label="默认值" style="margin-top: 16px">
     <template v-if="widget.dataSourceType !== 'static'">
+      <!-- eslint-disable vue/valid-v-model -->
       <a-input-tag
         v-if="isMultiple"
-        v-model="form[props.config.uid]"
+        v-model="(widget.defaultValue as string[])"
         placeholder="按下回车键新增"
       />
-      <a-input v-else v-model="form[props.config.uid]" allow-clear />
+      <a-input v-else v-model="(widget.defaultValue as string)" allow-clear />
+      <!-- eslint-enable vue/valid-v-model -->
     </template>
     <a-select
       v-else
-      v-model="form[props.config.uid]"
+      v-model="widget.defaultValue"
       :multiple="isMultiple"
       allow-clear
     >
@@ -108,7 +110,7 @@
   <template v-if="widget.allowSearch">
     <a-form-item label="远程搜索接口">
       <a-input v-model="widget.remoteSearchUrl" allow-clear />
-      <template #info>123</template>
+      <template #extra>123</template>
     </a-form-item>
     <a-form-item label="远程搜索请求类型">
       <a-select v-model="widget.remoteSearchMethod">
@@ -120,12 +122,10 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, watch, PropType } from 'vue'
+import { computed, PropType } from 'vue'
 import { IconClose } from '@arco-design/web-vue/es/icon'
 import { ConfigSelect } from '@/types/widget'
-import { useFormData, useBuilderContext } from '@/hooks/use-context'
-
-const cachedValue = ref<string | string[]>()
+import { useBuilderContext } from '@/hooks/use-context'
 
 const emit = defineEmits(['update:config'])
 
@@ -143,7 +143,6 @@ const widget = computed({
   },
 })
 
-const { form } = useFormData()
 const { schema } = useBuilderContext()
 
 const remoteDataSource = computed(() => schema.dataSourcesConfig.remote)
@@ -162,20 +161,6 @@ const addOption = () => {
 const removeOption = (idx: number) => {
   widget.value.data.static.splice(idx, 1)
 }
-
-watch(
-  () => isMultiple.value,
-  (val) => {
-    const t = form[props.config.uid]
-    const isArray = Array.isArray(cachedValue.value)
-    if (val) {
-      form[props.config.uid] = isArray ? cachedValue.value : []
-    } else {
-      form[props.config.uid] = isArray ? '' : cachedValue.value
-    }
-    cachedValue.value = t
-  }
-)
 </script>
 
 <style lang="scss" scoped>

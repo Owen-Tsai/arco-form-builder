@@ -10,61 +10,73 @@
       v-if="widget.type === 'input'"
       :config="widget.config"
       :uid="widget.uid"
+      mode="prod"
     />
     <InputNumber
       v-if="widget.type === 'inputNumber'"
       :config="widget.config"
       :uid="widget.uid"
+      mode="prod"
     />
     <InputTag
       v-if="widget.type === 'inputTag'"
       :config="widget.config"
       :uid="widget.uid"
+      mode="prod"
     />
     <Textarea
       v-if="widget.type === 'textarea'"
       :config="widget.config"
       :uid="widget.uid"
+      mode="prod"
     />
     <Select
       v-if="widget.type === 'select'"
       :config="widget.config"
       :uid="widget.uid"
+      mode="prod"
     />
     <Radio
       v-if="widget.type === 'radio'"
       :config="widget.config"
       :uid="widget.uid"
+      mode="prod"
     />
     <Checkbox
       v-if="widget.type === 'checkbox'"
       :config="widget.config"
       :uid="widget.uid"
+      mode="prod"
     />
     <Slider
       v-if="widget.type === 'slider'"
       :config="widget.config"
       :uid="widget.uid"
+      mode="prod"
     />
     <Rate
       v-if="widget.type === 'rate'"
       :config="widget.config"
       :uid="widget.uid"
+      mode="prod"
     />
     <Switch
       v-if="widget.type === 'switch'"
       :config="widget.config"
       :uid="widget.uid"
+      mode="prod"
     />
     <Cascader
       v-if="widget.type === 'cascader'"
       :config="widget.config"
       :uid="widget.uid"
+      mode="prod"
     />
     <DatePicker
       v-if="widget.type === 'datePicker'"
       :uid="widget.uid"
       :config="widget.config"
+      mode="prod"
     />
   </a-form-item>
 </template>

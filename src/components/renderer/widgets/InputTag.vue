@@ -1,7 +1,7 @@
 <template>
   <a-input-tag
     :key="config.defaultValue.toString()"
-    v-model="form[uid]"
+    v-model="modelValue"
     :default-value="config.defaultValue"
     :allow-clear="config.allowClear"
     :disabled="config.disabled"
@@ -22,7 +22,7 @@
 <script lang="ts" setup>
 import { PropType } from 'vue'
 import { OptInputTag } from '@/types/widget'
-import { useFormData } from '@/hooks/use-context'
+import { useModelValue } from '@/hooks/use-context'
 import useEvents from '@/hooks/use-events'
 
 const props = defineProps({
@@ -34,8 +34,12 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  mode: {
+    type: String as PropType<'prod' | 'dev'>,
+    default: 'dev',
+  },
 })
 
-const { form } = useFormData()
+const { modelValue } = useModelValue(props.uid, props.mode)
 const { handler } = useEvents(props.uid, props.config.actions)
 </script>

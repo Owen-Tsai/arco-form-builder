@@ -1,5 +1,6 @@
 <template>
   <a-select
+    :key="config.defaultValue?.toString()"
     v-model="form[uid]"
     :default-value="config.defaultValue"
     :allow-clear="config.allowClear"

@@ -44,10 +44,10 @@
   <a-form-item label="默认值" style="margin-top: 16px">
     <a-input
       v-if="widget.dataSourceType !== 'static'"
-      v-model="form[props.config.uid]"
+      v-model="widget.defaultValue"
       allow-clear
     />
-    <a-select v-else v-model="form[props.config.uid]" allow-clear>
+    <a-select v-else v-model="widget.defaultValue" allow-clear>
       <a-option
         v-for="(opt, i) in widget.data.static"
         :key="i"
@@ -86,7 +86,7 @@
 import { computed, PropType } from 'vue'
 import { IconClose } from '@arco-design/web-vue/es/icon'
 import { ConfigRadio } from '@/types/widget'
-import { useFormData, useBuilderContext } from '@/hooks/use-context'
+import { useBuilderContext } from '@/hooks/use-context'
 
 const emit = defineEmits(['update:config'])
 
@@ -104,7 +104,6 @@ const widget = computed({
   },
 })
 
-const { form } = useFormData()
 const { schema } = useBuilderContext()
 
 const remoteDataSource = computed(() => schema.dataSourcesConfig.remote)

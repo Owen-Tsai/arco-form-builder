@@ -1,6 +1,6 @@
 <template>
   <a-switch
-    v-model="form[uid]"
+    v-model="modelValue"
     :default-checked="config.defaultValue"
     :disabled="config.disabled"
     :type="config.type"
@@ -14,7 +14,7 @@
 <script lang="ts" setup>
 import { PropType } from 'vue'
 import { OptSwitch } from '@/types/widget'
-import { useFormData } from '@/hooks/use-context'
+import { useModelValue } from '@/hooks/use-context'
 import useEvents from '@/hooks/use-events'
 
 const props = defineProps({
@@ -26,8 +26,12 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  mode: {
+    type: String as PropType<'prod' | 'dev'>,
+    default: 'dev',
+  },
 })
 
-const { form } = useFormData()
+const { modelValue } = useModelValue(props.uid, props.mode)
 const { handler } = useEvents(props.uid, props.config.actions)
 </script>

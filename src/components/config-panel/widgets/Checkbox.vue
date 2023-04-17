@@ -69,7 +69,7 @@
     </div>
     <a-select
       v-else
-      v-model="form[props.config.uid]"
+      v-model="widget.defaultValue"
       allow-clear
       multiple
       style="margin-top: 8px"
@@ -106,7 +106,7 @@
 import { computed, PropType } from 'vue'
 import { IconClose } from '@arco-design/web-vue/es/icon'
 import { ConfigCheckbox } from '@/types/widget'
-import { useFormData, useBuilderContext } from '@/hooks/use-context'
+import { useBuilderContext } from '@/hooks/use-context'
 
 const emit = defineEmits(['update:config'])
 
@@ -124,7 +124,6 @@ const widget = computed({
   },
 })
 
-const { form } = useFormData()
 const { schema } = useBuilderContext()
 
 const remoteDataSource = computed(() => schema.dataSourcesConfig.remote)
