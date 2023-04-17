@@ -1,6 +1,6 @@
-import { inject } from 'vue'
+import { inject, computed } from 'vue'
 import {
-  FormData,
+  FormDataContext,
   formDataCtxKey,
   FormBuilderContext,
   formBuilderCtxKey,
@@ -18,7 +18,29 @@ export const useBuilderContext = () => {
 }
 
 export const useFormData = () => {
-  const form = inject<FormData>(formDataCtxKey) as FormData
+  const { form, resetForm } = inject<FormDataContext>(
+    formDataCtxKey
+  ) as FormDataContext
 
-  return { form }
+  return {
+    form,
+    resetForm,
+  }
+}
+
+export const useModelValue = (uid: string, mode: 'dev' | 'prod') => {
+  const { form } = useFormData()
+
+  const modelValue = computed({
+    get: () => (mode === 'prod' ? form.value[uid] : undefined),
+    set: (val) => {
+      if (mode === 'prod') {
+        form.value[uid] = val
+      }
+    },
+  })
+
+  return {
+    modelValue,
+  }
 }
