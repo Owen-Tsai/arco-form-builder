@@ -1,7 +1,7 @@
 <template>
   <a-select
     :key="config.defaultValue?.toString()"
-    v-model="form[uid]"
+    v-model="modelValue"
     :default-value="config.defaultValue"
     :allow-clear="config.allowClear"
     :allow-create="config.allowCreate"
@@ -27,7 +27,7 @@
 import { PropType } from 'vue'
 import axios from 'axios'
 import { OptSelect } from '@/types/widget'
-import { useFormData } from '@/hooks/use-context'
+import { useModelValue } from '@/hooks/use-context'
 import useLoading from '@/hooks/use-loading'
 import { useDataSource } from '@/hooks/use-data-source'
 import useEvents from '@/hooks/use-events'
@@ -43,12 +43,16 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  mode: {
+    type: String as PropType<'prod' | 'dev'>,
+    default: 'dev',
+  },
 })
 
 // TODO: provide context variables
 const options = useDataSource(props.config.dataSourceType, props.config.data)
 
-const { form } = useFormData()
+const { modelValue } = useModelValue(props.uid, props.mode)
 const { isLoading, setLoading } = useLoading()
 const { handler } = useEvents(props.uid, props.config.actions)
 
@@ -61,7 +65,7 @@ const handleSearch = () => {
     const { remoteSearchUrl: url, remoteSearchMethod: method } = props.config
     axios({
       method,
-      url: `${url}?search=${form[props.uid]}`,
+      url: `${url}?search=${modelValue.value}`,
     })
       .then((res) => {
         options.value = res.data as Option[]

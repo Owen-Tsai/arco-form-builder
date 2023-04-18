@@ -1,5 +1,6 @@
 <template>
   <a-rate
+    :key="config.defaultValue"
     v-model="modelValue"
     :default-value="config.defaultValue"
     :count="config.count"
