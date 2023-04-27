@@ -39,22 +39,26 @@
       allow-clear
     />
   </a-form-item>
-  <a-form-item label="上传请求附加的头信息">
+  <div>
+    <span class="label">上传请求附加的头信息</span>
     <Codemirror
       v-model="widget.headers"
       :tab-size="2"
       :extensions="[javascript()]"
       class="codemirror-editor"
+      style="height: 160px"
     />
-  </a-form-item>
-  <a-form-item label="上传请求附加的数据">
+  </div>
+  <div>
+    <span class="label">上传请求附加的数据</span>
     <Codemirror
-      v-model="widget.data"
+      v-model="widget.headers"
       :tab-size="2"
       :extensions="[javascript()]"
       class="codemirror-editor"
+      style="height: 160px"
     />
-  </a-form-item>
+  </div>
   <div class="boolean-config-field">
     <span class="label">是否携带 Cookie</span>
     <a-switch v-model="widget.withCookie" />
@@ -91,3 +95,11 @@ const widget = computed({
   },
 })
 </script>
+
+<style lang="scss" scoped>
+.codemirror-editor {
+  margin-bottom: 16px;
+  margin-top: 8px;
+  border: 1px solid var(--color-border-2);
+}
+</style>

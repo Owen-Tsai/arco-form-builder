@@ -312,3 +312,5 @@ export type WidgetName = keyof OptsMap
 export type LayoutWidget = ConfigGrid | ConfigTab
 
 export type FormWidget = Exclude<Widget, LayoutWidget>
+
+export type NormalFormWidget = Exclude<FormWidget, ConfigUpload>

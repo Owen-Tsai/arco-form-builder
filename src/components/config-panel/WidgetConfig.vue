@@ -17,7 +17,13 @@
     <Grid v-if="config.type === 'grid'" :widget="config" />
     <Tab v-if="config.type === 'tab'" :widget="config" />
 
-    <template v-if="config.type !== 'grid' && config.type !== 'tab'">
+    <template
+      v-if="
+        config.type !== 'grid' &&
+        config.type !== 'tab' &&
+        config.type !== 'upload'
+      "
+    >
       <!-- validation config -->
       <div>
         <span class="label">自定义校验规则</span>
@@ -43,10 +49,7 @@
           />
         </a-select>
       </a-form-item>
-      <ActionConfig
-        v-if="widget.type !== 'upload'"
-        :widget="(widget as FormWidget)"
-      />
+      <ActionConfig :widget="(widget as NormalFormWidget)" />
     </template>
   </a-form>
 </template>
@@ -55,7 +58,7 @@
 import { PropType, computed } from 'vue'
 import { Codemirror } from 'vue-codemirror'
 import { javascript } from '@codemirror/lang-javascript'
-import { FormWidget, Widget } from '@/types/widget'
+import { NormalFormWidget, Widget } from '@/types/widget'
 import { inputEvtNames } from '@/utils'
 import Grid from './widgets/Grid.vue'
 import Tab from './widgets/Tab.vue'

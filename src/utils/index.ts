@@ -20,3 +20,8 @@ export const safeEval = (str: string) => {
   // eslint-disable-next-line no-eval
   return eval?.(`'use strict';${str}`)
 }
+
+export const functionWrapper = (functionBody: string) => {
+  // eslint-disable-next-line no-new-func
+  return new Function(functionBody)()
+}

@@ -81,7 +81,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, PropType } from 'vue'
+import { PropType } from 'vue'
 import { OptDatePicker } from '@/types/widget'
 import { useModelValue } from '@/hooks/use-context'
 
@@ -101,14 +101,6 @@ const props = defineProps({
 })
 
 const { modelValue } = useModelValue(props.uid, props.mode)
-
-const properties = ref({
-  defaultValue: props.config.defaultValue as any,
-  allowClear: props.config.allowClear,
-  format: props.config.format,
-  readonly: props.config.readonly,
-  disabled: props.config.disabled,
-})
 </script>
 
 <style lang="scss">
