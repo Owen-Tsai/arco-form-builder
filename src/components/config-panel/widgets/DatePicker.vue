@@ -53,7 +53,6 @@
       v-model="(widget.placeholder as string)"
       allow-clear
     />
-    <!-- eslint-enable vue/valid-v-model -->
     <template v-else>
       <a-input v-model="(widget.placeholder as string[])[0]" allow-clear />
       <a-input
@@ -62,6 +61,7 @@
         allow-clear
       />
     </template>
+    <!-- eslint-enable vue/valid-v-model -->
   </a-form-item>
   <div class="boolean-config-field">
     <span class="label">是否禁用</span>
@@ -82,7 +82,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, PropType } from 'vue'
+import { computed, watch, PropType } from 'vue'
 import { ConfigDatePicker } from '@/types/widget'
 
 const emit = defineEmits(['update:config'])
@@ -100,6 +100,20 @@ const widget = computed({
     emit('update:config', val)
   },
 })
+
+watch(
+  () => widget.value.mode,
+  (newVal, oldVal) => {
+    if (newVal.includes('range') && !oldVal.includes('range')) {
+      widget.value.defaultValue = []
+      widget.value.placeholder = []
+    }
+    if (!newVal.includes('range') && oldVal.includes('range')) {
+      widget.value.defaultValue = ''
+      widget.value.placeholder = ''
+    }
+  }
+)
 </script>
 
 <style lang="scss" scoped>
