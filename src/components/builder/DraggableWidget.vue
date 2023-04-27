@@ -67,6 +67,11 @@
       :uid="widget.uid"
       :config="widget.config"
     />
+    <Upload
+      v-if="widget.type === 'upload'"
+      :uid="widget.uid"
+      :config="widget.config"
+    />
     <span class="widget-uid-caption">{{ widget.uid }}</span>
     <IconAction
       v-show="isWidgetSelected(widget.uid)"
@@ -99,6 +104,7 @@ import Rate from '../renderer/widgets/Rate.vue'
 import Switch from '../renderer/widgets/Switch.vue'
 import Cascader from '../renderer/widgets/Cascader.vue'
 import DatePicker from '../renderer/widgets/DatePicker.vue'
+import Upload from '../renderer/widgets/Upload.vue'
 import IconAction from '../private/IconAction.vue'
 
 const props = defineProps({

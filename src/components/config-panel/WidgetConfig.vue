@@ -12,6 +12,7 @@
     <Rate v-if="config.type === 'rate'" :config="config" />
     <Cascader v-if="config.type === 'cascader'" :config="config" />
     <DatePicker v-if="config.type === 'datePicker'" :config="config" />
+    <Upload v-if="config.type === 'upload'" :config="config" />
 
     <Grid v-if="config.type === 'grid'" :widget="config" />
     <Tab v-if="config.type === 'tab'" :widget="config" />
@@ -42,7 +43,10 @@
           />
         </a-select>
       </a-form-item>
-      <ActionConfig :widget="(widget as FormWidget)" />
+      <ActionConfig
+        v-if="widget.type !== 'upload'"
+        :widget="(widget as FormWidget)"
+      />
     </template>
   </a-form>
 </template>
@@ -67,6 +71,7 @@ import Slider from './widgets/Slider.vue'
 import Rate from './widgets/Rate.vue'
 import DatePicker from './widgets/DatePicker.vue'
 import Cascader from './widgets/Cascader.vue'
+import Upload from './widgets/Upload.vue'
 import ActionConfig from './widgets/ActionConfig.vue'
 
 const props = defineProps({

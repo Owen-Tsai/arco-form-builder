@@ -172,7 +172,7 @@ export type OptCascader = {
   limit?: number
   strict?: boolean
   pathSelection?: boolean
-} & InteractiveStateOpts &
+} & Omit<InteractiveStateOpts, 'readonly'> &
   CommonOpts &
   ValidationOpts &
   DataSourceOpts<CascaderOption[]> &
@@ -200,20 +200,21 @@ export type OptDatePicker = {
   EventActionOpts
 
 export type OptUpload = {
-  type: 'list' | 'picture'
   action?: string
   multiple?: boolean
   tip?: string
+  listType?: 'text' | 'picture' | 'picture-card'
+  headers?: string
+  data?: string
   withCookie?: boolean
   limit?: number
   accept?: string
   beforeUpload?: string
   beforeRemove?: string
-  required?: boolean
-} & Pick<InteractiveStateOpts, 'disabled'> &
+  autoUpload?: boolean
+} & Omit<InteractiveStateOpts, 'readonly'> &
   CommonOpts &
-  ValidationOpts &
-  EventActionOpts
+  ValidationOpts
 
 export type OptGrid = {
   width?: string

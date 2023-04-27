@@ -191,10 +191,7 @@ export const widgetsInitConfig: Record<string, Widget> = {
     name: '文件上传',
     type: 'upload',
     uid: '',
-    config: {
-      type: 'list',
-      actions: {},
-    },
+    config: {},
   },
 }
 

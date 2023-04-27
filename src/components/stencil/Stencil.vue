@@ -94,6 +94,7 @@ const props = defineProps({
       'slider',
       'cascader',
       'datePicker',
+      'upload',
       'grid',
       'tab',
     ],

@@ -78,6 +78,12 @@
       :config="widget.config"
       mode="prod"
     />
+    <Upload
+      v-if="widget.type === 'upload'"
+      :uid="widget.uid"
+      :config="widget.config"
+      mode="prod"
+    />
   </a-form-item>
 </template>
 
@@ -98,6 +104,7 @@ import Rate from './Rate.vue'
 import Switch from './Switch.vue'
 import Cascader from './Cascader.vue'
 import DatePicker from './DatePicker.vue'
+import Upload from './Upload.vue'
 
 const props = defineProps({
   widget: {
