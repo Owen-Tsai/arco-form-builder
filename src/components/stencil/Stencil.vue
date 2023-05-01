@@ -28,6 +28,7 @@
         <a-button long @click="visible.formData = true">
           测试用：查看表单值
         </a-button>
+        <a-button long @click="saveSchema">存储Schema</a-button>
       </a-space>
     </div>
 
@@ -140,6 +141,10 @@ const handleViewStart = () => {
 const handleViewEnd = () => {
   resetForm()
   visible.value.viewer = false
+}
+
+const saveSchema = () => {
+  localStorage.setItem('schema', computedSchema.value)
 }
 </script>
 

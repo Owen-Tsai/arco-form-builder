@@ -42,6 +42,10 @@ const schema = ref<Schema>({
   widgetsConfig: [],
 })
 
+if (localStorage.getItem('schema')) {
+  schema.value = JSON.parse(localStorage.getItem('schema'))
+}
+
 const form = ref({})
 
 const selectedWidget = ref<Widget>()
