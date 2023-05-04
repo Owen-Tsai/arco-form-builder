@@ -105,11 +105,11 @@
   }
 }
 
-.canvas {
-  & > .arco-form {
+.canvas-wrapper {
+  .arco-form {
     flex-grow: 1;
 
-    & > .draggable-area {
+  .draggable-area {
       flex-grow: 1;
     }
   }
