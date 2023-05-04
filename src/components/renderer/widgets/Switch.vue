@@ -1,5 +1,6 @@
 <template>
   <a-switch
+    :key="config.defaultValue?.toString()"
     v-model="modelValue"
     :default-checked="config.defaultValue"
     :disabled="config.disabled"
@@ -7,6 +8,8 @@
     :direction="config.checkedValue"
     :checked-value="config.checkedValue"
     :unchecked-value="config.uncheckedValue"
+    :checked-color="config.checkedColor"
+    :unchecked-color="config.uncheckedColor"
     @change="handler('onChange')"
   />
 </template>

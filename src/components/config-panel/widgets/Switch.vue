@@ -6,7 +6,7 @@
     <a-input v-model="widget.label" allow-clear />
   </a-form-item>
   <a-form-item label="默认值">
-    <a-switch v-model="form[props.config.uid]" />
+    <a-switch v-model="widget.defaultValue" />
   </a-form-item>
   <a-form-item label="开启时的颜色">
     <a-input
