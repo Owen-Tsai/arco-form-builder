@@ -25,7 +25,7 @@ import {
 } from '@/types/builder'
 import { Widget } from '@/types/widget'
 import Stencil from '@/components/stencil/Stencil.vue'
-import Canvas from '@/components/builder/CanvasLayout.vue'
+import Canvas from '@/components/canvas/CanvasLayout.vue'
 import ConfigPanel from '@/components/config-panel/ConfigPanel.vue'
 
 const schema = ref<Schema>({
@@ -71,6 +71,13 @@ provide<FormBuilderContext>(formBuilderCtxKey, {
 provide<FormDataContext>(formDataCtxKey, {
   form,
   resetForm,
+})
+
+defineExpose({
+  getSchema: () => schema.value,
+  setSchema: (s: Schema) => {
+    schema.value = s
+  },
 })
 </script>
 
