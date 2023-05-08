@@ -40,6 +40,18 @@
   <a-form-item label="提示文字">
     <a-input v-model="widget.placeholder" allow-clear />
   </a-form-item>
+  <div class="boolean-config-field">
+    <span class="label">是否禁用</span>
+    <a-switch v-model="widget.disabled" />
+  </div>
+  <div class="boolean-config-field">
+    <span class="label">是否必填</span>
+    <a-switch v-model="widget.required" />
+  </div>
+  <div class="boolean-config-field" style="margin-bottom: 16px">
+    <span class="label">允许清除</span>
+    <a-switch v-model="widget.allowClear" />
+  </div>
 </template>
 
 <script lang="ts" setup>
