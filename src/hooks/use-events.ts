@@ -25,6 +25,10 @@ const serializeValue = (val: any): string | undefined => {
     return `'${val}'`
   }
 
+  if (typeof val === 'object') {
+    return JSON.stringify(val)
+  }
+
   return val
 }
 
@@ -34,11 +38,12 @@ const useEvents = (uid: string, actions: WidgetActionConfig) => {
 
   const handler = (action: ActionEvent) => {
     const val = serializeValue(form.value[uid])
+    const serializedForm = serializeValue(form.value)
     try {
       const func = schema.widgetActionConfig.filter(
         (e) => e.name === actions[action]
       )
-      const argsDef = `let val = ${val};`
+      const argsDef = `const val = ${val}; const formData = ${serializedForm};`
       if (func && func.length === 1) {
         safeEval(`${argsDef}${func[0].functionBody}`)
       }
