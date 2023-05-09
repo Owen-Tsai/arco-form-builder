@@ -14,6 +14,8 @@ type CommonOpts = {
   fieldName?: string
   labelSpan?: number
   wrapperSpan?: number
+  hideByDefault?: boolean
+  hideLabel?: boolean
 }
 
 type CascaderOption = {
@@ -221,6 +223,7 @@ export type OptGrid = {
   gutter?: number
   justify?: 'start' | 'center' | 'end' | 'space-between' | 'space-around'
   align?: 'start' | 'center' | 'end' | 'stretch'
+  hideByDefault?: boolean
 }
 
 export type OptGridCol = {
@@ -232,6 +235,7 @@ export type OptTab = {
   width?: string
   type?: 'line' | 'card' | 'card-gutter' | 'text' | 'rounded' | 'capsule'
   size?: 'mini' | 'small' | 'medium' | 'large'
+  hideByDefault?: boolean
 }
 
 export type OptTabPane = {

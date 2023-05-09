@@ -103,6 +103,10 @@
     <span class="label">允许清除</span>
     <a-switch v-model="widget.allowClear" />
   </div>
+  <div class="boolean-config-field">
+    <span class="label">默认隐藏</span>
+    <a-switch v-model="widget.hideByDefault" />
+  </div>
   <div class="boolean-config-field" style="margin-bottom: 16px">
     <span class="label">允许搜索</span>
     <a-switch v-model="widget.allowSearch" />

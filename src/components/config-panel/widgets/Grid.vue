@@ -38,6 +38,10 @@
       <a-option value="stretch">拉伸填充</a-option>
     </a-select>
   </a-form-item>
+  <div class="boolean-config-field">
+    <span class="label">默认隐藏</span>
+    <a-switch v-model="widget.config.hideByDefault" />
+  </div>
 </template>
 
 <script lang="ts" setup>

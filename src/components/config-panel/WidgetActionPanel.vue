@@ -61,7 +61,6 @@ import { Codemirror } from 'vue-codemirror'
 import { javascript } from '@codemirror/lang-javascript'
 import { IconPlus } from '@arco-design/web-vue/es/icon'
 import { FormBuilderContext, formBuilderCtxKey } from '@/types/builder'
-import Icon from '@/components/private/Icon.vue'
 
 const props = defineProps({
   visible: {

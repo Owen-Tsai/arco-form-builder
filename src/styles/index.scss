@@ -23,6 +23,7 @@
 
   &.is-selected {
     outline: 2px solid rgb(var(--primary-6));
+    z-index: 2;
     .widget-uid-caption {
       opacity: 1;
     }
@@ -39,13 +40,13 @@
     }
   }
   &:not(.is-selected):hover {
+    z-index: 1;
     background-color: var(--color-primary-light-1);
     outline-color: rgb(var(--primary-6));
   }
 }
 
 .widget-renderer {
-  
   .is-selected {
     .widget-uid-caption {
       opacity: 1;

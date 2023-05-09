@@ -50,9 +50,13 @@
     <span class="label">显示刻度线</span>
     <a-switch v-model="widget.showTicks" />
   </div>
-  <div class="boolean-config-field" style="margin-bottom: 16px">
+  <div class="boolean-config-field">
     <span class="label">允许选择范围</span>
     <a-switch v-model="widget.range" />
+  </div>
+  <div class="boolean-config-field" style="margin-bottom: 16px">
+    <span class="label">默认隐藏</span>
+    <a-switch v-model="widget.hideByDefault" />
   </div>
 </template>
 

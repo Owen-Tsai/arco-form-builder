@@ -12,6 +12,7 @@
     :precision="config.precision"
     :step="config.step"
     :style="{ width: config.width }"
+    :hide-button="!!config.suffix"
     @change="handler('onChange')"
     @input="handler('onInput')"
     @focus="handler('onFocus')"

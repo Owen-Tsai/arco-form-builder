@@ -55,6 +55,10 @@
     <span class="label">是否必填</span>
     <a-switch v-model="widget.required" />
   </div>
+  <div class="boolean-config-field" style="margin-bottom: 16px">
+    <span class="label">默认隐藏</span>
+    <a-switch v-model="widget.hideByDefault" />
+  </div>
 </template>
 
 <script lang="ts" setup>

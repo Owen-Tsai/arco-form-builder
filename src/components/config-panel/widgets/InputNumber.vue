@@ -48,9 +48,13 @@
     <span class="label">是否只读</span>
     <a-switch v-model="widget.readonly" />
   </div>
-  <div class="boolean-config-field" style="margin-bottom: 16px">
+  <div class="boolean-config-field">
     <span class="label">允许清除</span>
     <a-switch v-model="widget.allowClear" />
+  </div>
+  <div class="boolean-config-field" style="margin-bottom: 16px">
+    <span class="label">默认隐藏</span>
+    <a-switch v-model="widget.hideByDefault" />
   </div>
 </template>
 
