@@ -1,4 +1,7 @@
 <template>
+  <a-form-item label="字段标识">
+    <a-input v-model="widget.uid" allow-clear />
+  </a-form-item>
   <a-form-item label="宽度">
     <a-input v-model="widget.config.width" allow-clear />
   </a-form-item>

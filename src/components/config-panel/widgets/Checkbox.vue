@@ -1,25 +1,28 @@
 <template>
   <a-form-item label="字段标识">
-    <a-input v-model="widget.fieldName" allow-clear />
+    <a-input v-model="widget.uid" allow-clear />
   </a-form-item>
   <a-form-item label="字段标签">
-    <a-input v-model="widget.label" allow-clear />
+    <a-input v-model="widget.config.label" allow-clear />
   </a-form-item>
   <a-form-item label="可选值" style="margin-bottom: 8px">
-    <a-radio-group v-model="widget.dataSourceType" size="small">
+    <a-radio-group v-model="widget.config.dataSourceType" size="small">
       <a-radio value="static">固定值</a-radio>
       <a-radio value="variable">变量赋值</a-radio>
       <a-radio value="remote">从接口获取</a-radio>
     </a-radio-group>
   </a-form-item>
-  <div v-if="widget.dataSourceType === 'static'" class="value-list">
+  <div v-if="widget.config.dataSourceType === 'static'" class="value-list">
     <span
-      v-for="(item, i) in widget.data.static"
+      v-for="(item, i) in widget.config.data.static"
       :key="i"
       class="value-list-item"
     >
-      <a-input v-model="widget.data.static[i].label" placeholder="文字" />
-      <a-input v-model="widget.data.static[i].value" placeholder="值" />
+      <a-input
+        v-model="widget.config.data.static[i].label"
+        placeholder="文字"
+      />
+      <a-input v-model="widget.config.data.static[i].value" placeholder="值" />
       <a-button
         class="btn"
         status="danger"
@@ -34,8 +37,8 @@
 
     <a-button long type="outline" @click="addOption">增加可选值</a-button>
   </div>
-  <div v-else-if="widget.dataSourceType === 'remote'">
-    <a-select v-model="widget.data.remote">
+  <div v-else-if="widget.config.dataSourceType === 'remote'">
+    <a-select v-model="widget.config.data.remote">
       <a-option v-for="(opt, i) in remoteDataSource" :key="i" :value="opt">
         {{ opt.name }}
       </a-option>
@@ -43,14 +46,14 @@
   </div>
   <div style="margin-top: 16px; margin-bottom: 20px">
     <span class="label">默认值</span>
-    <div v-if="widget.dataSourceType !== 'static'">
+    <div v-if="widget.config.dataSourceType !== 'static'">
       <div class="value-list" style="margin-top: 8px">
         <div
-          v-for="(item, i) in widget.defaultValue"
+          v-for="(item, i) in widget.config.defaultValue"
           :key="i"
           class="value-list-item"
         >
-          <a-input v-model="widget.defaultValue[i]" />
+          <a-input v-model="widget.config.defaultValue[i]" />
           <a-button
             size="small"
             type="outline"
@@ -69,13 +72,13 @@
     </div>
     <a-select
       v-else
-      v-model="widget.defaultValue"
+      v-model="widget.config.defaultValue"
       allow-clear
       multiple
       style="margin-top: 8px"
     >
       <a-option
-        v-for="(opt, i) in widget.data.static"
+        v-for="(opt, i) in widget.config.data.static"
         :key="i"
         :value="opt.value"
       >
@@ -85,24 +88,24 @@
   </div>
   <a-form-item label="宽度">
     <a-input
-      v-model="widget.width"
+      v-model="widget.config.width"
       placeholder="输入含单位(%/px)的数值"
       allow-clear
     />
   </a-form-item>
   <a-form-item label="排列方式">
-    <a-select v-model="widget.direction" default-value="horizontal">
+    <a-select v-model="widget.config.direction" default-value="horizontal">
       <a-option value="horizontal">水平排列</a-option>
       <a-option value="vertical">垂直排列</a-option>
     </a-select>
   </a-form-item>
   <div class="boolean-config-field">
     <span class="label">是否禁用</span>
-    <a-switch v-model="widget.disabled" />
+    <a-switch v-model="widget.config.disabled" />
   </div>
   <div class="boolean-config-field" style="margin-bottom: 16px">
     <span class="label">默认隐藏</span>
-    <a-switch v-model="widget.hideByDefault" />
+    <a-switch v-model="widget.config.hideByDefault" />
   </div>
 </template>
 
@@ -122,7 +125,7 @@ const props = defineProps({
 })
 
 const widget = computed({
-  get: () => props.config.config,
+  get: () => props.config,
   set: (val) => {
     emit('update:config', val)
   },
@@ -133,22 +136,22 @@ const { schema } = useBuilderContext()
 const remoteDataSource = computed(() => schema.dataSourcesConfig.remote)
 
 const addOption = () => {
-  widget.value.data.static.push({
+  widget.value.config.data.static.push({
     label: '',
     value: '',
   })
 }
 
 const removeOption = (idx: number) => {
-  widget.value.data.static.splice(idx, 1)
+  widget.value.config.data.static.splice(idx, 1)
 }
 
 const removeValueFromList = (i: number) => {
-  widget.value.defaultValue.splice(i, 1)
+  widget.value.config.defaultValue.splice(i, 1)
 }
 
 const add = () => {
-  widget.value.defaultValue.push('')
+  widget.value.config.defaultValue.push('')
 }
 </script>
 

@@ -1,29 +1,29 @@
 <template>
   <a-form-item label="字段标识">
-    <a-input v-model="widget.fieldName" allow-clear />
+    <a-input v-model="widget.uid" allow-clear />
   </a-form-item>
   <a-form-item label="字段标签">
-    <a-input v-model="widget.label" allow-clear />
+    <a-input v-model="widget.config.label" allow-clear />
   </a-form-item>
   <a-form-item label="默认值">
-    <a-switch v-model="widget.defaultValue" />
+    <a-switch v-model="widget.config.defaultValue" />
   </a-form-item>
   <a-form-item label="开启时的颜色">
     <a-input
-      v-model="widget.checkedColor"
+      v-model="widget.config.checkedColor"
       placeholder="合法的CSS颜色值"
       allow-clear
     />
   </a-form-item>
   <a-form-item label="关闭时的颜色">
     <a-input
-      v-model="widget.uncheckedColor"
+      v-model="widget.config.uncheckedColor"
       placeholder="合法的CSS颜色值"
       allow-clear
     />
   </a-form-item>
   <a-form-item label="开关类型">
-    <a-select v-model="widget.type" allow-clear>
+    <a-select v-model="widget.config.type" allow-clear>
       <a-option value="circle">圆形</a-option>
       <a-option value="line">线形</a-option>
       <a-option value="round">方形</a-option>
@@ -38,23 +38,23 @@
   </div>
   <template v-if="useCustomValues">
     <a-form-item label="开启时的值">
-      <a-input v-model="widget.checkedValue" allow-clear />
+      <a-input v-model="widget.config.checkedValue" allow-clear />
     </a-form-item>
     <a-form-item label="关闭时的值">
-      <a-input v-model="widget.uncheckedValue" allow-clear />
+      <a-input v-model="widget.config.uncheckedValue" allow-clear />
     </a-form-item>
   </template>
   <div class="boolean-config-field">
     <span class="label">是否禁用</span>
-    <a-switch v-model="widget.disabled" />
+    <a-switch v-model="widget.config.disabled" />
   </div>
   <div class="boolean-config-field">
     <span class="label">是否必填</span>
-    <a-switch v-model="widget.required" />
+    <a-switch v-model="widget.config.required" />
   </div>
   <div class="boolean-config-field" style="margin-bottom: 16px">
     <span class="label">默认隐藏</span>
-    <a-switch v-model="widget.hideByDefault" />
+    <a-switch v-model="widget.config.hideByDefault" />
   </div>
 </template>
 
@@ -72,7 +72,7 @@ const props = defineProps({
 })
 
 const widget = computed({
-  get: () => props.config.config,
+  get: () => props.config,
   set: (val) => {
     emit('update:config', val)
   },

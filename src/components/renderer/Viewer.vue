@@ -10,6 +10,8 @@
     <template v-for="(item, i) in schema.widgetsConfig" :key="i">
       <widget-renderer v-if="item !== undefined" :widget="item" />
     </template>
+
+    <pre>{{ form }}</pre>
   </a-form>
 </template>
 

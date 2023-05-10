@@ -1,12 +1,12 @@
 <template>
   <a-form-item label="字段标识">
-    <a-input v-model="widget.fieldName" allow-clear />
+    <a-input v-model="widget.uid" allow-clear />
   </a-form-item>
   <a-form-item label="字段标签">
-    <a-input v-model="widget.label" allow-clear />
+    <a-input v-model="widget.config.label" allow-clear />
   </a-form-item>
   <a-form-item label="模式">
-    <a-select v-model="widget.mode" default-value="date">
+    <a-select v-model="widget.config.mode" default-value="date">
       <a-option value="date">日期选择</a-option>
       <a-option value="week">周选择</a-option>
       <a-option value="month">月份选择</a-option>
@@ -22,26 +22,33 @@
   <a-form-item label="默认值">
     <!-- eslint-disable vue/valid-v-model -->
     <a-input
-      v-if="!widget.mode.includes('range')"
-      v-model="(widget.defaultValue as string)"
+      v-if="!widget.config.mode.includes('range')"
+      v-model="(widget.config.defaultValue as string)"
       allow-clear
     />
     <!-- eslint-enable vue/valid-v-model -->
     <template v-else>
-      <a-input v-model="(widget.defaultValue as string[])[0]" allow-clear />
       <a-input
-        v-model="(widget.defaultValue as string[])[1]"
+        v-model="(widget.config.defaultValue as string[])[0]"
+        allow-clear
+      />
+      <a-input
+        v-model="(widget.config.defaultValue as string[])[1]"
         style="margin-top: 8px"
         allow-clear
       />
     </template>
   </a-form-item>
   <a-form-item label="日期格式">
-    <a-input v-model="widget.format" default-value="YYYY-MM-DD" allow-clear />
+    <a-input
+      v-model="widget.config.format"
+      default-value="YYYY-MM-DD"
+      allow-clear
+    />
   </a-form-item>
   <a-form-item label="宽度">
     <a-input
-      v-model="widget.width"
+      v-model="widget.config.width"
       placeholder="输入含单位(%/px)的数值"
       allow-clear
     />
@@ -49,14 +56,17 @@
   <a-form-item label="提示文字">
     <!-- eslint-disable vue/valid-v-model -->
     <a-input
-      v-if="!widget.mode.includes('range')"
-      v-model="(widget.placeholder as string)"
+      v-if="!widget.config.mode.includes('range')"
+      v-model="(widget.config.placeholder as string)"
       allow-clear
     />
     <template v-else>
-      <a-input v-model="(widget.placeholder as string[])[0]" allow-clear />
       <a-input
-        v-model="(widget.placeholder as string[])[1]"
+        v-model="(widget.config.placeholder as string[])[0]"
+        allow-clear
+      />
+      <a-input
+        v-model="(widget.config.placeholder as string[])[1]"
         style="margin-top: 8px"
         allow-clear
       />
@@ -65,23 +75,23 @@
   </a-form-item>
   <div class="boolean-config-field">
     <span class="label">是否禁用</span>
-    <a-switch v-model="widget.disabled" />
+    <a-switch v-model="widget.config.disabled" />
   </div>
   <div class="boolean-config-field">
     <span class="label">是否只读</span>
-    <a-switch v-model="widget.readonly" />
+    <a-switch v-model="widget.config.readonly" />
   </div>
   <div class="boolean-config-field">
     <span class="label">是否必填</span>
-    <a-switch v-model="widget.required" />
+    <a-switch v-model="widget.config.required" />
   </div>
   <div class="boolean-config-field">
     <span class="label">允许清除</span>
-    <a-switch v-model="widget.allowClear" />
+    <a-switch v-model="widget.config.allowClear" />
   </div>
   <div class="boolean-config-field" style="margin-bottom: 16px">
     <span class="label">默认隐藏</span>
-    <a-switch v-model="widget.hideByDefault" />
+    <a-switch v-model="widget.config.hideByDefault" />
   </div>
 </template>
 
@@ -99,22 +109,22 @@ const props = defineProps({
 })
 
 const widget = computed({
-  get: () => props.config.config,
+  get: () => props.config,
   set: (val) => {
     emit('update:config', val)
   },
 })
 
 watch(
-  () => widget.value.mode,
+  () => widget.value.config.mode,
   (newVal, oldVal) => {
     if (newVal.includes('range') && !oldVal.includes('range')) {
-      widget.value.defaultValue = []
-      widget.value.placeholder = []
+      widget.value.config.defaultValue = []
+      widget.value.config.placeholder = []
     }
     if (!newVal.includes('range') && oldVal.includes('range')) {
-      widget.value.defaultValue = ''
-      widget.value.placeholder = ''
+      widget.value.config.defaultValue = ''
+      widget.value.config.placeholder = ''
     }
   }
 )

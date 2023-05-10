@@ -25,9 +25,6 @@
         <a-button long @click="visible.schema = true">
           测试用：查看Schema
         </a-button>
-        <a-button long @click="visible.formData = true">
-          测试用：查看表单值
-        </a-button>
         <a-button long @click="saveSchema">存储Schema</a-button>
       </a-space>
     </div>
@@ -53,15 +50,6 @@
     >
       <template #title>表单预览</template>
       <Viewer :schema="schemaRef" />
-    </a-modal>
-
-    <a-modal
-      :visible="visible.formData"
-      hide-cancel
-      @ok="visible.formData = false"
-    >
-      <template #title>表单值</template>
-      <pre>{{ JSON.stringify(form, null, 2) }}</pre>
     </a-modal>
   </div>
 </template>
@@ -109,10 +97,9 @@ const props = defineProps({
 const visible = ref({
   schema: false,
   viewer: false,
-  formData: false,
 })
 
-const { form, resetForm } = useFormData()
+const { resetForm } = useFormData()
 let { schema } = useBuilderContext()
 
 const schemaRef = ref(schema)

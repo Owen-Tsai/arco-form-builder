@@ -11,7 +11,6 @@ type InteractiveStateOpts = {
 type CommonOpts = {
   label?: string
   width?: string
-  fieldName?: string
   labelSpan?: number
   wrapperSpan?: number
   hideByDefault?: boolean

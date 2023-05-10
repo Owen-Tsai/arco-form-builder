@@ -1,32 +1,32 @@
 <template>
   <a-form-item label="字段标识">
-    <a-input v-model="widget.fieldName" allow-clear />
+    <a-input v-model="widget.uid" allow-clear />
   </a-form-item>
   <a-form-item label="字段标签">
-    <a-input v-model="widget.label" allow-clear />
+    <a-input v-model="widget.config.label" allow-clear />
   </a-form-item>
   <a-form-item label="宽度">
     <a-input
-      v-model="widget.width"
+      v-model="widget.config.width"
       placeholder="输入含单位(%/px)的数值"
       allow-clear
     />
   </a-form-item>
   <a-form-item label="接受的文件类型">
     <a-input
-      v-model="widget.accept"
+      v-model="widget.config.accept"
       placeholder="需填写合法的 HTML 标准值"
       allow-clear
     />
   </a-form-item>
   <a-form-item label="URL目标地址">
-    <a-input v-model="widget.action" allow-clear />
+    <a-input v-model="widget.config.action" allow-clear />
   </a-form-item>
   <a-form-item label="提示文字">
-    <a-input v-model="widget.tip" allow-clear />
+    <a-input v-model="widget.config.tip" allow-clear />
   </a-form-item>
   <a-form-item label="文件列表样式">
-    <a-select v-model="widget.listType">
+    <a-select v-model="widget.config.listType">
       <a-option value="text">文字型</a-option>
       <a-option value="picture">图片型</a-option>
       <a-option value="picture-card">照片墙</a-option>
@@ -34,7 +34,7 @@
   </a-form-item>
   <a-form-item label="上传数量限制">
     <a-input-number
-      v-model="widget.limit"
+      v-model="widget.config.limit"
       placeholder="大于1时将允许多选"
       allow-clear
     />
@@ -42,7 +42,7 @@
   <div>
     <span class="label">上传请求附加的头信息</span>
     <Codemirror
-      v-model="widget.headers"
+      v-model="widget.config.headers"
       :tab-size="2"
       :extensions="[javascript()]"
       class="codemirror-editor"
@@ -52,7 +52,7 @@
   <div>
     <span class="label">上传请求附加的数据</span>
     <Codemirror
-      v-model="widget.headers"
+      v-model="widget.config.headers"
       :tab-size="2"
       :extensions="[javascript()]"
       class="codemirror-editor"
@@ -61,19 +61,19 @@
   </div>
   <div class="boolean-config-field">
     <span class="label">是否携带 Cookie</span>
-    <a-switch v-model="widget.withCookie" />
+    <a-switch v-model="widget.config.withCookie" />
   </div>
   <div class="boolean-config-field">
     <span class="label">是否禁用</span>
-    <a-switch v-model="widget.disabled" />
+    <a-switch v-model="widget.config.disabled" />
   </div>
   <div class="boolean-config-field">
     <span class="label">是否必填</span>
-    <a-switch v-model="widget.required" />
+    <a-switch v-model="widget.config.required" />
   </div>
   <div class="boolean-config-field" style="margin-bottom: 16px">
     <span class="label">默认隐藏</span>
-    <a-switch v-model="widget.hideByDefault" />
+    <a-switch v-model="widget.config.hideByDefault" />
   </div>
 </template>
 
@@ -93,7 +93,7 @@ const props = defineProps({
 })
 
 const widget = computed({
-  get: () => props.config.config,
+  get: () => props.config,
   set: (val) => {
     emit('update:config', val)
   },

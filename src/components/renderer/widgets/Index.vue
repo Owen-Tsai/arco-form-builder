@@ -6,7 +6,6 @@
     :field="widget.uid"
     :validate-trigger="widget.config.trigger"
     :rules="computedRules"
-    :data-c-field="widget.name || widget.uid"
   >
     <Input
       v-if="widget.type === 'input'"

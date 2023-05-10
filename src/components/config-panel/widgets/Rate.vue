@@ -1,39 +1,44 @@
 <template>
   <a-form-item label="字段标识">
-    <a-input v-model="widget.fieldName" allow-clear />
+    <a-input v-model="widget.uid" allow-clear />
   </a-form-item>
   <a-form-item label="字段标签">
-    <a-input v-model="widget.label" allow-clear />
+    <a-input v-model="widget.config.label" allow-clear />
   </a-form-item>
   <a-form-item label="默认值">
-    <a-input-number v-model="widget.defaultValue" allow-clear />
+    <a-input-number v-model="widget.config.defaultValue" allow-clear />
   </a-form-item>
   <a-form-item label="分数上限">
-    <a-input-number v-model="widget.count" :min="1" :step="1" :precision="0" />
+    <a-input-number
+      v-model="widget.config.count"
+      :min="1"
+      :step="1"
+      :precision="0"
+    />
     <template #extra>启用分级图标将致此项配置失效</template>
   </a-form-item>
   <a-form-item label="自定义颜色">
-    <a-input v-model="widget.color" allow-clear />
+    <a-input v-model="widget.config.color" allow-clear />
   </a-form-item>
   <div class="boolean-config-field">
     <span class="label">允许半选</span>
-    <a-switch v-model="widget.allowHalf" />
+    <a-switch v-model="widget.config.allowHalf" />
   </div>
   <div class="boolean-config-field">
     <span class="label">启用分级图标</span>
-    <a-switch v-model="widget.grading" />
+    <a-switch v-model="widget.config.grading" />
   </div>
   <div class="boolean-config-field">
     <span class="label">是否只读</span>
-    <a-switch v-model="widget.readonly" />
+    <a-switch v-model="widget.config.readonly" />
   </div>
   <div class="boolean-config-field">
     <span class="label">是否禁用</span>
-    <a-switch v-model="widget.disabled" />
+    <a-switch v-model="widget.config.disabled" />
   </div>
   <div class="boolean-config-field" style="margin-bottom: 16px">
     <span class="label">默认隐藏</span>
-    <a-switch v-model="widget.hideByDefault" />
+    <a-switch v-model="widget.config.hideByDefault" />
   </div>
 </template>
 
@@ -51,7 +56,7 @@ const props = defineProps({
 })
 
 const widget = computed({
-  get: () => props.config.config,
+  get: () => props.config,
   set: (val) => {
     emit('update:config', val)
   },
