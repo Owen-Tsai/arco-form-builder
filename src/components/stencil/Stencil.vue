@@ -64,7 +64,7 @@ import { widgets } from '@/hooks/use-widgets'
 import { useFormData, useBuilderContext } from '@/hooks/use-context'
 import { generateUID } from '@/utils'
 import type { Widget, WidgetName } from '@/types/widget'
-import Viewer from '@/components/renderer/Viewer.vue'
+import Viewer from '@/components/FormViewer.vue'
 import DraggableItem from './Item.vue'
 
 const props = defineProps({

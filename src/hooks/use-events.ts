@@ -1,5 +1,6 @@
 import { WidgetActionConfig, ActionEvent } from '@/types/action'
 import { safeEval } from '@/utils'
+import ViewerComponent from '@/components/FormViewer.vue'
 import { useBuilderContext, useFormData } from '@/hooks/use-context'
 
 const serializeValue = (val: any): string | undefined => {
@@ -45,7 +46,11 @@ const useEvents = (uid: string, actions: WidgetActionConfig) => {
       )
       const argsDef = `const val = ${val}; const formData = ${serializedForm};`
       if (func && func.length === 1) {
-        safeEval(`${argsDef}${func[0].functionBody}`)
+        // safeEval(`${argsDef}${func[0].functionBody}`)
+        // eslint-disable-next-line no-new-func
+        const f = new Function('input', `eval(input)`)
+        console.log(f)
+        f.call(ViewerComponent, func[0].functionBody)
       }
     } catch (e) {
       // nothing
