@@ -6,7 +6,6 @@
       :align="widget.config.align"
       :gutter="widget.config.gutter"
       :justify="widget.config.justify"
-      :data-c-field="widget.uid"
     >
       <a-col
         v-for="(col, i) in widget.cols"
@@ -18,24 +17,18 @@
             col.widgets.length > 0 && col.widgets[0] !== undefined && visible
           "
           :widget="col.widgets[0]"
-          :data-c-field="widget.uid"
         />
       </a-col>
     </a-row>
   </template>
   <template v-else-if="widget.type === 'tab'">
     <!-- tabs: allow grid and normal components as children -->
-    <a-tabs
-      v-if="visible"
-      :type="widget.config.type"
-      :data-c-field="widget.uid"
-    >
+    <a-tabs v-if="visible" :type="widget.config.type">
       <a-tab-pane v-for="(pane, i) in widget.panes" :key="i" :title="pane.name">
         <template v-for="nestedWidget in pane.widgets" :key="nestedWidget.uid">
           <WidgetRenderer
             v-if="nestedWidget !== undefined && visible"
             :widget="nestedWidget"
-            :data-c-field="widget.uid"
           />
         </template>
       </a-tab-pane>
@@ -43,11 +36,7 @@
   </template>
   <template v-else>
     <!-- normal form components -->
-    <FormWidgetRenderer
-      v-if="visible"
-      :widget="widget"
-      :data-c-field="widget.uid"
-    />
+    <FormWidgetRenderer v-if="visible" :widget="widget" />
   </template>
 </template>
 
