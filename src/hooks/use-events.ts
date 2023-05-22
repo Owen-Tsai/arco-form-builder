@@ -1,6 +1,5 @@
 import { WidgetActionConfig, ActionEvent } from '@/types/action'
-import { safeEval } from '@/utils'
-import ViewerComponent from '@/components/FormViewer.vue'
+import emitter from '@/utils/event-bus'
 import { useBuilderContext, useFormData } from '@/hooks/use-context'
 
 const serializeValue = (val: any): string | undefined => {
@@ -37,20 +36,46 @@ const useEvents = (uid: string, actions: WidgetActionConfig) => {
   const { schema } = useBuilderContext()
   const { form } = useFormData()
 
+  const val = serializeValue(form.value[uid])
+  const serializedForm = serializeValue(form.value)
+
+  const eventBus = {
+    hide(widgetUid: string) {
+      emitter.emit('widget:hide', widgetUid)
+    },
+    show(widgetUid: string) {
+      emitter.emit('widget:show', widgetUid)
+    },
+    getValue() {
+      return form.value[uid]
+    },
+    getFormData() {
+      return form.value
+    },
+    setValue(v: unknown, widget?: string) {
+      form.value[widget || uid] = v
+    },
+    clearField(widget?: string) {
+      delete form.value[widget || uid]
+    },
+  }
+
   const handler = (action: ActionEvent) => {
-    const val = serializeValue(form.value[uid])
-    const serializedForm = serializeValue(form.value)
     try {
       const func = schema.widgetActionConfig.filter(
         (e) => e.name === actions[action]
       )
       const argsDef = `const val = ${val}; const formData = ${serializedForm};`
       if (func && func.length === 1) {
-        // safeEval(`${argsDef}${func[0].functionBody}`)
+        console.log('found matched function')
         // eslint-disable-next-line no-new-func
-        const f = new Function('input', `eval(input)`)
+        const f = new Function(
+          'input',
+          'argsDef',
+          'const body = argsDef + input; eval(body)'
+        )
         console.log(f)
-        f.call(ViewerComponent, func[0].functionBody)
+        f.call(eventBus, func[0].functionBody, argsDef)
       }
     } catch (e) {
       // nothing

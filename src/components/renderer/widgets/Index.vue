@@ -1,6 +1,5 @@
 <template>
   <a-form-item
-    :ref="widget.uid"
     :label="widget.config.label || widget.name"
     :required="widget.config.required"
     :field="widget.uid"

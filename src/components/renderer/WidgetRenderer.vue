@@ -2,7 +2,7 @@
   <template v-if="widget.type === 'grid'">
     <!-- grid: allow normal form components as children -->
     <a-row
-      v-show="!widget.config.hideByDefault"
+      v-if="visible"
       :align="widget.config.align"
       :gutter="widget.config.gutter"
       :justify="widget.config.justify"
@@ -14,8 +14,9 @@
         :span="widget.cols[i].span"
       >
         <WidgetRenderer
-          v-if="col.widgets.length > 0 && col.widgets[0] !== undefined"
-          v-show="!widget.config.hideByDefault"
+          v-if="
+            col.widgets.length > 0 && col.widgets[0] !== undefined && visible
+          "
           :widget="col.widgets[0]"
           :data-c-field="widget.uid"
         />
@@ -25,15 +26,14 @@
   <template v-else-if="widget.type === 'tab'">
     <!-- tabs: allow grid and normal components as children -->
     <a-tabs
-      v-show="!widget.config.hideByDefault"
+      v-if="visible"
       :type="widget.config.type"
       :data-c-field="widget.uid"
     >
       <a-tab-pane v-for="(pane, i) in widget.panes" :key="i" :title="pane.name">
         <template v-for="nestedWidget in pane.widgets" :key="nestedWidget.uid">
           <WidgetRenderer
-            v-if="nestedWidget !== undefined"
-            v-show="!widget.config.hideByDefault"
+            v-if="nestedWidget !== undefined && visible"
             :widget="nestedWidget"
             :data-c-field="widget.uid"
           />
@@ -44,7 +44,7 @@
   <template v-else>
     <!-- normal form components -->
     <FormWidgetRenderer
-      v-show="!widget.config.hideByDefault"
+      v-if="visible"
       :widget="widget"
       :data-c-field="widget.uid"
     />
@@ -52,15 +52,37 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from 'vue'
+import { ref, PropType } from 'vue'
 import { Widget } from '@/types/widget'
+import emitter from '@/utils/event-bus'
 import FormWidgetRenderer from './widgets/Index.vue'
 
-defineProps({
+const props = defineProps({
   widget: {
     type: Object as PropType<Widget>,
     required: true,
   },
+})
+
+const visible = ref(true)
+
+if (props.widget.config.hideByDefault) {
+  visible.value = false
+}
+
+emitter.on('widget:show', (uid) => {
+  console.log('received widget:show')
+  console.log(`my uid is ${props.widget.uid}`)
+  if (props.widget.uid === uid) {
+    console.log('change visibility')
+    visible.value = true
+    console.log(visible.value)
+  }
+})
+emitter.on('widget:hide', (uid) => {
+  if (props.widget.uid === uid) {
+    visible.value = false
+  }
 })
 </script>
 
