@@ -8,10 +8,7 @@
     :label-col-props="{ span: schema.formConfig.labelSpan, offset: 0 }"
   >
     <template v-for="(item, i) in schema.widgetsConfig" :key="i">
-      <widget-renderer
-        v-if="item !== undefined && !hiddenFields.has(item.uid)"
-        :widget="item"
-      />
+      <widget-renderer v-if="item !== undefined" :widget="item" />
     </template>
 
     <pre>{{ form }}</pre>
@@ -31,25 +28,5 @@ defineProps({
   },
 })
 
-const hiddenFields = ref<Set<string>>(new Set())
-
 const { form } = useFormData()
-
-const hide = (uid: string) => {
-  hiddenFields.value.add(uid)
-}
-
-const show = (uid: string) => {
-  hiddenFields.value.delete(uid)
-}
-
-const getValues = () => {
-  return form.value
-}
-
-defineExpose({
-  hide,
-  show,
-  getValues,
-})
 </script>

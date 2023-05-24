@@ -2,42 +2,9 @@ import { WidgetActionConfig, ActionEvent } from '@/types/action'
 import emitter from '@/utils/event-bus'
 import { useBuilderContext, useFormData } from '@/hooks/use-context'
 
-const serializeValue = (val: any): string | undefined => {
-  if (Array.isArray(val)) {
-    let str = '['
-    val.forEach((e, i) => {
-      if (i !== 0) {
-        str += ','
-      }
-      if (typeof e === 'string') {
-        str += `'${e}'`
-      } else {
-        str += e
-      }
-    })
-
-    str += ']'
-
-    return str
-  }
-
-  if (typeof val === 'string') {
-    return `'${val}'`
-  }
-
-  if (typeof val === 'object') {
-    return JSON.stringify(val)
-  }
-
-  return val
-}
-
 const useEvents = (uid: string, actions: WidgetActionConfig) => {
   const { schema } = useBuilderContext()
   const { form } = useFormData()
-
-  const val = serializeValue(form.value[uid])
-  const serializedForm = serializeValue(form.value)
 
   const eventBus = {
     hide(widgetUid: string) {
@@ -58,6 +25,13 @@ const useEvents = (uid: string, actions: WidgetActionConfig) => {
     clearField(widget?: string) {
       delete form.value[widget || uid]
     },
+    setAttribute(props: Record<string, any>, widget?: string) {
+      const target = schema.widgetsConfig.filter((e) => e.uid === widget || uid)
+      if (target.length <= 0) return
+      Object.keys(props).forEach((k, i) => {
+        ;(target[0].config as any)[k] = props[i][k]
+      })
+    },
   }
 
   const handler = (action: ActionEvent) => {
@@ -65,17 +39,11 @@ const useEvents = (uid: string, actions: WidgetActionConfig) => {
       const func = schema.widgetActionConfig.filter(
         (e) => e.name === actions[action]
       )
-      const argsDef = `const val = ${val}; const formData = ${serializedForm};`
       if (func && func.length === 1) {
-        console.log('found matched function')
         // eslint-disable-next-line no-new-func
-        const f = new Function(
-          'input',
-          'argsDef',
-          'const body = argsDef + input; eval(body)'
-        )
+        const f = new Function('input', 'eval(input)')
         console.log(f)
-        f.call(eventBus, func[0].functionBody, argsDef)
+        f.call(eventBus, func[0].functionBody)
       }
     } catch (e) {
       // nothing
