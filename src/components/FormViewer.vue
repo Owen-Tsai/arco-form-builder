@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, PropType } from 'vue'
+import { PropType } from 'vue'
 import { Schema } from '@/types/builder'
 import { useFormData } from '@/hooks/use-context'
 import WidgetRenderer from '@/components/renderer/WidgetRenderer.vue'
@@ -29,4 +29,15 @@ defineProps({
 })
 
 const { form } = useFormData()
+
+// exposed methods
+const getFormData = () => form.value
+const setFormData = (data: Record<string, unknown>) => {
+  form.value = data
+}
+
+defineExpose({
+  getFormData,
+  setFormData,
+})
 </script>

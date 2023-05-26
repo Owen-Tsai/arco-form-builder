@@ -72,13 +72,6 @@ provide<FormDataContext>(formDataCtxKey, {
   form,
   resetForm,
 })
-
-defineExpose({
-  getSchema: () => schema.value,
-  setSchema: (s: Schema) => {
-    schema.value = s
-  },
-})
 </script>
 
 <style lang="scss" scoped>
