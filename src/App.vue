@@ -1,9 +1,10 @@
 <template>
-  <FormBuilder />
+  <!-- <SForm mode="design" /> -->
+  <SForm mode="view" />
 </template>
 
 <script lang="ts" setup>
-import FormBuilder from './components/FormBuilder.vue'
+import SForm from './components/SForm.vue'
 </script>
 
 <style lang="scss">

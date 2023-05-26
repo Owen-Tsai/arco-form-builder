@@ -5,73 +5,40 @@
     </aside>
     <main>
       <div class="canvas-wrapper">
-        <Canvas class="canvas" :schema="schema" />
+        <Canvas class="canvas" :schema="computedSchema" />
       </div>
     </main>
     <aside class="right">
-      <ConfigPanel :schema="schema" :selected-widget="selectedWidget" />
+      <ConfigPanel :schema="computedSchema" :selected-widget="selectedWidget" />
     </aside>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, provide } from 'vue'
-import {
-  Schema,
-  formDataCtxKey,
-  formBuilderCtxKey,
-  FormBuilderContext,
-  FormDataContext,
-} from '@/types/builder'
-import { Widget } from '@/types/widget'
+import { computed, PropType } from 'vue'
+import { Schema } from '@/types/builder'
+import { useBuilderContext } from '@/hooks/use-context'
 import Stencil from '@/components/stencil/Stencil.vue'
 import Canvas from '@/components/canvas/CanvasLayout.vue'
 import ConfigPanel from '@/components/config-panel/ConfigPanel.vue'
 
-const schema = ref<Schema>({
-  dataSourcesConfig: {
-    remote: [],
-    variable: {},
+const props = defineProps({
+  schema: {
+    type: Object as PropType<Schema>,
+    required: true,
   },
-  widgetActionConfig: [],
-  formConfig: {
-    labelAlign: 'left',
-    layout: 'vertical',
-    size: 'medium',
-    labelSpan: 4,
-    wrapperSpan: 20,
+})
+
+const emit = defineEmits(['update:schema'])
+
+const computedSchema = computed({
+  get: () => props.schema,
+  set: (val) => {
+    emit('update:schema', val)
   },
-  widgetsConfig: [],
 })
 
-const savedSchema = localStorage.getItem('schema')
-
-if (savedSchema) {
-  schema.value = JSON.parse(savedSchema)
-}
-
-const form = ref({})
-
-const selectedWidget = ref<Widget>()
-
-const setSelectedWidget = (widget: Widget) => {
-  selectedWidget.value = widget
-}
-
-const resetForm = () => {
-  form.value = {}
-}
-
-provide<FormBuilderContext>(formBuilderCtxKey, {
-  schema: schema.value,
-  selectedWidget,
-  setSelectedWidget,
-})
-
-provide<FormDataContext>(formDataCtxKey, {
-  form,
-  resetForm,
-})
+const { selectedWidget } = useBuilderContext()
 </script>
 
 <style lang="scss" scoped>

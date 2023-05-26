@@ -8,7 +8,7 @@
     :label-col-props="{ span: schema.formConfig.labelSpan, offset: 0 }"
   >
     <template v-for="(item, i) in schema.widgetsConfig" :key="i">
-      <widget-renderer v-if="item !== undefined" :widget="item" />
+      <WidgetRenderer v-if="item !== undefined" :widget="item" />
     </template>
 
     <pre>{{ form }}</pre>
@@ -16,28 +16,27 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from 'vue'
+import { computed, PropType } from 'vue'
 import { Schema } from '@/types/builder'
-import { useFormData } from '@/hooks/use-context'
 import WidgetRenderer from '@/components/renderer/WidgetRenderer.vue'
 
-defineProps({
+const emit = defineEmits(['update:formData'])
+
+const props = defineProps({
   schema: {
     type: Object as PropType<Schema>,
     required: true,
   },
+  formData: {
+    type: Object as PropType<Record<string, any>>,
+    required: true,
+  },
 })
 
-const { form } = useFormData()
-
-// exposed methods
-const getFormData = () => form.value
-const setFormData = (data: Record<string, unknown>) => {
-  form.value = data
-}
-
-defineExpose({
-  getFormData,
-  setFormData,
+const form = computed({
+  get: () => props.formData,
+  set: (val) => {
+    emit('update:formData', val)
+  },
 })
 </script>

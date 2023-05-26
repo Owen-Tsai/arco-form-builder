@@ -49,7 +49,7 @@
       @close="handleViewEnd"
     >
       <template #title>表单预览</template>
-      <Viewer :schema="schemaRef" />
+      <Viewer :form-data="form" :schema="schemaRef" />
     </a-modal>
   </div>
 </template>
@@ -99,7 +99,7 @@ const visible = ref({
   viewer: false,
 })
 
-const { resetForm } = useFormData()
+const { form, resetForm } = useFormData()
 let { schema } = useBuilderContext()
 
 const schemaRef = ref(schema)
