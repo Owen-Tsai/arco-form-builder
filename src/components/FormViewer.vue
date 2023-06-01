@@ -16,8 +16,14 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, PropType } from 'vue'
-import { Schema } from '@/types/builder'
+import { computed, provide, PropType } from 'vue'
+import {
+  Schema,
+  FormDataContext,
+  FormBuilderContext,
+  formDataCtxKey,
+  formBuilderCtxKey,
+} from '@/types/builder'
 import WidgetRenderer from '@/components/renderer/WidgetRenderer.vue'
 
 const emit = defineEmits(['update:formData'])
@@ -38,5 +44,12 @@ const form = computed({
   set: (val) => {
     emit('update:formData', val)
   },
+})
+
+provide<FormDataContext>(formDataCtxKey, {
+  form,
+})
+provide<FormBuilderContext>(formBuilderCtxKey, {
+  schema: props.schema,
 })
 </script>

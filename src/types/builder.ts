@@ -34,12 +34,12 @@ export type Schema = {
 }
 
 export type FormBuilderContext = {
-  selectedWidget: Ref<Widget | undefined>
-  setSelectedWidget: (w: Widget) => void
+  selectedWidget?: Ref<Widget | undefined>
+  setSelectedWidget?: (w: Widget) => void
   schema: Schema
 }
 
 export type FormDataContext = {
   form: Ref<FormData>
-  resetForm: () => void
+  resetForm?: () => void
 }

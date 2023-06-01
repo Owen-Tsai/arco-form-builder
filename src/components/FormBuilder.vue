@@ -15,9 +15,16 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, PropType } from 'vue'
-import { Schema } from '@/types/builder'
-import { useBuilderContext } from '@/hooks/use-context'
+import { ref, computed, provide, PropType } from 'vue'
+import {
+  Schema,
+  FormBuilderContext,
+  FormDataContext,
+  FormData,
+  formBuilderCtxKey,
+  formDataCtxKey,
+} from '@/types/builder'
+import { Widget } from '@/types/widget'
 import Stencil from '@/components/stencil/Stencil.vue'
 import Canvas from '@/components/canvas/CanvasLayout.vue'
 import ConfigPanel from '@/components/config-panel/ConfigPanel.vue'
@@ -38,7 +45,26 @@ const computedSchema = computed({
   },
 })
 
-const { selectedWidget } = useBuilderContext()
+const selectedWidget = ref<Widget>()
+const form = ref<FormData>({})
+
+const setSelectedWidget = (widget: Widget) => {
+  selectedWidget.value = widget
+}
+
+// inject builderContext
+provide<FormBuilderContext>(formBuilderCtxKey, {
+  schema: computedSchema.value,
+  selectedWidget,
+  setSelectedWidget,
+})
+const resetForm = () => {
+  form.value = {}
+}
+provide<FormDataContext>(formDataCtxKey, {
+  resetForm,
+  form,
+})
 </script>
 
 <style lang="scss" scoped>
