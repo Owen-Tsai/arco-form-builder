@@ -1,8 +1,8 @@
 <template>
-  <!-- <FormBuilder :schema="schema" /> -->
-  <div class="demo-viewer">
+  <FormBuilder :schema="schema" />
+  <!-- <div class="demo-viewer">
     <FormViewer :schema="schema" :form-data="form" />
-  </div>
+  </div> -->
 </template>
 
 <script lang="ts" setup>

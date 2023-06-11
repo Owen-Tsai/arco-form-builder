@@ -5,6 +5,7 @@
     :field="widget.uid"
     :validate-trigger="widget.config.trigger"
     :rules="computedRules"
+    :hide-label="widget.config.hideLabel"
   >
     <Input
       v-if="widget.type === 'input'"
