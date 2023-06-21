@@ -9,15 +9,28 @@
 import { ref } from 'vue'
 import FormBuilder from './components/FormBuilder.vue'
 import FormViewer from './components/FormViewer.vue'
+import { Schema } from './types/builder'
 
 const schema = ref()
 const form = ref({})
+
+const defaultSchema: Schema = {
+  dataSourcesConfig: {
+    remote: [],
+    variable: {},
+  },
+  formConfig: {},
+  widgetActionConfig: [],
+  widgetsConfig: [],
+}
 
 // load saved schema
 const savedSchema = localStorage.getItem('schema')
 
 if (savedSchema) {
   schema.value = JSON.parse(savedSchema)
+} else {
+  schema.value = defaultSchema
 }
 </script>
 
