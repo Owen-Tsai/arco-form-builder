@@ -46,7 +46,7 @@
   <WidgetActionPanel
     :visible="panelVisible"
     :active="defaultActiveActionItem"
-    @close="panelVisible = false"
+    @close="onDialogClose"
   />
 </template>
 
@@ -102,6 +102,23 @@ const deleteAction = (evt: ActionEvent) => {
 const openModal = (evt: ActionEvent) => {
   defaultActiveActionItem.value = config.value.actions[evt]
   panelVisible.value = true
+}
+
+const onDialogClose = () => {
+  panelVisible.value = false
+
+  const events = Object.keys(config.value.actions)
+  for (let i = 0; i < events.length; i++) {
+    const evtName = events[i] as ActionEvent
+    const functionName = config.value.actions[evtName]
+    const res = schema.widgetActionConfig.filter(
+      (act) => act.name === functionName
+    )
+
+    if (res.length <= 0) {
+      config.value.actions[evtName] = undefined
+    }
+  }
 }
 </script>
 

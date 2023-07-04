@@ -19,7 +19,11 @@ const defaultSchema: Schema = {
     remote: [],
     variable: {},
   },
-  formConfig: {},
+  formConfig: {
+    labelAlign: 'left',
+    size: 'medium',
+    layout: 'vertical',
+  },
   widgetActionConfig: [],
   widgetsConfig: [],
 }

@@ -21,6 +21,7 @@
               'is-active': activeIndex === i,
             },
           ]"
+          :data-idx="activeIndex"
           @click="activeIndex = i"
         >
           <span class="name">{{ item.name }}</span>
@@ -56,7 +57,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, inject, computed, watchEffect } from 'vue'
+import { ref, inject, computed, onMounted } from 'vue'
 import { Codemirror } from 'vue-codemirror'
 import { javascript } from '@codemirror/lang-javascript'
 import { IconPlus } from '@arco-design/web-vue/es/icon'
@@ -106,7 +107,7 @@ const close = () => {
   emit('close')
 }
 
-watchEffect(() => {
+onMounted(() => {
   if (props.active) {
     const idx = schema.widgetActionConfig.findIndex(
       (e) => e.name === props.active
