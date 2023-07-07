@@ -1,6 +1,46 @@
-## 名词与术语
+<h1 align="center">Arco Form Builder</h1>
+<p align="center">Visualized form designer & runtime form renderer based on <a href="https://arco.design/vue/docs/start">@arco-design/web-vue</a></p>
 
-- 表单构造器：指此 package 或使用此 package 构建的应用程序；
-- stencil：指储存表单组件的仓库，可以从 stencil 中向画布添加组件；
-- 画布：指用于进行表单构造的主要区域，从 stencil 向画布中添加组件后，画布会显示所有已添加的组件及它们的状态；
-- 配置面板：指用于对某个选中的表单组件进行配置、或者对表单本身的属性进行配置的面板；
+## Install
+
+`@arco-design/web-vue`, `axios` and `vue` must be installed as they are peer dependencies of the package.
+
+```sh
+npm install arco-form-builder
+# or
+yarn add arco-form-builder
+```
+
+## Usage
+
+```ts
+import { createApp } from 'vue'
+import ArcoVue from '@arco-design/web-vue'
+import ArcoIcon from '@arco-design/web-vue/es/icon'
+import App from './App.vue'
+import '@arco-design/web-vue/dist/arco.css'
+
+import ArcoFormBuilder from 'arco-form-builder' // import ArcoFormBuilder
+import 'arco-form-builder/dist/style.css'       // import stylesheet
+
+const app = createApp(App)
+app.use(ArcoVue)
+app.use(ArcoIcon)
+app.use(ArcoFormBuilder)  // use the package
+app.mount('#app')
+```
+
+Then use `SFormBuilder` for designing the schema visually, and use `SFormViewer` for rendering the form at runtime.
+
+Or import provided components into your component files:
+
+```vue
+<template>
+  <FormBuilder :schema="schema" />
+</template>
+
+<script setup lang="ts">
+import { FormBuilder } from 'arco-form-builder'
+// ...
+</script>
+```
