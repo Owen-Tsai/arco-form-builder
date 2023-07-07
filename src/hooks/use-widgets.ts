@@ -201,21 +201,23 @@ export const useBuilderInjection = (widgetList: Ref<Widget[]>) => {
   const context = inject<FormBuilderContext>(formBuilderCtxKey)
 
   const isWidgetSelected = (uid: string) => {
-    return context?.selectedWidget.value?.uid === uid
+    return context?.selectedWidget?.value?.uid === uid
   }
 
   const onWidgetSelect = (idx: number) => {
-    context?.setSelectedWidget(widgetList.value[idx])
+    context?.setSelectedWidget?.(widgetList.value[idx])
   }
 
   const onWidgetDelete = (idx: number) => {
     widgetList.value.splice(idx, 1)
-    ;(context as FormBuilderContext).selectedWidget.value = undefined
+    if (context?.selectedWidget?.value) {
+      context.selectedWidget.value = undefined
+    }
   }
 
   const onWrapperClick = (idx: number, nested: OptGridCol | OptTabPane) => {
     if (nested.widgets?.length === 0) {
-      context?.setSelectedWidget(widgetList.value[idx])
+      context?.setSelectedWidget?.(widgetList.value[idx])
     }
   }
 

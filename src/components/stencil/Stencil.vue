@@ -126,7 +126,7 @@ const handleViewStart = () => {
 }
 
 const handleViewEnd = () => {
-  resetForm()
+  resetForm?.()
   visible.value.viewer = false
 }
 
